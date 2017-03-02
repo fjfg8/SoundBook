@@ -33,5 +33,9 @@ class User extends Authenticatable
     private $status;
     private $preferences;
     private $admin;
+
+    public function song(){
+        return $this->hasMany('App\Song');
+    }
   
 }

@@ -12,4 +12,8 @@ class Song extends Model
     private $duration;
     private $gender;
     private $date;
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
