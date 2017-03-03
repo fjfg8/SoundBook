@@ -37,9 +37,5 @@ class User extends Authenticatable
     public function song(){
         return $this->hasMany('App\Song');
     }
-    
-    public function comment(){
-        return $this->hasOne('App\Comment');
-    }
   
 }
