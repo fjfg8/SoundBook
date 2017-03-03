@@ -17,7 +17,7 @@ class CreateSongsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('artist');
-            $table->integer('duration');
+            $table->string('duration');
             $table->string('gender');
             $table->string('date');
             $table->integer('user_id')->unsigned();
