@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('status');
             $table->string('preferences');
             $table->boolean('admin');
+            $table->integer('account_id');
+            $table->foreign('account_id')->references('id')->on('accounts'); 
+
             $table->rememberToken();
             $table->timestamps();
         });

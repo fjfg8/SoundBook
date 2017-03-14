@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,7 +22,8 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rock',
-            'admin' => true
+            'admin' => true,
+            'account_id' => 1
         ]);
 
         DB::table('users')->insert([
@@ -32,7 +34,21 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rap',
-            'admin' => true
+            'admin' => true,
+            'account_id' => 2
         ]);
+
+         DB::table('users')->insert([
+            
+            'name' => 'Raul',
+            'email' => 'raul@ejemplo.com',
+            'password' => 'raul',
+            'gender' => 'Hombre',
+            'status' => 'Soltero',
+            'preferences' => 'Rap',
+            'admin' => true,
+            'account_id' => 3
+        ]);
+
     }
 }

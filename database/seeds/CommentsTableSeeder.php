@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Comment;
 
 class CommentsTableSeeder extends Seeder
 {
@@ -37,5 +38,6 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'song_id' => 3
         ]);
+
     }
 }

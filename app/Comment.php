@@ -10,6 +10,7 @@ class Comment extends Model
     private $comment;
     private $date;
     private $likes;
+    
 
     public function user(){
         return $this->belongsTo('App\User');
