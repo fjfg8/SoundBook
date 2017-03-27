@@ -1,5 +1,5 @@
 <?php
-
+Use App\Song;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/song/{id}','SongsController@show');
