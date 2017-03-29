@@ -7,9 +7,11 @@ use App\Comment;
 
 class CommentController extends Controller
 {
-    public function update($id){
-     $comment = Comment::find($id);
-     $comment->likes++;   
-     $comment->save();
+    public function create(Request $request, $id){
+     $this->validate($request,[
+         'comment'=>'required'
+     ]);
+    
+     
     }
 }

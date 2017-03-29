@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Song extends Model
 {
-    private $id;
+    /*private $id;
     private $title;
     private $artist;
     private $duration;
     private $gender;
-    private $date;
+    private $date;*/
 
     public function user(){
         return $this->belongsTo('App\User');
@@ -19,4 +19,6 @@ class Song extends Model
     public function comment(){
         return $this->hasMany('App\Comment');
     }
+
+
 }

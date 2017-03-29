@@ -1,6 +1,6 @@
-<html>
-<title>SoundBook</title>
-<body>
+@extends('master')
+
+@section('container')
 <div>
     <p>
     {{$song->title}}</p>
@@ -14,6 +14,4 @@
 
 
 </div>
-
-</body>
-</html>
+@stop
