@@ -11,3 +11,18 @@ class Account extends Model
         return $this->hasOne('App\User');
     }
 }
+
+class Normal extends Account {
+
+
+}
+
+class Admin extends Account {
+
+
+    
+}
+
+
+
+
