@@ -38,8 +38,14 @@ Route::get('/pass',function(){
 
 Route::post('pass','UsersController@change');
 
-/*Route::get('/comment/{id}',function (){
-    return view('comment');
+Route::post('/song/{id}','SongsController@show');
+
+
+Route::post('/song','CommentController@create');
+
+/*
+Route::get('/comment/{id}',function ($id){
+    redirect()->action('SongsController@like',$id);
 });
 
 Route::post('/comment/{id}','CommentController@create');*/

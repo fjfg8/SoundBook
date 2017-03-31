@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Account;
+use App\Song;
 
 class UsersController extends Controller
 {
     public function show($id){
         $user = User::find($id);
-        $value = session()->get('name');
-        return view('profile',array('user' => $user,'session'=>$value));
+        $songs = Song::select('*')->where('user_id','=',$id)->paginate(5);
+        return view('profile',array('user' => $user,'songs'=>$songs));
     }
 
     public function create(Request $request){
@@ -35,9 +36,13 @@ class UsersController extends Controller
 
         $user->save();
 
+        $request->session()->put([
+            'name'=>$user->name,
+            'id'=>$user->id
+        ]);
 
-        $id = User::where('email',$request->email)->value('id');//recogemos la id del nuevo usuario y redirigimos al vista de user
-        return redirect()->action('UsersController@show',$id);
+        //$id = User::where('email',$request->email)->value('id');//recogemos la id del nuevo usuario y redirigimos al vista de user
+        return redirect()->action('UsersController@show',$user->id);
     }
 
     public function start(Request $request){
@@ -45,20 +50,34 @@ class UsersController extends Controller
             'nick'=>'required',
             'password'=>'required'
         ]);
-        $acc = Account::where('nick',$request->nick)->value('id');
-        $user = User::where('account_id','=',$acc)->first();
-   
-        if($user->password == $request->password){
-            $request->session()->put([
-                'name'=>$user->name,
-                'id'=>$user->id
-            ]);
-            return redirect()->action('UsersController@show',$user->id);
+
+        if($this->comprobar($request->nick)){
+            $acc = Account::where('nick',$request->nick)->value('id');
+            $user = User::where('account_id','=',$acc)->first();
+    
+            if($user->password == $request->password){
+                $request->session()->put([
+                    'name'=>$user->name,
+                    'id'=>$user->id
+                ]);
+                return redirect()->action('UsersController@show',$user->id);
+            }else{
+                return redirect('/session');
+            }
         }else{
-            return redirect('/session');
+            return redirect('/register');
         }
 
     }
+    
+    public function comprobar($nick){
+        $acc = Account::where('nick',$nick)->value('id');
+        if($acc == NULL){
+            return false;
+        }
+        return true;
+    }
+
     public function edit(Request $request){
             $id = session()->get('id');
             $user = User::findOrFail($id);

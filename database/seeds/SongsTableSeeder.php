@@ -40,5 +40,18 @@ class SongsTableSeeder extends Seeder
             'date' => '03/06/2002',
             'user_id' => 2
         ]);
+
+        for($i=0;$i<=25;$i++){
+           DB::table('songs')->insert([
+            
+            'title' => 'song'.$i,
+            'artist' => 'artist'.$i,
+            'duration' => '03:40',
+            'gender' => 'Salsa',
+            'date' => '03/06/2002',
+            'user_id' => 1
+        ]); 
+        }
+
     }
 }

@@ -4,7 +4,7 @@
     Cambio de contraseña
 @stop
 
-@section('container')
+@section('content')
 
 {{-- Error messages --}}
 @if (count($errors) > 0)

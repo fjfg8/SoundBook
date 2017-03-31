@@ -17,7 +17,6 @@ class CommentsTableSeeder extends Seeder
         DB::table('comments')->insert([
             
             'comment' => 'Muy buena cancion',
-            'date' => '03/03/2017',
             'likes' => '100',
             'user_id' => 1,
             'song_id' => 1
@@ -25,7 +24,6 @@ class CommentsTableSeeder extends Seeder
         DB::table('comments')->insert([
             
             'comment' => 'Estupenda',
-            'date' => '03/03/2017',
             'likes' => '10',
             'user_id' => 2,
             'song_id' => 2
@@ -33,7 +31,6 @@ class CommentsTableSeeder extends Seeder
         DB::table('comments')->insert([
             
             'comment' => 'Un clasico',
-            'date' => '03/03/2017',
             'likes' => '5',
             'user_id' => 1,
             'song_id' => 3
