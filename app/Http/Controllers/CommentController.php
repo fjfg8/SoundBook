@@ -7,9 +7,30 @@ use App\Comment;
 
 class CommentController extends Controller
 {
-    public function update($id){
-     $comment = Comment::find($id);
-     $comment->likes++;   
-     $comment->save();
+
+    public function create(Request $request){
+        
+        $c = new Comment();
+        $c->comment = $request->descripcion;
+        $c->likes = 0;
+        $c->user_id = session()->get('id');
+        $c->song_id = $request->song;
+
+        $c->save();
+
+    return redirect()->action('SongsController@show',$request->song);
+
+
+    }
+
+    public function like(Request $request){
+     
+     $c = Comment::findOrFail($request->comment);
+
+     $c->likes = $c->likes + 1;
+     $c->save();
+
+     return redirect()->action('SongsController@show',$request->song);
+
     }
 }

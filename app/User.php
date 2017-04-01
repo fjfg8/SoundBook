@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Account;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -27,7 +29,32 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+   /* private $id;
+    private $email;
+    private $password;
+    private $gender;
+    private $status;
+    private $preferences;
+    private $admin;*/
+
+  /*  public function song(){
+        return $this->hasMany('App\Song');
+    }
+   public function comment(){
+        return $this->hasMany('App\Comment');
+    }*/
+
+
     public function account(){
         return $this->belongsTo('App\Account');
     }
+
+
+    /*public function createAccount($n){
+        $acc = new Account();
+        $acc->nick = $n;
+        $acc->save();
+
+    }*/
 }
