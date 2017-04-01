@@ -22,7 +22,6 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rock',
-            'admin' => true,
             'account_id' => 1
         ]);
 
@@ -34,7 +33,6 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rap',
-            'admin' => true,
             'account_id' => 2
         ]);
 
@@ -46,7 +44,6 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rap',
-            'admin' => true,
             'account_id' => 3
         ]);
 

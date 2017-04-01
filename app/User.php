@@ -28,6 +28,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
    /* private $id;
     private $email;
     private $password;
@@ -36,12 +38,13 @@ class User extends Authenticatable
     private $preferences;
     private $admin;*/
 
-    public function song(){
+  /*  public function song(){
         return $this->hasMany('App\Song');
     }
    public function comment(){
         return $this->hasMany('App\Comment');
-    }
+    }*/
+
 
     public function account(){
         return $this->belongsTo('App\Account');

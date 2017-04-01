@@ -16,6 +16,7 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nick')->unique();
+            
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-       // Schema::dropIfExists('accounts');
+
     }
 }

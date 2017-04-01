@@ -17,10 +17,14 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->string('comment');
             $table->integer('likes');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users'); 
+            $table->integer('admin_id')->unsigned();
+            $table->foreign('admin_id')->references('id')->on('admins'); 
+            $table->integer('mormal_id')->unsigned();
+            $table->foreign('normal_id')->references('id')->on('normals'); 
             $table->integer('song_id')->unsigned();
-            $table->foreign('song_id')->references('id')->on('songs'); 
+            $table->foreign('song_id')->references('id')->on('songs');
+            $table->integer('group_id')->unsigned();
+            $table->foreign('group_id')->references('id')->on('groups'); 
             
             $table->timestamps();
         });
