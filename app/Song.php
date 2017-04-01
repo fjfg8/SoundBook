@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Song extends Model
 {
-    public function user(){
-        return $this->belongsTo('App\User');
+    public function userAdmin(){
+        return $this->belongsToMany('App\Admin');
+    }
+
+    public function userNormal() {
+        return $this->belongsToMany('App\Normal');
     }
     
     public function comment(){

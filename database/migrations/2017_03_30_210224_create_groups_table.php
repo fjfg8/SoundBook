@@ -18,10 +18,6 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('musicStyle');
             $table->string('description');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users'); 
-            $table->integer('song_id')->unsigned();
-            $table->foreign('song_id')->references('id')->on('songs');
 
             $table->timestamps();
         });

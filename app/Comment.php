@@ -6,17 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    private $id;
-    private $comment;
-    private $date;
-    private $likes;
     
+    public function userAdmin(){
+        return $this->belongsTo('App\Admin');
+    }
 
-    public function user(){
-        return $this->belongsTo('App\User');
+    public function userNormal(){
+        return $this->belongsTo('App\Normal');
     }
 
     public function song(){
         return $this->belongsTo('App\Song');
+    }
+
+    public function group(){
+        return $this->belongsTo('App\Group');
     }
 }

@@ -12,16 +12,6 @@ class Account extends Model
     }
 }
 
-class Normal extends Account {
-
-
-}
-
-class Admin extends Account {
-
-
-    
-}
 
 
 

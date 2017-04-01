@@ -27,18 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function song(){
-        return $this->hasMany('App\Song');
-    }
-   public function comment(){
-        return $this->hasMany('App\Comment');
-    }
-
     public function account(){
         return $this->belongsTo('App\Account');
-    }
-
-    public function group() {
-        return $this->belongsToMany('App\Group');
     }
 }
