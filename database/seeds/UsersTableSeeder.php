@@ -18,33 +18,36 @@ class UsersTableSeeder extends Seeder
             
             'name' => 'Jonay',
             'email' => 'jonay@ejemplo.com',
+            'nick'=> 'Aylmao',
             'password' => 'jonay',
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rock',
-            'account_id' => 1
+            'preferences' => 'Rock'
+           
         ]);
 
         DB::table('users')->insert([
             
             'name' => 'Fran',
             'email' => 'fran@ejemplo.com',
+            'nick' => 'Nanet',
             'password' => 'fran',
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rap',
-            'account_id' => 2
+            'preferences' => 'Rap'
+        
         ]);
 
          DB::table('users')->insert([
             
             'name' => 'Raul',
             'email' => 'raul@ejemplo.com',
+            'nick' => 'Raul',
             'password' => 'raul',
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rap',
-            'account_id' => 3
+            'preferences' => 'Rap'
+            
         ]);
 
     }

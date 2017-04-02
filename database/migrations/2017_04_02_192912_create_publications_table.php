@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNormalsTable extends Migration
+class CreatePublicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateNormalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('normals', function (Blueprint $table) {
+        Schema::create('publications', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('group_id')->unsigned();
+            $table->foreign('group_id')->references('id')->on('groups'); 
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateNormalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('normals');
+        Schema::dropIfExists('publications');
     }
 }

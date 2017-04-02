@@ -48,6 +48,11 @@
             </div>
         </div>
     </form>
+
+    <a href="{{session()->get('id')}}/upload"><img width="50" height="50" src="http://icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png">Subir canción</img></a>
+
+
+
     </div>
 <div class="col-md-6">
         <div class="container" id="misCanciones" align="center">

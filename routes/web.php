@@ -41,11 +41,16 @@ Route::post('pass','UsersController@change');
 Route::post('/song/{id}','SongsController@show');
 
 
-Route::post('/song','CommentController@create');
+Route::post('/song','CommentController@like');
 
-/*
-Route::get('/comment/{id}',function ($id){
-    redirect()->action('SongsController@like',$id);
+
+Route::get('/song/{id}/comment',function($id){
+    return view('comment',array('song'=>$id));
 });
 
-Route::post('/comment/{id}','CommentController@create');*/
+Route::post('comment/','CommentController@create');
+
+Route::get('user/{id}/upload',function($id){
+    return view('upload',array('user'=>$id));
+});
+Route::post('upload/','SongsController@create');

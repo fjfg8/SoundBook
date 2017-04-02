@@ -11,28 +11,20 @@ class UsersController extends Controller
 {
     public function show($id){
         $user = User::find($id);
-        $songs = Song::select('*')->where('user_id','=',$id)->paginate(5);
+        $songs = Song::select('*')->where('user_id','=',$id)->orderby('created_at','desc')->paginate(4);
         return view('profile',array('user' => $user,'songs'=>$songs));
     }
 
     public function create(Request $request){
         
         $this->validate($request,[
-            'nick' => 'unique:accounts'
+            'nick' => 'unique:users'
         ]);
         $user = new User();
         $user->email = $request->email;
         $user->name = $request->name;
         $user->password = $request->password;
-        $user->admin = false;
-       //$user->createAccount($request->nick);
-        $aux = new Account();
-        $aux->nick = $request->nick;
-        $aux->save();
-
-        $acc = Account::where('nick',$request->nick)->value('id');
-        $user->account_id = $acc;
-        $user->gender = "soltero";
+        $user->nick = $request->nick;
 
         $user->save();
 
@@ -52,8 +44,8 @@ class UsersController extends Controller
         ]);
 
         if($this->comprobar($request->nick)){
-            $acc = Account::where('nick',$request->nick)->value('id');
-            $user = User::where('account_id','=',$acc)->first();
+           // $acc = Account::where('nick',$request->nick)->value('id');
+            $user = User::where('nick','=',$request->nick)->first();
     
             if($user->password == $request->password){
                 $request->session()->put([
@@ -71,7 +63,7 @@ class UsersController extends Controller
     }
     
     public function comprobar($nick){
-        $acc = Account::where('nick',$nick)->value('id');
+        $acc = User::where('nick',$nick)->value('id');
         if($acc == NULL){
             return false;
         }

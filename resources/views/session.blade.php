@@ -26,7 +26,10 @@
   <body>
 
 
-{{-- Error messages --}}
+
+<div class="container" id="login">
+<div align="center">
+  {{-- Error messages --}}
 @if (count($errors) > 0)
     <ul>
     @foreach ($errors->all() as $error)
@@ -34,32 +37,30 @@
     @endforeach
     </ul>
 @endif
-<div class="container">
-<h2 align="center">Inicio de Sesión</h2>
+</div>
+<h2 align="center"><font color="black">Inicio de Sesión</font></h2>
 
-<form class="form-horizontal" method="POST" action="{{action('UsersController@start')}}">
+<form  id="formLog" class="form-horizontal" method="POST" action="{{action('UsersController@start')}}">
 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="nick">Usuario:</label>
-      <div class="col-sm-10">
+      <label class="control-label col-sm-2" for="nick"><font color="black">Usuario:</font></label>
+      <div class="col-sm-4">
         <input type="text" class="form-control" name="nick" id="nick" placeholder="Introduce el usuario">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="password">Contraseña:</label>
-      <div class="col-sm-10">          
+      <label class="control-label col-sm-2" for="password"><font color="black">Contraseña:</font></label>
+      <div class="col-sm-4">          
         <input type="password" class="form-control" name="password" id="password" placeholder="Introduce la contraseña">
       </div>
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Entrar</button>   <a href="/register" class="btn btn-default">Registrarse</a> 
+        <button type="submit" id="botonL" class="btn btn-default">Entrar</button>   <a href="/register"  id="botonL" class="btn btn-default">Registrarse</a> 
       </div>
     </div>
   </form>
 </div>
-
-
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->

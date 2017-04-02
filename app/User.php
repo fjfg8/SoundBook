@@ -38,23 +38,16 @@ class User extends Authenticatable
     private $preferences;
     private $admin;*/
 
-  /*  public function song(){
+   public function song(){
         return $this->hasMany('App\Song');
     }
    public function comment(){
         return $this->hasMany('App\Comment');
-    }*/
+    }
 
-
-    public function account(){
-        return $this->belongsTo('App\Account');
+    public function group(){
+        return $this->belongsToMany('App\Group');
     }
 
 
-    /*public function createAccount($n){
-        $acc = new Account();
-        $acc->nick = $n;
-        $acc->save();
-
-    }*/
 }

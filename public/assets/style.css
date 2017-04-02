@@ -1,7 +1,6 @@
-
 body{
     padding-top: 50px;
-    background-color: skyblue;
+    background-color: lightskyblue;
 }
 h5 {
     display: block;
@@ -113,4 +112,13 @@ div.col-md-4{
  background: rgba(0,0,0,0);
  color: #3a7999;
  box-shadow: inset 0 0 0 3px #3a7999;
+}
+
+#login{
+    margin-top: 300px;
+
+}
+
+#formLog{
+    margin-left: 300px;
 }

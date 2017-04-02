@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Song;
 
 class CommentController extends Controller
 {
@@ -19,8 +20,6 @@ class CommentController extends Controller
         $c->save();
 
     return redirect()->action('SongsController@show',$request->song);
-
-
     }
 
     public function like(Request $request){
@@ -31,6 +30,12 @@ class CommentController extends Controller
      $c->save();
 
      return redirect()->action('SongsController@show',$request->song);
+
+    }
+
+    public function userName($user){
+        $name = Song::select('name')->where('id','=',$user)->first();
+        return $name;
 
     }
 }
