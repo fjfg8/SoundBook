@@ -39,7 +39,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/user/{{session()->get('id')}}">Mi Perfil</a></li>
-            <li><a href="/listagrupos">Grupos</a></li>
+            <li><a href="/listagrupos/{{session()->get('id')}}">Grupos</a></li>
             <li><a href="/search">Buscar</a></li>
             <li>@yield('session')</li>
           </ul>

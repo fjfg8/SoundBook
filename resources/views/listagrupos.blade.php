@@ -1,3 +1,35 @@
 @extends('master')
 
 @section('content')
+
+<div class="container" id="comentarios" align="center">
+        <label>Tus Grupos</label><br/>
+        @forelse($lista as $list)
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>{{$list->name}}</strong></div>
+                <div class="panel-body" align="left">
+                    <label>{{$list->musicStyle}}</label><br/>
+                    <text syle="text-align: right;">{{$list->description}}</text>
+                    
+                </div> 
+                
+            </div>
+
+        @empty
+            <div class="alert alert-info">
+                <strong>No estas subscrito a ningun grupo</strong>
+            </div>
+        @endforelse
+        {{ $lista->links() }}
+       
+        </div>
+
+
+
+
+
+
+
+
+
+@stop

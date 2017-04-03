@@ -57,4 +57,4 @@ Route::post('upload/','SongsController@create');
 
 Route::get('/groups/{id}','GroupsController@show');
 
-Route::get('/listagrupos','GroupsController@showlista');
+Route::get('/listagrupos/{id}','GroupsController@showlista');
