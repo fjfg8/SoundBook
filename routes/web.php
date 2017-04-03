@@ -54,3 +54,7 @@ Route::get('user/{id}/upload',function($id){
     return view('upload',array('user'=>$id));
 });
 Route::post('upload/','SongsController@create');
+
+Route::get('/groups/{id}','GroupsController@show');
+
+Route::get('/listagrupos','GroupsController@showlista');
