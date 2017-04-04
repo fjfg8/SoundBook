@@ -10,6 +10,7 @@
                 <div class="panel-body" align="left">
                     <label>{{$list->musicStyle}}</label><br/>
                     <text syle="text-align: right;">{{$list->description}}</text>
+                    <a href="/groups/{{$list->id}}" class="btn btn-default pull-right" style="padding-top: 5px;">Acceder</a>
                     
                 </div> 
                 

@@ -10,4 +10,8 @@ class Publication extends Model
     public function group(){
         return $this->belongsTo('App\Group');
     }
+
+    public function song(){
+        return $this->belongsTo('App\Song');
+    }
 }

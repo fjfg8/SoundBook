@@ -26,5 +26,8 @@ class Song extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function publication(){
+        return $this->hasMany('App\Publication');
+    }
 
 }
