@@ -24,7 +24,7 @@
         <label>Comentarios</label><br/>
         @forelse($comments as $comment)
             <div class="panel panel-default">
-                <div class="panel-heading">{{$comment->user_id}}</div>
+                <div class="panel-heading">{{$comment->nick}}</div>
                 <div class="panel-body" align="left">
                     <label>{{$comment->comment}}</label><br/>
                     <text syle="text-align: right;">Likes->{{$comment->likes}}</text>

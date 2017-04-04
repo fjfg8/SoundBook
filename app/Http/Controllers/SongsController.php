@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Song;
 use App\Comment;
 use App\User;
@@ -10,8 +11,10 @@ class SongsController extends Controller
 {
     public function show($id){
         $song = Song::findOrFail($id);
-        $comments = Comment::where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
-
+        //$comments = Comment::select()->where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
+        $comments = DB::table('comments')
+        ->join('users','comments.user_id','=','users.id')
+        ->select('comments.*','users.nick')->paginate(3);
         return view('song',array('song' => $song,'comments'=>$comments));
     }
 
