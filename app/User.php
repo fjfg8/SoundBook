@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use App\Account;
+//use App\Account;
 
 class User extends Authenticatable
 {
@@ -49,5 +49,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Group');
     }
 
-
+    public function user(){
+        return $this->belongsToMany('App\User');
+    }
 }
