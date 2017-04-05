@@ -9,7 +9,8 @@ use App\Song;
 
 class UsersController extends Controller
 {
-    public function show($id){
+    public function show(){
+        $id = session()->get('id');
         $user = User::find($id);
         $filtro = session()->get('filtro');
 
@@ -30,7 +31,7 @@ class UsersController extends Controller
         $request->session()->put([
             'filtro'=>$request->filtro
         ]);
-         return redirect()->action('UsersController@show',session()->get('id'));
+         return redirect()->action('UsersController@show');
     }
 
     public function create(Request $request){
@@ -57,7 +58,7 @@ class UsersController extends Controller
         ]);
 
         //$id = User::where('email',$request->email)->value('id');//recogemos la id del nuevo usuario y redirigimos al vista de user
-        return redirect()->action('UsersController@show',$user->id);
+        return redirect()->action('UsersController@show');
     }
 
     public function start(Request $request){
@@ -79,7 +80,7 @@ class UsersController extends Controller
                     'id'=>$user->id,
                     'filtro'=>"fecha"
                 ]);
-                return redirect()->action('UsersController@show',$user->id);
+                return redirect()->action('UsersController@show');
             }else{
                 return redirect('/session');
             }
@@ -98,38 +99,37 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request){
-            $id = session()->get('id');
-            $user = User::findOrFail($id);
+        $id = session()->get('id');
+        $user = User::findOrFail($id);
 
-            if($request->has('name')){
-                $user->name = $request->name;
-                $user->save();
-            }
-            if($request->has('email')){
-                $user->email = $request->email;
-                $user->save();
-            }
-            if($request->has('gender')){
-                $user->gender = $request->gender;
-                $user->save();
-            }
-            if($request->has('status')){
-                $user->status = $request->status;
-                $user->save();
-            }
-            if($request->has('preferences')){
-                $user->preferences = $request->preferences;
-                $user->save();
-            }
-
-             $request->session()->put([
-                    'filtro'=>"fecha"
-                ]);
-
-            return redirect()->action('UsersController@show',$user->id);
+        if($request->has('name')){
+            $user->name = $request->name;
+            $user->save();
+        }
+        if($request->has('email')){
+            $user->email = $request->email;
+            $user->save();
+        }
+        if($request->has('gender')){
+            $user->gender = $request->gender;
+            $user->save();
+        }
+        if($request->has('status')){
+            $user->status = $request->status;
+            $user->save();
+        }
+        if($request->has('preferences')){
+            $user->preferences = $request->preferences;
+            $user->save();
         }
 
+            $request->session()->put([
+                'filtro'=>"fecha"
+            ]);
 
+        return redirect()->action('UsersController@show');
+    }
+    
     public function change(Request $request){
         $this->validate($request,[
             'old'=>'required',
@@ -154,7 +154,12 @@ class UsersController extends Controller
             'filtro'=>"fecha"
         ]);
 
-        return redirect()->action('UsersController@show',$user->id);
+        return redirect()->action('UsersController@show');
+    }
+
+    public function logout(){
+        session()->flush();
+        return redirect()->action('UsersController@start');
     }
 
 

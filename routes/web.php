@@ -20,7 +20,7 @@ Route::get('/register',function(){
 });
 Route::get('/song/{id}','SongsController@show');
 
-Route::get('/user/{id}','UsersController@show');
+Route::get('user/','UsersController@show');
 
 Route::post('user/','UsersController@search');
 
@@ -54,11 +54,13 @@ Route::get('/song/{id}/comment',function($id){
 
 Route::post('comment/','CommentController@create');
 
-Route::get('user/{id}/upload',function($id){
-    return view('upload',array('user'=>$id));
+Route::get('user/upload',function(){
+    return view('upload');
 });
 Route::post('upload/','SongsController@create');
 
-Route::get('/groups/{id}','GroupsController@show');
+Route::get('/groups','GroupsController@show');
 
-Route::get('/listagrupos/{id}','GroupsController@showlista');
+Route::get('/listagrupos','GroupsController@showlista');
+
+Route::post('/logout','UsersController@logout');

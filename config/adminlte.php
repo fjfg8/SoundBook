@@ -85,9 +85,9 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => '#',
 
-    'logout_url' => 'session',
+    'logout_url' => 'logout',
 
     'logout_method' => null,
 
@@ -108,81 +108,38 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'NAVEGACION',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text'        => 'Mi perfil',
+            'url'         => 'user',
+            'icon'        => 'user',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
+            'text'        => 'Configuración',
+            'icon'        => 'wrench',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Cambiar contraseña',
+                    'url'  => 'pass',
+                    'icon' => 'lock',
                 ],
                 [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
+                    'text' => 'Cambiar imagen perfil',
                     'url'  => '#',
+                    'icon' => 'photo',
                 ],
             ],
         ],
-        'LABELS',
         [
-            'text'       => 'Important',
-            'icon_color' => 'red',
+            'text'        => 'Grupos',
+            'url'         => 'listagrupos',
+            'icon'        => 'users',
         ],
         [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
-        ],
+            'text'        => 'Buscar',
+            'url'         => '#',
+            'icon'        => 'search',
+       ],
     ],
 
     /*

@@ -29,7 +29,7 @@
 
         <form method="POST" action="{{action('SongsController@create')}}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-            <input type="hidden" name="user" value="{{$user}}"></br>
+            <input type="hidden" name="user" value="{{session()->get('id')}}"></br>
             Titulo
             <input type="text" name="title" id="title"></br>
             Artista
