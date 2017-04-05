@@ -1,73 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+@extends('adminlte::login')
 
-    <title>SoundBook - Inicio Sesion</title>
+@section('body')
 
-    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/style.css') }}" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-
-
-<div class="container" id="login">
-<div align="center">
-  {{-- Error messages --}}
-@if (count($errors) > 0)
-    <ul>
-    @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-    @endforeach
-    </ul>
-@endif
-</div>
-<h2 align="center"><font color="black">Inicio de Sesión</font></h2>
-
-<form  id="formLog" class="form-horizontal" method="POST" action="{{action('UsersController@start')}}">
-<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="nick"><font color="black">Usuario:</font></label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" name="nick" id="nick" placeholder="Introduce el usuario">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="password"><font color="black">Contraseña:</font></label>
-      <div class="col-sm-4">          
-        <input type="password" class="form-control" name="password" id="password" placeholder="Introduce la contraseña">
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" id="botonL" class="btn btn-default">Entrar</button>   <a href="/register"  id="botonL" class="btn btn-default">Registrarse</a> 
-      </div>
-    </div>
-  </form>
-</div>
-
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </body>
-</html>
-
-
-
-
+    <div class="login-box">
+        <div class="login-logo">
+            <p href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Sound</b>Book') !!}</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Introduce tus datos para iniciar sesion</p>
+            <form action="{{action('UsersController@start')}}" method="post">{!! csrf_field() !!}
+                <div class="form-group has-feedback {{ $errors->has('nick') ? 'has-error' : '' }}">
+                    <input type="text" name="nick" class="form-control" value="{{ old('nick') }}"
+                           placeholder="Usuario">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @if ($errors->has('nick'))
+                        <span class="help-block">
+                            <strong>Introduce un usuario</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
+                    <input type="password" name="password" class="form-control"
+                           placeholder="Contraseña">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>Introduce la contraseña</strong>
+                        </span>
+                    @endif
+                </div>
+                <!-- <div class="row">
+                     <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                <input type="checkbox" name="remember"> Recuerdame
+                            </label>
+                        </div>
+                    </div> -->
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar Sesión</button>
+                    <!--<div class="col-xs-5">
+                        <button type="submit"class="btn btn-primary btn-block btn-flat">Iniciar Sesión</button>
+                    </div> 
+                </div>-->
+            </form>
+            <div class="auth-links">
+                <br>
+                    <a href="/register" class="text-center">Si aun no tienes una cuenta registrate aquí</a>
+            </div>
+        </div>
+        <!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+@stop
