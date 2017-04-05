@@ -38,4 +38,11 @@ class CommentController extends Controller
         return $name;
 
     }
+
+    public function delete(Request $request){
+        $comment = Comment::find($request->comment);
+        $comment->delete();
+
+        return redirect()->back();
+    }
 }

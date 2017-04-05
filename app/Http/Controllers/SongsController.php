@@ -14,7 +14,8 @@ class SongsController extends Controller
         //$comments = Comment::select()->where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
         $comments = DB::table('comments')
         ->join('users','comments.user_id','=','users.id')
-        ->select('comments.*','users.nick')->paginate(3);
+        ->select('comments.*','users.nick')
+        ->orderBy('created_at','desc')->paginate(3);
         return view('song',array('song' => $song,'comments'=>$comments));
     }
 

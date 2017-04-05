@@ -19,7 +19,7 @@ class CreateSongsTable extends Migration
             $table->string('artist');
             $table->string('duration');
             $table->string('gender');
-            $table->string('date'); 
+            $table->date('date'); 
              $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users'); 
             $table->timestamps();
