@@ -1,8 +1,5 @@
-@extends('master')
+@extends('adminlte::page')
 
-@section('title')
-    Comentar
-@stop
 
 @section('content')
 

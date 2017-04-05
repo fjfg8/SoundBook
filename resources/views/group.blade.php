@@ -1,3 +1,3 @@
-@extends('master')
+@extends('adminlte::page')
 
 @section('content')

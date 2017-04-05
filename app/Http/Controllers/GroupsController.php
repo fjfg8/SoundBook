@@ -16,9 +16,8 @@ public function showlista() {
 
         $id = session()->get('id');
         //$groups = members::where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
-        $groups = DB::table('group_user')
+        $groups = DB::table('group_user')->where('group_user.user_id','=',$id)
         ->join('groups','group_user.group_id','=','groups.id')
-        ->join('users','group_user.user_id','=',$id)
         ->select('groups.*')->paginate(3);
         return view('listagrupos',array('lista'=>$groups));
     }

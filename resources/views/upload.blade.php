@@ -1,8 +1,4 @@
-@extends('master')
-
-@section('title')
-    Subir canción
-@stop
+@extends('adminlte::page')
 
 @section('content')
 
