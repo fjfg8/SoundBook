@@ -1,78 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+@extends('adminlte::register')
 
-    <title>SoundBook - Inicio Sesion</title>
-
-    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/style.css') }}" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-{{-- Error messages --}}
-@if (count($errors) > 0)
-    <ul>
-    @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-    @endforeach
-    </ul>
-@endif
-<div class="container">
-    <h2 align="center">Registrate</h2>
-
-    <form class="form-horizontal" method="POST" action="{{action('UsersController@create')}}">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Email:</label>
-        <div class="col-sm-10">
-         <input value="{{ old('email') }}" type="text" name="email" id="email">
+@section('body')
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}"><b>Regístrate</b></a>
         </div>
-    </div>
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="nick">Usuario:</label>
-        <div class="col-sm-10">
-         <input value="{{ old('nick') }}" type="text" name="nick" id="nick">
-        </div>
-    </div>
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="password">Contraseña:</label>
-        <div class="col-sm-10">
-         <input type="password" name="password" id="password">
-        </div>
-    </div>
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Nombre:</label>
-        <div class="col-sm-10">
-         <input value="{{ old('name') }}" type="text" name="name" id="name">
-        </div>
-    </div>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-         <button type="submit" class="btn btn-default">Registrar</button>
+        <div class="register-box-body">
+            <p class="login-box-msg">Introduce tus datos para registrarte</p>
+            <form action="{{action('UsersController@create')}}" method="post">{!! csrf_field() !!}
+                <div class="form-group has-feedback {{ $errors->has('nick') ? 'has-error' : '' }}">
+                    <input type="text" name="nick" class="form-control" value="{{ old('nick') }}"
+                           placeholder="Nombre de usuario">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @if ($errors->has('nick'))
+                        <span class="help-block">
+                            <strong>Introduce un nombre de usuario</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
+                    <input type="text" name="name" class="form-control" value="{{ old('name') }}"
+                           placeholder="Nombre completo">
+                    <span class="glyphicon glyphicon-font form-control-feedback"></span>
+                    @if ($errors->has('name'))
+                        <span class="help-block">
+                            <strong>Introduce tu nombre completo</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+                    <input type="email" name="email" class="form-control" value="{{ old('email') }}"
+                           placeholder="Email">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>Introduce un email</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
+                    <input type="password" name="password" class="form-control"
+                           placeholder="Contraseña">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>Introduce una contraseña</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
+                    <input type="password" name="password_confirmation" class="form-control"
+                           placeholder="Confirma de nuevo la contraseña">
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    @if ($errors->has('password_confirmation'))
+                        <span class="help-block">
+                            <strong>Confirma la contraseña</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Regístrate</button>
+
+                <div class="auth-links">
+                    <a href="/session"class="text-center">Ya me he registrado</a>
+                </div>
+            </form>
+            
         </div>
-    </div>
-</form>
-</div>
-
-
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </body>
-</html>
+        <!-- /.form-box -->
+    </div><!-- /.register-box -->
+@stop
