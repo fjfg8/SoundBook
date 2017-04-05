@@ -33,6 +33,14 @@
                          <input type="hidden" name="song" value="{{ $song->id }}"></input>
                          <button type="submit" id="botonL" class="btn btn-default pull-right">Like</button>
                     </form>
+                    @if(session()->get('id') == $comment->user_id)
+                         <form method="POST" action="{{action('CommentController@delete')}}" id="comentarioN">
+                            <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="comment" value="{{$comment->id}}">
+                            <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
+                            </form>
+                    @endif
                 </div> 
                 
             </div>

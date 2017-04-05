@@ -45,6 +45,8 @@ Route::post('/song/{id}','SongsController@show');
 
 Route::put('/song','CommentController@like');
 
+Route::delete('/song','CommentController@delete');
+
 
 Route::get('/song/{id}/comment',function($id){
     return view('comment',array('song'=>$id));
