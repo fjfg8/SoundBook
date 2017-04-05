@@ -1,5 +1,6 @@
 @extends('master')
 
+
 @section('content')
 <div class="row">
     <div class="col-md-4" id="menuPerfil">Opciones<br/>
@@ -10,6 +11,7 @@
     <div class="col-md-8" id="perfil">
     <form method="POST" action="{{action('UsersController@edit')}}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+    <input type="hidden" name="_method" value="PUT"></input>
         <div class="form-group">
             <label class="control-label col-sm-2">Nombre</label>
             <div class="col-md-10">
@@ -56,7 +58,21 @@
     </div>
 <div class="col-md-6">
         <div class="container" id="misCanciones" align="center">
-        <label>Mis Canciones</label><br/>
+        <label>Mis Canciones</label>
+        
+
+        <div class="btn-group">
+        <form method="POST" action="{{action('UsersController@search')}}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+        <select name="filtro">
+            <option value="titulo">Titulo</option> 
+            <option value="fecha">Fecha</option> 
+            <option value="artista">Artista</option>    
+        </select>
+        <button class="btn btn-default" type="submit">Filtrar</button>
+        </form>
+        </div>
+        <br/>
         @forelse($songs as $song)
             <div class="panel panel-default">
                 <div class="panel-heading">{{$song->title}}</div>

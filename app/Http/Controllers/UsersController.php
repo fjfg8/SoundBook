@@ -11,8 +11,26 @@ class UsersController extends Controller
 {
     public function show($id){
         $user = User::find($id);
-        $songs = Song::select('*')->where('user_id','=',$id)->orderby('created_at','desc')->paginate(4);
+        $filtro = session()->get('filtro');
+
+        if($filtro == "titulo")
+        $songs = Song::select('*')->where('user_id','=',$id)->orderby('title','desc')->paginate(4);
+
+        if($filtro=="fecha")
+        $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','descasc')->paginate(4);
+
+        if($filtro=="artista")
+        $songs = Song::select('*')->where('user_id','=',$id)->orderby('artist','desc')->paginate(4);
+       // $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','desc')->paginate(4);
         return view('profile',array('user' => $user,'songs'=>$songs));
+    }
+
+    public function search(Request $request){
+
+        $request->session()->put([
+            'filtro'=>$request->filtro
+        ]);
+         return redirect()->action('UsersController@show',session()->get('id'));
     }
 
     public function create(Request $request){
@@ -30,7 +48,8 @@ class UsersController extends Controller
 
         $request->session()->put([
             'name'=>$user->name,
-            'id'=>$user->id
+            'id'=>$user->id,
+            'filtro'=>"fecha"
         ]);
 
         //$id = User::where('email',$request->email)->value('id');//recogemos la id del nuevo usuario y redirigimos al vista de user
@@ -41,6 +60,9 @@ class UsersController extends Controller
         $this->validate($request,[
             'nick'=>'required',
             'password'=>'required'
+        ],
+        [
+            'nick.required'=>'EL nick es obligatorio'
         ]);
 
         if($this->comprobar($request->nick)){
@@ -50,7 +72,8 @@ class UsersController extends Controller
             if($user->password == $request->password){
                 $request->session()->put([
                     'name'=>$user->name,
-                    'id'=>$user->id
+                    'id'=>$user->id,
+                    'filtro'=>"fecha"
                 ]);
                 return redirect()->action('UsersController@show',$user->id);
             }else{
@@ -63,7 +86,7 @@ class UsersController extends Controller
     }
     
     public function comprobar($nick){
-        $acc = User::where('nick',$nick)->value('id');
+        $acc = User::where('nick',"=",$nick)->value('id');
         if($acc == NULL){
             return false;
         }
@@ -95,6 +118,10 @@ class UsersController extends Controller
                 $user->save();
             }
 
+             $request->session()->put([
+                    'filtro'=>"fecha"
+                ]);
+
             return redirect()->action('UsersController@show',$user->id);
         }
 
@@ -118,6 +145,10 @@ class UsersController extends Controller
 
         $user->password = $request->new;
         $user->save();
+
+        $request->session()->put([
+            'filtro'=>"fecha"
+        ]);
 
         return redirect()->action('UsersController@show',$user->id);
     }

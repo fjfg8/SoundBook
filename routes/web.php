@@ -22,7 +22,9 @@ Route::get('/song/{id}','SongsController@show');
 
 Route::get('/user/{id}','UsersController@show');
 
-Route::post('user/','UsersController@edit');
+Route::post('user/','UsersController@search');
+
+Route::put('user/','UsersController@edit');
 
 Route::post('/register','UsersController@create');
 
@@ -41,7 +43,7 @@ Route::post('pass','UsersController@change');
 Route::post('/song/{id}','SongsController@show');
 
 
-Route::post('/song','CommentController@like');
+Route::put('/song','CommentController@like');
 
 
 Route::get('/song/{id}/comment',function($id){

@@ -19,7 +19,7 @@ class SongsTableSeeder extends Seeder
             'artist' => 'Marc Anthony',
             'duration' => '03:25',
             'gender' => 'Salsa',
-            'date' => '15/06/2015',
+            'date' => '2015-05-12',
             'user_id' => 1
         ]);
         DB::table('songs')->insert([
@@ -28,7 +28,7 @@ class SongsTableSeeder extends Seeder
             'artist' => 'Raphael',
             'duration' => '04:10',
             'gender' => 'Copla',
-            'date' => '17/02/1978',
+            'date' => '1978-02-17',
             'user_id' => 1
         ]);
         DB::table('songs')->insert([
@@ -37,7 +37,7 @@ class SongsTableSeeder extends Seeder
             'artist' => 'David Bisbal',
             'duration' => '03:40',
             'gender' => 'Salsa',
-            'date' => '03/06/2002',
+            'date' => '2002-03-06',
             'user_id' => 2
         ]);
 
@@ -48,7 +48,7 @@ class SongsTableSeeder extends Seeder
             'artist' => 'artist'.$i,
             'duration' => '03:40',
             'gender' => 'Salsa',
-            'date' => '03/06/2002',
+            'date' => '2001-01-12',
             'user_id' => 1
         ]); 
         }
