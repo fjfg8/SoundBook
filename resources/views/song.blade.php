@@ -5,10 +5,10 @@
 <div class="raw" id="song">
     <div class="container" >
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color:#ef8300;color:#FFFFFF;">
+            <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
                 <div class="panel-title" >{{$song->title}}</div>
             </div>
-            <div class="panel-body" align="left" style="background-color:#ffe4c4;">
+            <div class="panel-body" align="left" style="background-color:#c4deff;">
                 <label>Artista: {{$song->artist}} </label>  
                 <label> | Album: {{$song->album}}</label><br/>
                 <label>Duracion: {{$song->duration}}</label>
@@ -25,8 +25,8 @@
             <div class="panel-body" align="center" style="background-color:#c4deff;">
                     @forelse($comments as $comment)
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{$comment->nick}}</div>
-                            <div class="panel-body" align="left">
+                            <div class="panel-heading" style="background-color:#ef8300;color:#FFFFFF;">{{$comment->nick}}</div>
+                            <div class="panel-body" style="background-color:#ffe4c4;" align="left">
                                 <label>{{$comment->comment}}</label><br/>
                                 <text syle="text-align: right;">Likes->{{$comment->likes}}</text>
                                 <form method="POST" action="{{action('CommentController@like')}}" id="comentarioN">

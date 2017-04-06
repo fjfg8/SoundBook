@@ -162,5 +162,10 @@ class UsersController extends Controller
         return redirect()->action('UsersController@start');
     }
 
+    public function admin(){
+        $users = User::select('*')->paginate(4);
+        return view('admin',array('users' => $users));
+    }
+
 
 }

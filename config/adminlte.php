@@ -132,7 +132,7 @@ return [
         ],
         [
             'text'        => 'Administración',
-            'url'         => '#',
+            'url'         => 'admin',
             'icon'        => 'database',
         ],
         [
