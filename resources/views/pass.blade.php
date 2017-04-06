@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row" id="perfil">
+<div class="row">
 
         {{-- Error messages --}}
         @if (count($errors) > 0)
@@ -18,25 +18,37 @@
         @if (Session::has('mess'))
         <div class="alert alert-info">{{ Session::get('mess') }}</div>
         @endif
-        <div class="container" >
-            <div class="panel panel-default">
-                <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;"><h3>Cambia la contraseña</h3></div>
-                <div class="panel-body" align="left">
-                    <form method="POST" action="{{action('UsersController@change')}}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                        Contraseña antigua
-                        <input type="password" name="old" id="old"></br>
-                        Contraseña nueva
-                        <input type="password" name="new" id="new"></br>
-                        Repite la contraseña
-                        <input type="password" name="copy" id="copy"></br>
 
-                        </br>
-                        <button type="submit" class="btn btn-default">Cambiar</button>
-                    </form>
-                </div>  
+        <div class="col-md-8" id="perfil" align="center">
+            <form method="POST" action="{{action('UsersController@change')}}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                <div class="panel panel-default" style="width:40%;">
+                    <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
+                        <h3 class="panel-title" >Cambia la contraseña</h3>
+                    </div>
+                    <div class="panel-body" style="background-color:#c4deff;" align="left">
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Contraseña antigua</label>
+                                <input type="password" name="old" id="old">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Contraseña nueva</label>
+                            <input type="password" name="new" id="new">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Repite la contraseña</label>
+                            <input type="password" name="copy" id="copy">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">Cambiar</button>
+                        </div>
+                    </div>  
             </div>
-        </div>
+        </form>
+    </div>
 </div>
 
 @stop
