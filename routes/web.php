@@ -54,10 +54,11 @@ Route::get('/song/{id}/comment',function($id){
 
 Route::post('comment/','CommentController@create');
 
-Route::get('user/upload',function(){
+Route::get('/upload',function(){
     return view('upload');
 });
-Route::post('upload/','SongsController@create');
+
+Route::post('/upload','SongsController@create');
 
 Route::get('/groups','GroupsController@show');
 

@@ -4,9 +4,7 @@
 
 <div class="row">
 
-    <div class="col-md-4"></div>
-
-    <div class="col-md-4" id="perfil">
+    <div class="col-md-8" id="perfil" align="center">
 
         {{-- Error messages --}}
         @if (count($errors) > 0)
@@ -24,21 +22,44 @@
         @endif
 
         <form method="POST" action="{{action('SongsController@create')}}">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" name="user" value="{{session()->get('id')}}"></br>
-            Titulo
-            <input type="text" name="title" id="title"></br>
-            Artista
-            <input type="text" name="artist" id="artist"></br>
-            Duración
-            <input type="text" name="duration" id="duration"></br>
-            Genero
-            <input type="text" name="gender" id="gender"></br>
-            Fecha de salida
-            <input type="text" name="date" id="date"></br>
 
-            </br>
-            <button type="submit" id="botonL" class="btn btn-default pull-left">Subir</button>
+            <div class="panel panel-default" style="width:40%;">
+                    <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
+                        <h3 class="panel-title" >Sube una canción</h3>
+                    </div>
+                    <div class="panel-body" style="background-color:#c4deff;" align="left">
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Título</label>
+                                <input type="text" name="title" id="title">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Artista</label>
+                            <input type="text" name="artist" id="artist">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Duración</label>
+                            <input type="text" name="duration" id="duration">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Género</label>
+                            <input type="text" name="gender" id="gender">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">Fecha de salida</label>
+                            <input type="text" name="date" id="date">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="botonL" class="btn btn-default">Subir</button>
+                        </div>
+                    </div>  
+            </div>
         </form>
 
 
