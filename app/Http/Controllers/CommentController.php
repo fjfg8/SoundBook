@@ -22,6 +22,15 @@ class CommentController extends Controller
     return redirect()->action('SongsController@show',$request->song);
     }
 
+    public function edit(Request $request){
+        
+        $c = Comment::find($request->comment);
+        $c->comment = $request->descripcion;
+        $c->save();
+
+        return redirect()->action('SongsController@show',$request->song);
+    }
+
     public function like(Request $request){
      
      $c = Comment::findOrFail($request->comment);

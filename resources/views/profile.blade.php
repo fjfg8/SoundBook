@@ -90,10 +90,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color:#ef8300;color:#000000;">{{$song->title}}</div>
                     <div class="panel-body" align="left" style="background-color:#ffe4c4;">
-                        <label>Artista: {{$song->artist}} </label>  
-                        <label> | Album: {{$song->album}}</label><br/>
+                        <label>Artista: {{$song->artist}} </label><br/>
                         <label>Duracion: {{$song->duration}}</label>
                         <label> | Fecha: {{$song->date}}</label>
+                        <form method="POST" action="{{action('SongsController@delete')}}" id="comentarioN">
+                            <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="song" value="{{$song->id}}">
+                            <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
+                        </form>
                         <a href="/song/{{$song->id}}" class="btn btn-default pull-right" style="padding-top: 5px;">Ver más</a>
                     </div>  
                 </div>

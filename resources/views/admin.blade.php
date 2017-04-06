@@ -6,7 +6,7 @@
     <div class="container" id="usuarios" align="center">
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
-                <div class="panel-title" >Listado de suarios</div>
+                <div class="panel-title" >Listado de usuarios</div>
             </div>
             <div class="panel-body" align="center" style="background-color:#c4deff;">
                     @forelse($users as $user)
@@ -26,6 +26,8 @@
                             <strong>No existe ningun usuario</strong>
                         </div>
                     @endforelse
+
+                    {{ $users->links() }}
             </div>
         </div>
     </div>

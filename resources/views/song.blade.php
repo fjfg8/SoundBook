@@ -9,10 +9,10 @@
                 <div class="panel-title" >{{$song->title}}</div>
             </div>
             <div class="panel-body" align="left" style="background-color:#c4deff;">
-                <label>Artista: {{$song->artist}} </label>  
-                <label> | Album: {{$song->album}}</label><br/>
+                <label>Artista: {{$song->artist}} </label><br/>
                 <label>Duracion: {{$song->duration}}</label>
                 <label> | Fecha: {{$song->date}}</label>
+                <a href="/song/{{$song->id}}/change" class="btn btn-default pull-right">Editar</a>
             </div>  
             </div>
     </div>
@@ -43,6 +43,8 @@
                                         <input type="hidden" name="comment" value="{{$comment->id}}">
                                         <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
                                     </form>
+                                    
+                                    <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-default pull-right">Editar</a>
                                 @endif
                             </div> 
                             

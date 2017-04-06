@@ -47,10 +47,19 @@ Route::put('/song','CommentController@like');
 
 Route::delete('/song','CommentController@delete');
 
+Route::delete('/user','SongsController@delete');
 
-Route::get('/song/{id}/comment',function($id){
-    return view('comment',array('song'=>$id));
+Route::get('/song/{id}/change',function($id){
+    return view('edit',array('song'=>$id));
 });
+
+Route::put('change','SongsController@edit');
+
+Route::get('/song/{id}/edit/{c}',function($id,$c){
+    return view('comment',array('song'=>$id,'comment'=>$c));
+});
+
+Route::put('/edit','CommentController@edit');
 
 Route::post('comment/','CommentController@create');
 

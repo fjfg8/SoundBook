@@ -14,6 +14,7 @@ class SongsController extends Controller
         //$comments = Comment::select()->where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
         $comments = DB::table('comments')
         ->join('users','comments.user_id','=','users.id')
+        ->where('comments.song_id','=',$id)
         ->select('comments.*','users.nick')
         ->orderBy('created_at','desc')->paginate(3);
         return view('song',array('song' => $song,'comments'=>$comments));
@@ -40,6 +41,44 @@ class SongsController extends Controller
         $s->save();
 
         return redirect()->action('UsersController@show',$request->user);
+    }
 
+    public function delete(Request $request){
+        $s = Song::find($request->song);
+        $s->delete();
+
+        return redirect()->back();
+    }
+
+    public function edit(Request $request){
+
+        $s = Song::findOrFail($request->id);
+
+        if($request->has('title')){
+            $s->title = $request->title;
+            $s->save();
+        }
+        if($request->has('artist')){
+            $s->artist = $request->artist;
+            $s->save();
+        }
+        if($request->has('gender')){
+            $s->gender = $request->gender;
+            $s->save();
+        }
+        if($request->has('duration')){
+            $s->duration = $request->duration;
+            $s->save();
+        }
+        if($request->has('date')){
+            $s->date = $request->date;
+            $s->save();
+        }
+
+            $request->session()->put([
+                'filtro'=>"fecha"
+            ]);
+
+        return redirect()->action('UsersController@show');
     }
 }
