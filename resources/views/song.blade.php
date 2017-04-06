@@ -5,8 +5,10 @@
 <div class="raw" id="song">
     <div class="container" >
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;"><h3>{{$song->title}}</h3></div>
-            <div class="panel-body" align="left">
+            <div class="panel-heading" style="background-color:#ef8300;color:#FFFFFF;">
+                <div class="panel-title" >{{$song->title}}</div>
+            </div>
+            <div class="panel-body" align="left" style="background-color:#ffe4c4;">
                 <label>Artista: {{$song->artist}} </label>  
                 <label> | Album: {{$song->album}}</label><br/>
                 <label>Duracion: {{$song->duration}}</label>
@@ -17,8 +19,10 @@
 
     <div class="container" id="comentarios" align="center">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;"><h4>Comentarios</h4></div>
-            <div class="panel-body" align="center">
+            <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
+                <div class="panel-title" >Comentarios</div>
+            </div>
+            <div class="panel-body" align="center" style="background-color:#c4deff;">
                     @forelse($comments as $comment)
                         <div class="panel panel-default">
                             <div class="panel-heading">{{$comment->nick}}</div>
@@ -38,7 +42,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                                         <input type="hidden" name="comment" value="{{$comment->id}}">
                                         <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
-                                        </form>
+                                    </form>
                                 @endif
                             </div> 
                             
