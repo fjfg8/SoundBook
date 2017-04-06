@@ -65,3 +65,5 @@ Route::get('/groups','GroupsController@show');
 Route::get('/listagrupos','GroupsController@showlista');
 
 Route::post('/logout','UsersController@logout');
+
+Route::get('/admin','UsersController@admin');
