@@ -131,6 +131,11 @@ return [
             ],
         ],
         [
+            'text'        => 'Administración',
+            'url'         => '#',
+            'icon'        => 'database',
+        ],
+        [
             'text'        => 'Grupos',
             'url'         => 'listagrupos',
             'icon'        => 'users',
