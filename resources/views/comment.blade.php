@@ -3,22 +3,26 @@
 
 @section('content')
 
-<div class="row">
+<form method="POST" action="{{action('CommentController@edit')}}" id="comentarioN">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="song" value="{{ $song }}"></input>
+    <input type="hidden" name="comment" value="{{ $comment }}"></input>
+    <div class="panel panel-default" style="width:30%;text-align:center;margin:0 auto;" align="center">
+        <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
+            <h3 class="panel-title" >Editar comentario</h3>
+        </div>
+        <div class="panel-body" style="background-color:#c4deff;">
+            <div class="form-group">
+                <textarea form="comentarioN" name="descripcion" rows="5" cols="40"></textarea><br/>
+            </div>
 
-    <div class="col-md-4"></div>
-
-    <div class="col-md-4" id="comment">
-        <label><strong>Editar comentario</song></label>
-       <form method="POST" action="{{action('CommentController@edit')}}" id="comentarioN">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                <input type="hidden" name="_method" value="PUT">
-                <input type="hidden" name="song" value="{{ $song }}"></input>
-                 <input type="hidden" name="comment" value="{{ $comment }}"></input>
-                <button type="submit" id="botonL" class="btn btn-default pull-left">Editar</button>
-        </form><br/>
-        <textarea form="comentarioN" name="descripcion" rows="5" cols="40"></textarea>
-
+            <div class="form-group">        
+                    <button type="submit" class="btn btn-default">Editar</button> 
+            </div>
+        </div><!-- /.box-body -->
     </div>
+</form>
 
-</div>
+
 @stop
