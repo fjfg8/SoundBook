@@ -134,6 +134,10 @@ class UsersController extends Controller
         return redirect()->action('UsersController@show');
         //return redirect()->back();
     }
+
+
+
+    
     
     public function change(Request $request){
         $this->validate($request,[
