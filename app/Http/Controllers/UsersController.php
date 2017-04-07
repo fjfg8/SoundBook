@@ -163,8 +163,15 @@ class UsersController extends Controller
     }
 
     public function admin(){
-        $users = User::select('*')->paginate(4);
+        $users = User::select('*')->paginate(6);
         return view('admin',array('users' => $users));
+    }
+
+    public function delete(Request $request){
+        $s = User::find($request->user);
+        $s->delete();
+
+        return redirect()->back();
     }
 
 

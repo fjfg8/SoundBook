@@ -76,3 +76,5 @@ Route::get('/listagrupos','GroupsController@showlista');
 Route::post('/logout','UsersController@logout');
 
 Route::get('/admin','UsersController@admin');
+
+Route::delete('/admin','UsersController@delete');

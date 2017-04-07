@@ -19,6 +19,12 @@
                                 </br>
                                 <text syle="text-align: left;">Email: {{$user->email}}</text>
                                 </br>
+                                <form method="POST" action="{{action('UsersController@delete')}}" id="usuario">
+                                    <input type="hidden" name="_method" value="DELETE"></input>
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                    <input type="hidden" name="user" value="{{$user->id}}">
+                                    <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
+                                </form>
                             </div>
                         </div>
                     @empty
