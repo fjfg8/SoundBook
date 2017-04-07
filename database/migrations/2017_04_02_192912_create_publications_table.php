@@ -16,9 +16,9 @@ class CreatePublicationsTable extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('group_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('song_id')->unsigned();
-            $table->foreign('song_id')->references('id')->on('songs');
+            $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
