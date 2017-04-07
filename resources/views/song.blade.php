@@ -55,11 +55,11 @@
                     </div>
                 @endforelse
                 {{ $comments->links() }}
-                <form method="POST" action="{{action('CommentController@create')}}" id="comentarioN">
+                <form method="POST" action="{{action('CommentController@create')}}" id="otro">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                     <input type="hidden" name="song" value="{{ $song->id }}"></input>
                         <div class="form-group">
-                            <textarea form="comentarioN" name="descripcion" rows="5" cols="40"></textarea><br/>
+                            <textarea form="otro" name="descripcion" rows="5" cols="40"></textarea><br/>
                         </div>
 
                         <div class="form-group">        
