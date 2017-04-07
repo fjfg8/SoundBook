@@ -18,9 +18,9 @@ class CreateCommentsTable extends Migration
             $table->string('comment');
             $table->integer('likes');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');  
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');  
             $table->integer('song_id')->unsigned();
-            $table->foreign('song_id')->references('id')->on('songs');
+            $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade')->onUpdate('cascade');
              
             
             $table->timestamps();

@@ -99,8 +99,12 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request){
-        $id = session()->get('id');
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->id);
+
+        if($request->has('nick')){
+            $user->nick = $request->nick;
+            $user->save();
+        }
 
         if($request->has('name')){
             $user->name = $request->name;
@@ -123,11 +127,12 @@ class UsersController extends Controller
             $user->save();
         }
 
-            $request->session()->put([
-                'filtro'=>"fecha"
-            ]);
+        $request->session()->put([
+            'filtro'=>"fecha"
+        ]);
 
         return redirect()->action('UsersController@show');
+        //return redirect()->back();
     }
     
     public function change(Request $request){
@@ -163,8 +168,15 @@ class UsersController extends Controller
     }
 
     public function admin(){
-        $users = User::select('*')->paginate(4);
+        $users = User::select('*')->paginate(6);
         return view('admin',array('users' => $users));
+    }
+
+    public function delete(Request $request){
+        $s = User::find($request->user);
+        $s->delete();
+
+        return redirect()->back();
     }
 
 

@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/register',function(){
     return view('register');
 });
+
 Route::get('/song/{id}','SongsController@show');
 
 Route::get('user/','UsersController@show');
@@ -50,7 +51,7 @@ Route::delete('/song','CommentController@delete');
 Route::delete('/user','SongsController@delete');
 
 Route::get('/song/{id}/change',function($id){
-    return view('edit',array('song'=>$id));
+    return view('edit_song',array('song'=>$id));
 });
 
 Route::put('change','SongsController@edit');
@@ -76,3 +77,9 @@ Route::get('/listagrupos','GroupsController@showlista');
 Route::post('/logout','UsersController@logout');
 
 Route::get('/admin','UsersController@admin');
+
+Route::delete('/admin','UsersController@delete');
+
+Route::get('/user/{id}/edit',function($id){
+    return view('edit_user',array('user'=>$id));
+});

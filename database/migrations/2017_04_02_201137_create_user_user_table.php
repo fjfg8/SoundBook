@@ -17,9 +17,9 @@ class CreateUserUserTable extends Migration
         Schema::create('user_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id1')->unsigned();
-            $table->foreign('user_id1')->references('id')->on('users');
+            $table->foreign('user_id1')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('user_id2')->unsigned();
-            $table->foreign('user_id2')->references('id')->on('users');
+            $table->foreign('user_id2')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
