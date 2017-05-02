@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'nick' => 'admin',
-            'password' => 'admin',
+            'password' => bcrypt('admin'),
             'gender' => '-',
             'status' => '-',
             'preferences' => '-'
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Jonay',
             'email' => 'jonay@ejemplo.com',
             'nick'=> 'jonay',
-            'password' => 'jonay',
+            'password' => bcrypt('jonay'),
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rock'
@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Fran',
             'email' => 'fran@ejemplo.com',
             'nick' => 'fran',
-            'password' => 'fran',
+            'password' => bcrypt('fran'),
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rap'
@@ -55,7 +55,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Raul',
             'email' => 'raul@ejemplo.com',
             'nick' => 'raul',
-            'password' => 'raul',
+            'password' => bcrypt('raul'),
             'gender' => 'Hombre',
             'status' => 'Soltero',
             'preferences' => 'Rap'
@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Larry',
             'email' => 'larry@ejemplo.com',
             'nick' => 'larry',
-            'password' => 'larry',
+            'password' => bcrypt('larry'),
             'gender' => 'Hombre',
             'status' => 'Casado',
             'preferences' => 'HipHop'
