@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Account;
+use Illuminate\Support\Facades\Auth;
 use App\Song;
 
 class UsersController extends Controller
@@ -31,7 +31,7 @@ class UsersController extends Controller
         $request->session()->put([
             'filtro'=>$request->filtro
         ]);
-         return redirect()->action('UsersController@show');
+         return redirect()->action('HomeController@index');
     }
 
     public function edit(Request $request){
@@ -67,7 +67,7 @@ class UsersController extends Controller
             'filtro'=>"fecha"
         ]);
 
-        return redirect()->action('UsersController@show');
+        return redirect()->action('HomeController@index');
         //return redirect()->back();
     }
 
@@ -77,7 +77,7 @@ class UsersController extends Controller
             'new'=>'required',
             'copy'=>'required'
         ]);
-        $id = session()->get('id');
+        $id = Auth::user()->id;
         $user = User::find($id);
 
         if($user->password != $request->old ){
@@ -95,7 +95,7 @@ class UsersController extends Controller
             'filtro'=>"fecha"
         ]);
 
-        return redirect()->action('UsersController@show');
+        return redirect()->action('HomeController@index');
     }
 
    /* public function logout(){
