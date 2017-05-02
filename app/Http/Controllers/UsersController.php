@@ -34,99 +34,35 @@ class UsersController extends Controller
          return redirect()->action('UsersController@show');
     }
 
-    public function create(Request $request){
-        
-        $this->validate($request,[
-            'nick' => 'unique:users|required',
-            'password'=>'required|same:password_confirmation',
-            'password_confirmation'=>'required|same:password',
-            'email'=>'required',
-            'name'=>'required'
-        ]);
-        $user = new User();
-        $user->email = $request->email;
-        $user->name = $request->name;
-        $user->password = $request->password;
-        $user->nick = $request->nick;
-
-        $user->save();
-
-        $request->session()->put([
-            'name'=>$user->name,
-            'id'=>$user->id,
-            'filtro'=>"fecha"
-        ]);
-
-        //$id = User::where('email',$request->email)->value('id');//recogemos la id del nuevo usuario y redirigimos al vista de user
-        return redirect()->action('UsersController@show');
-    }
-
-    public function start(Request $request){
-        $this->validate($request,[
-            'nick'=>'required',
-            'password'=>'required'
-        ],
-        [
-            'nick.required'=>'EL nick es obligatorio'
-        ]);
-
-        if($this->comprobar($request->nick)){
-           // $acc = Account::where('nick',$request->nick)->value('id');
-            $user = User::where('nick','=',$request->nick)->first();
-    
-            if($user->password == $request->password){
-                $request->session()->put([
-                    'name'=>$user->name,
-                    'id'=>$user->id,
-                    'filtro'=>"fecha"
-                ]);
-                return redirect()->action('UsersController@show');
-            }else{
-                return redirect('/session');
-            }
-        }else{
-            return redirect('/register');
-        }
-
-    }
-    
-    public function comprobar($nick){
-        $acc = User::where('nick',"=",$nick)->value('id');
-        if($acc == NULL){
-            return false;
-        }
-        return true;
-    }
-
     public function edit(Request $request){
         $user = User::findOrFail($request->id);
 
         if($request->has('nick')){
             $user->nick = $request->nick;
-            $user->save();
+            //$user->save();
         }
 
         if($request->has('name')){
             $user->name = $request->name;
-            $user->save();
+            //$user->save();
         }
         if($request->has('email')){
             $user->email = $request->email;
-            $user->save();
+            //$user->save();
         }
         if($request->has('gender')){
             $user->gender = $request->gender;
-            $user->save();
+            //$user->save();
         }
         if($request->has('status')){
             $user->status = $request->status;
-            $user->save();
+            //$user->save();
         }
         if($request->has('preferences')){
             $user->preferences = $request->preferences;
-            $user->save();
+            //$user->save();
         }
-
+        $user->save();
         $request->session()->put([
             'filtro'=>"fecha"
         ]);
@@ -135,10 +71,6 @@ class UsersController extends Controller
         //return redirect()->back();
     }
 
-
-
-    
-    
     public function change(Request $request){
         $this->validate($request,[
             'old'=>'required',
@@ -166,10 +98,10 @@ class UsersController extends Controller
         return redirect()->action('UsersController@show');
     }
 
-    public function logout(){
+   /* public function logout(){
         session()->flush();
         return redirect()->action('UsersController@start');
-    }
+    }*/
 
     public function admin(){
         $users = User::select('*')->paginate(6);

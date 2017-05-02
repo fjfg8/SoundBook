@@ -72,7 +72,6 @@ Route::get('/user/{id}/edit',function($id){
     return view('edit_user',array('user'=>$id));
 });
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
