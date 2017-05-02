@@ -11,7 +11,7 @@
             <form action="{{action('UsersController@create')}}" method="post">{!! csrf_field() !!}
                 <div class="form-group has-feedback {{ $errors->has('nick') ? 'has-error' : '' }}">
                     <input type="text" name="nick" class="form-control" value="{{ old('nick') }}"
-                           placeholder="Nombre de usuario">
+                           placeholder="Nombre de usuario" required>
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     @if ($errors->has('nick'))
                         <span class="help-block">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
                     <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                           placeholder="Nombre completo">
+                           placeholder="Nombre completo" required>
                     <span class="glyphicon glyphicon-font form-control-feedback"></span>
                     @if ($errors->has('name'))
                         <span class="help-block">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
-                           placeholder="Email">
+                           placeholder="Email" required>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -40,8 +40,8 @@
                     @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
-                    <input type="password" name="password" class="form-control"
-                           placeholder="Contraseña">
+                    <input id="password" type="password" name="password" class="form-control"
+                           placeholder="Contraseña" required>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
                         <span class="help-block">
@@ -50,8 +50,8 @@
                     @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                    <input type="password" name="password_confirmation" class="form-control"
-                           placeholder="Confirma de nuevo la contraseña">
+                    <input id="password-confirm" type="password" name="password_confirmation" class="form-control"
+                           placeholder="Confirma de nuevo la contraseña" required>
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     @if ($errors->has('password_confirmation'))
                         <span class="help-block">
@@ -63,7 +63,7 @@
                 <button type="submit" class="btn btn-primary btn-block btn-flat">Regístrate</button>
 
                 <div class="auth-links">
-                    <a href="/session"class="text-center">Ya me he registrado</a>
+                    <a href="/login" class="text-center">Ya me he registrado</a>
                 </div>
             </form>
             
