@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Route::get('/song/{id}','SongsController@show');
 
-Route::get('user/','UsersController@show');
+Route::get('user/','HomeController@index');
 
 Route::post('user/','UsersController@search');
 
