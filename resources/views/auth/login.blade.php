@@ -9,14 +9,14 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Introduce tus datos para iniciar sesion</p>
-            <form action="{{action('UsersController@start')}}" method="post">{!! csrf_field() !!}
-                <div class="form-group has-feedback {{ $errors->has('nick') ? 'has-error' : '' }}">
-                    <input type="text" name="nick" class="form-control" value="{{ old('nick') }}"
-                           placeholder="Usuario">
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    @if ($errors->has('nick'))
+            <form action="{{ route('login') }}" method="post">{!! csrf_field() !!}
+                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+                    <input type="email" name="email" class="form-control" value="{{ old('email') }}"
+                           placeholder="Email">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @if ($errors->has('email'))
                         <span class="help-block">
-                            <strong>Introduce un usuario</strong>
+                            <strong>Introduce un email</strong>
                         </span>
                     @endif
                 </div>
