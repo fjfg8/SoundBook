@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Song;
 use App\Comment;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 class SongsController extends Controller
 {
     public function show($id){
@@ -36,11 +37,11 @@ class SongsController extends Controller
         $s->duration = $request->duration;
         $s->gender = $request->gender;
         $s->date = $request->date;
-        $s->user_id = $request->user;
+        $s->user_id = Auth::user()->id;
 
         $s->save();
 
-        return redirect()->action('UsersController@show',$request->user);
+        return redirect()->action('HomeController@index');
     }
 
     public function delete(Request $request){
@@ -79,6 +80,6 @@ class SongsController extends Controller
                 'filtro'=>"fecha"
             ]);
 
-        return redirect()->action('UsersController@show');
+        return redirect()->action('HomeController@index');
     }
 }
