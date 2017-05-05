@@ -40,7 +40,14 @@
                     <label class="control-label col-sm-6">Preferencias:</label>
                     <label class="control-label col-sm-3">{{$user->preferences}}</label>
                     <br/>
-                </div>    
+                </div>  
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Seguidos:</label>
+                    <label class="control-label col-sm-3">{{$user->follow}}</label>
+                    <br/> 
+                    <label class="control-label col-sm-6">Seguidores:</label>
+                    <label class="control-label col-sm-3">{{$user->followers}}</label>
+                </div>  
                 <div class="form-group" align="center">        
                     <div class="col-sm-12">
                         <a href="/user/{{$user->id}}/edit" class="btn btn-default">Editar</a>

@@ -1,5 +1,6 @@
 <?php
 Use App\Song;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/song/{id}','SongsController@show');
 
-Route::get('user/','UsersController@show');
+//Route::get('user/','UsersController@show');
 
 Route::post('user/','UsersController@search');
 
@@ -69,9 +70,16 @@ Route::get('/admin','UsersController@admin');
 Route::delete('/admin','UsersController@delete');
 
 Route::get('/user/{id}/edit',function($id){
-    return view('edit_user',array('user'=>$id));
+    $user=Auth::user();
+    return view('edit_user',array('user'=>$user));
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/searcher','SearchController@show');
+
+Route::post('/searcher','SearchController@search');
+
+Route::put('/searcher','UsersController@follow');
