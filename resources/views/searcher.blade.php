@@ -39,7 +39,13 @@
                              <input type="hidden" name="_method" value="PUT"></input>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                             <input type="hidden" name="user" value="{{ $s->id }}"></input>
-                                <button class="btn btn-default" type="submit">Seguir</button>
+                                <button class="btn btn-default pull-right" type="submit">Follow</button>
+                            </form>
+                            <form method="POST" action="{{action('UsersController@unfollow')}}">
+                             <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="user" value="{{ $s->id }}"></input>
+                                <button class="btn btn-default pull-right" type="submit">Unfollow</button>
                             </form>
                         </div>  
                     </div>
