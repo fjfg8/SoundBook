@@ -110,6 +110,11 @@ return [
     'menu' => [
         'NAVEGACION',
         [
+            'text'        => 'Mi muro',
+            'url'         => 'wall',
+            'icon'        => 'music',
+        ],
+        [
             'text'        => 'Mi perfil',
             'url'         => 'home',
             'icon'        => 'user',
@@ -129,11 +134,6 @@ return [
                     'icon' => 'photo',
                 ],
             ],
-        ],
-        [
-            'text'        => 'Administración',
-            'url'         => 'admin',
-            'icon'        => 'database',
         ],
         [
             'text'        => 'Grupos',

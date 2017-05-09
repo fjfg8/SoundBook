@@ -23,7 +23,9 @@
                                     <input type="hidden" name="_method" value="DELETE"></input>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                                     <input type="hidden" name="user" value="{{$user->id}}">
-                                    <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
+                                    @if (!(Auth::user()->id == $user->id))
+                                        <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
+                                    @endif
                                 </form>
                                 <a href="/user/{{$user->id}}/edit" class="btn btn-default pull-right">Editar</a>
                             </div>
@@ -35,7 +37,6 @@
                     @endforelse
 
                     {{ $users->links() }}
-                    <a href="/register" class="btn btn-default" align"center">Crear nuevo usuario</a>
             </div>
         </div>
     </div>
