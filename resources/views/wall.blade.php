@@ -11,9 +11,9 @@
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color:#ef8300;color:#000000;">{{$song->title}}</div>
             <div class="panel-body" align="left" style="background-color:#ffe4c4;">
-                <label>Artista: {{$song->artist}} </label><br/>
-                <label>Album: {{$song->album}}</label>
-                <label> | Fecha: {{$song->date}}</label>
+                <iframe width="560" height="315" 
+                src = {{$song->url}}  
+                allowfullscreen></iframe><br/>
             </div>  
         </div>
     @empty
