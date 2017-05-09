@@ -8,11 +8,11 @@ class Comment extends Model
 {
     
  
-    public function song(){
+    public function songs(){
         return $this->belongsTo('App\Song');
     }
 
-     public function user(){
+     public function users(){
         return $this->belongsTo('App\User');
     }
 

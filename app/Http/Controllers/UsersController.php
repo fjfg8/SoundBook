@@ -104,11 +104,7 @@ class UsersController extends Controller
         $user1 = Auth::user();
         $user2 = User::find($request->user);
 
-        //$user1->user()->attach($user2->id);
-        DB::table('user_user')->insert([
-            'user_id1' => $user1->id,
-            'user_id2' => $user2->id
-        ]);
+        $user1->users()->attach($user2->id);
 
         return redirect()->action('HomeController@index');
 

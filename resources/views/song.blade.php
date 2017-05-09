@@ -8,8 +8,11 @@
             <div class="panel-title" >{{$song->title}}</div>
         </div>
         <div class="panel-body" align="left" style="background-color:#c4deff;">
+            <iframe width="560" height="315" 
+            src = {{$song->url}}  
+            allowfullscreen></iframe><br/>
             <label>Artista: {{$song->artist}} </label><br/>
-            <label>Duracion: {{$song->duration}}</label>
+            <label>Album: {{$song->album}}</label>
             <label> | Fecha: {{$song->date}}</label>
             <a href="/song/{{$song->id}}/change" class="btn btn-default pull-right">Editar</a>
         </div>  

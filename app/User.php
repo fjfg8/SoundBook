@@ -38,19 +38,19 @@ class User extends Authenticatable
     private $preferences;
     private $admin;*/
 
-   public function song(){
+   public function songs(){
         return $this->hasMany('App\Song');
     }
-   public function comment(){
+   public function comments(){
         return $this->hasMany('App\Comment');
     }
 
-    public function group(){
+    public function groups(){
         return $this->belongsToMany('App\Group');
     }
 
-    public function user(){
-        return $this->belongsToMany('App\User');
+    public function users(){
+        return $this->belongsToMany('App\User','user_user','user_id1','user_id2');
     }
 
 }

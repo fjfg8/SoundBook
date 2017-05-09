@@ -12,12 +12,7 @@ class SongsController extends Controller
 {
     public function show($id){
         $song = Song::findOrFail($id);
-        //$comments = Comment::select()->where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
-        $comments = DB::table('comments')
-        ->join('users','comments.user_id','=','users.id')
-        ->where('comments.song_id','=',$id)
-        ->select('comments.*','users.nick')
-        ->orderBy('created_at','desc')->paginate(3);
+        $comments = $song->comments()->orderby('created_at','desc')->paginate(3);
         return view('song',array('song' => $song,'comments'=>$comments));
     }
 

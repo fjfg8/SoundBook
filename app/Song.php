@@ -18,15 +18,15 @@ class Song extends Model
 
  
     
-    public function comment(){
+    public function comments(){
         return $this->hasMany('App\Comment');
     }
 
-    public function user(){
+    public function users(){
         return $this->belongsTo('App\User');
     }
 
-    public function publication(){
+    public function publications(){
         return $this->hasMany('App\Publication');
     }
 
