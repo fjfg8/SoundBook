@@ -17,11 +17,13 @@ class CreateSongsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('artist');
+            $table->string('album');
             $table->string('duration');
             $table->string('gender');
             $table->date('date'); 
              $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->string('url');
             $table->timestamps();
         });
     }

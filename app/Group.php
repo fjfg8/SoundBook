@@ -8,11 +8,11 @@ class Group extends Model
 {
     //
     
-    public function publication(){
+    public function publications(){
         return $this->hasMany('App\Publication');
     }
 
-    public function user(){
+    public function users(){
         return $this->belongsToMany('App\User');
     }
 

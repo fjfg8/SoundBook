@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Publication extends Model
 {
     //
-    public function group(){
+    public function groups(){
         return $this->belongsTo('App\Group');
     }
 
-    public function song(){
+    public function songs(){
         return $this->belongsTo('App\Song');
     }
 }

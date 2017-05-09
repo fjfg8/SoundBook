@@ -16,28 +16,17 @@ class WallController extends Controller
     }
 
     public function publicaciones(){
-    $id = Auth::user()->id;
+        $user = User::find(Auth::user()->id);
 
-    $users = DB::table('user_user')->select('user_id2')->where('user_id1','=',$id)->paginate(5);
-
-    $publi = array();
-    foreach($users as $u){
-       
-        $res = Song::where('user_id','=',$u);
-        $publi = array_merge($publi,(array)$res);
-    }
-    $aux = Song::where('user_id','=',Auth::user()->id);
-    $publi = array_merge($publi,(array)$aux);
-
-    //uasort($publi,'cmp');
-    return $publi;
-    }
-
-    public function cmp($a, $b) {
-        if ($a->created_at == $b->created_at) {
-            return 0;
+        $others = $user->users; 
+        $songs = $user->songs;
+        
+        foreach($others as $o){
+            $aux = $o->songs;
+            $songs = $songs->merge($aux);
         }
-        return ($a->created_at < $b->created_at) ? -1 : 1;
+
+        return $songs;
     }
 
 }
