@@ -22,9 +22,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('admin'),
             'gender' => '-',
             'status' => '-',
-            'preferences' => '-',
-            'follow' => 0,
-            'followers' => 0
+            'preferences' => '-'
             
         ]);
 
@@ -36,9 +34,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('jonay'),
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rock',
-            'follow' => 0,
-            'followers' => 0
+            'preferences' => 'Rock'
            
         ]);
 
@@ -50,9 +46,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('fran'),
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rap',
-            'follow' => 0,
-            'followers' => 0
+            'preferences' => 'Rap'
         
         ]);
 
@@ -64,9 +58,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('raul'),
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rap',
-            'follow' => 0,
-            'followers' => 0
+            'preferences' => 'Rap'
             
         ]);
 
@@ -78,9 +70,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('larry'),
             'gender' => 'Hombre',
             'status' => 'Casado',
-            'preferences' => 'HipHop',
-            'follow' => 0,
-            'followers' => 0
+            'preferences' => 'HipHop'
             
         ]);
     

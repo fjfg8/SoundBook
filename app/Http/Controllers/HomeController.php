@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Song;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-         $id = Auth::user()->id;
+        $id = Auth::user()->id;
         $user = User::find($id);
         if(session()->has("filtro")){
            $filtro = session()->get('filtro'); 
@@ -42,6 +43,19 @@ class HomeController extends Controller
         if($filtro=="artista")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('artist','asc')->paginate(4);
             
-        return view('home',array('user' => $user,'songs'=>$songs));
+
+        $follow = $this->follow($id);
+        $followers = $this->followers($id);
+        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers));
+    }
+
+
+    public function follow($id){
+        $res = DB::table('user_user')->where('user_id1','=',$id)->count();
+        return $res;
+    }
+    public function followers($id){
+        $res = DB::table('user_user')->where('user_id2','=',$id)->count();
+        return $res;
     }
 }

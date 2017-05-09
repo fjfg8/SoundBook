@@ -19,8 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('nick')->unique();
             $table->string('password');
-            $table->integer('follow')->nullable();
-            $table->integer('followers')->nullable();
             $table->string('gender')->nullable();
             $table->string('status')->nullable();
             $table->string('preferences')->nullable();
