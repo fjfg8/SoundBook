@@ -17,8 +17,7 @@ class Admin
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        $esAdmin = (boolean)$user->isAdmin;
-        if($esAdmin === true){
+        if($user->isAdmin){
             return $next($request);
         }
         else{
