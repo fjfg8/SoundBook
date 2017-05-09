@@ -6,25 +6,10 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Song;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    public function show(){
-        $id = session()->get('id');
-        $user = User::find($id);
-        $filtro = session()->get('filtro');
-
-        if($filtro == "titulo")
-        $songs = Song::select('*')->where('user_id','=',$id)->orderby('title','desc')->paginate(4);
-
-        if($filtro=="fecha")
-        $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','descasc')->paginate(4);
-
-        if($filtro=="artista")
-        $songs = Song::select('*')->where('user_id','=',$id)->orderby('artist','desc')->paginate(4);
-       // $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','desc')->paginate(4);
-        return view('profile',array('user' => $user,'songs'=>$songs));
-    }
 
     public function search(Request $request){
 
@@ -113,6 +98,32 @@ class UsersController extends Controller
         $s->delete();
 
         return redirect()->back();
+    }
+
+    public function follow(Request $request){
+        $user1 = Auth::user();
+        $user2 = User::find($request->user);
+
+        //$user1->user()->attach($user2->id);
+        DB::table('user_user')->insert([
+            'user_id1' => $user1->id,
+            'user_id2' => $user2->id
+        ]);
+
+        return redirect()->action('HomeController@index');
+
+    }
+
+    public function unfollow(Request $request){
+        $user1 = Auth::user();
+        $user2 = User::find($request->user);
+
+        $result = DB::table('user_user')->where('user_id1','=',$user1->id)->where('user_id2','=',$user2->id);
+
+        $result->delete();
+
+        return redirect()->action('HomeController@index');
+
     }
 
 

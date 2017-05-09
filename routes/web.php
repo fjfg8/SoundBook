@@ -15,7 +15,6 @@ Route::get('/', function () {
     return redirect('/login');
 });
 Route::get('/song/{id}','SongsController@show');
-//Route::get('user/','UsersController@show');
 Route::post('user/','UsersController@search');
 Route::put('user/','UsersController@edit');
 Route::get('/pass',function(){
@@ -47,10 +46,16 @@ Route::get('/user/{id}/edit',function($id){
     $user=Auth::user();
     return view('edit_user',array('user'=>$user));
 });
+
 Auth::routes();
 Route::get('/home', 'HomeController@index');
+
 Route::get('/searcher','SearchController@show');
+
 Route::post('/searcher','SearchController@search');
+
 Route::put('/searcher','UsersController@follow');
+
 Route::delete('/searcher','UsersController@unfollow');
+
 Route::get('/wall','WallController@show');

@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => '#',
+    'dashboard_url' => 'wall',
 
     'logout_url' => 'logout',
 
@@ -111,7 +111,7 @@ return [
         'NAVEGACION',
         [
             'text'        => 'Mi perfil',
-            'url'         => 'user',
+            'url'         => 'home',
             'icon'        => 'user',
         ],
         [
@@ -142,7 +142,7 @@ return [
         ],
         [
             'text'        => 'Buscar',
-            'url'         => '#',
+            'url'         => 'searcher',
             'icon'        => 'search',
        ],
     ],
