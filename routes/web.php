@@ -85,3 +85,5 @@ Route::post('/searcher','SearchController@search');
 Route::put('/searcher','UsersController@follow');
 
 Route::delete('/searcher','UsersController@unfollow');
+
+Route::get('/wall','WallController@show');

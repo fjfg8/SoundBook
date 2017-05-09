@@ -110,12 +110,6 @@ class UsersController extends Controller
             'user_id2' => $user2->id
         ]);
 
-        $user1->follow = $user1->follow+1;
-        $user1->save();
-
-        $user2->followers = $user2->followers+1;
-        $user2->save();
-
         return redirect()->action('HomeController@index');
 
     }
@@ -124,15 +118,9 @@ class UsersController extends Controller
         $user1 = Auth::user();
         $user2 = User::find($request->user);
 
-        $result = DB::table('user_user')->where('user_id1','=','$user1->id')->where('user_id2','=','$user2->id');
+        $result = DB::table('user_user')->where('user_id1','=',$user1->id)->where('user_id2','=',$user2->id);
 
         $result->delete();
-
-        $user1->follow = $user1->follow-1;
-        $user1->save();
-
-        $user2->followers = $user2->followers-1;
-        $user2->save();
 
         return redirect()->action('HomeController@index');
 
