@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Song;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -12,11 +13,13 @@ class CommentController extends Controller
 
     public function create(Request $request){
         
+        $song = Song::find($request->song);
+        $user = User::find(Auth::user()->id);
         $c = new Comment();
         $c->comment = $request->descripcion;
         $c->likes = 0;
-        $c->user_id = Auth::user()->id;
-        $c->song_id = $request->song;
+        $c->user()->associate($user);
+        $c->song()->associate($song);
 
         $c->save();
 
