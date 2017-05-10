@@ -25,38 +25,40 @@
             <div class="panel-title" >Comentarios</div>
         </div>
         <div class="panel-body" align="center" style="background-color:#c4deff;">
-                @forelse($comments as $comment)
+
+                @if(sizeof($comments)==0)
+                    <div class="alert alert-info">
+                        <strong>No tienes ningun comentario</strong>
+                    </div>
+                @endif
+                @for($i=0;$i<sizeof($comments);$i++)
                     <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color:#ef8300;color:#FFFFFF;">{{$comment->nick}}</div>
+                        <div class="panel-heading" style="background-color:#ef8300;color:#FFFFFF;">{{$nicks[$i]}}</div>
                         <div class="panel-body" style="background-color:#ffe4c4;" align="left">
-                            <label>{{$comment->comment}}</label><br/>
-                            <text syle="text-align: right;">Likes->{{$comment->likes}}</text>
+                            <label>{{$comments[$i]->comment}}</label><br/>
+                            <text syle="text-align: right;">Likes->{{$comments[$i]->likes}}</text>
                             <form method="POST" action="{{action('CommentController@like')}}" id="comentarioN">
                                 <input type="hidden" name="_method" value="PUT"></input>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                <input type="hidden" name="comment" value="{{ $comment->id }}"></input>
+                                <input type="hidden" name="comment" value="{{ $comments[$i]->id }}"></input>
                                 <input type="hidden" name="song" value="{{ $song->id }}"></input>
                                 <button type="submit" id="botonL" class="btn btn-default pull-right">Like</button>
                             </form>
-                            @if(session()->get('id') == $comment->user_id)
+                            @if(session()->get('id') == $comments[$i]->user_id)
                                 <form method="POST" action="{{action('CommentController@delete')}}" id="comentarioN">
                                     <input type="hidden" name="_method" value="DELETE"></input>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                    <input type="hidden" name="comment" value="{{$comment->id}}">
+                                    <input type="hidden" name="comment" value="{{$comments[$i]->id}}">
                                     <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
                                 </form>
                                 
-                                <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-default pull-right">Editar</a>
+                                <a href="/song/{{$song->id}}/edit/{{$comments[$i]->id}}" class="btn btn-default pull-right">Editar</a>
                             @endif
                         </div> 
                         
                     </div>
 
-                @empty
-                    <div class="alert alert-info">
-                        <strong>No tienes ningun comentario</strong>
-                    </div>
-                @endforelse
+                @endfor
                 {{ $comments->links() }}
                 <form method="POST" action="{{action('CommentController@create')}}" id="otro">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>

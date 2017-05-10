@@ -41,8 +41,8 @@
                             <br/>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-5">Duración</label>
-                            <input type="text" name="duration" id="duration">
+                            <label class="control-label col-sm-5">Album</label>
+                            <input type="text" name="album" id="album">
                             <br/>
                         </div>
                         <div class="form-group">
@@ -52,7 +52,12 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-5">Fecha de salida</label>
-                            <input type="text" name="date" id="date">
+                            <input type="text" name="date" id="date" placeholder="AAAA-MM-DD">
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5">URL</label>
+                            <input type="text" name="url" id="url">
                             <br/>
                         </div>
                         <div class="form-group">

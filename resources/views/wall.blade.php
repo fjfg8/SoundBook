@@ -15,6 +15,7 @@
                 src = {{$song->url}}  
                 allowfullscreen></iframe><br/>
             </div>  
+            <a href="/song/{{$song->id}}" class="btn btn-default pull-right" style="padding-top: 5px;">Ver más</a>
         </div>
     @empty
         <div class="alert alert-info">

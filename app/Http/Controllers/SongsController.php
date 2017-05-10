@@ -19,7 +19,12 @@ class SongsController extends Controller
         ->select('comments.*','users.nick')
         ->orderBy('created_at','desc')->paginate(3);*/
         $comments = $song->comments()->orderby('created_at','desc')->paginate(3);
-        return view('song',array('song' => $song,'comments'=>$comments));
+        $nicks = array();
+        for($i=0;$i<sizeof($comments);$i++){
+            $nicks[$i] = $comments[$i]->user->nick;
+        }
+        
+        return view('song',array('song' => $song,'comments'=>$comments,'nicks'=>$nicks));
     }
 
     public function create(Request $request){
@@ -27,7 +32,7 @@ class SongsController extends Controller
         $this->validate($request,[
             'title'=>'required',
             'artist'=>'required',
-            'duration'=>'required',
+            'album'=>'required',
             'gender'=>'required',
             'date'=>'required'
         ]);
@@ -35,10 +40,12 @@ class SongsController extends Controller
         $s = new Song();
         $s->title = $request->title;
         $s->artist = $request->artist;
-        $s->duration = $request->duration;
+        $s->album = $request->album;
         $s->gender = $request->gender;
         $s->date = $request->date;
-        $s->user_id = Auth::user()->id;
+        $s->url = $request->url;
+        $user = User::find(Auth::user()->id);
+        $s->user()->associate($user);
 
         $s->save();
 
