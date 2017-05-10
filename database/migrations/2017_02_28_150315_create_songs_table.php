@@ -18,7 +18,6 @@ class CreateSongsTable extends Migration
             $table->string('title');
             $table->string('artist');
             $table->string('album');
-            $table->string('duration');
             $table->string('gender');
             $table->date('date'); 
              $table->integer('user_id')->unsigned();
