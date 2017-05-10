@@ -101,6 +101,7 @@
                     <input type="hidden" name="song" value="{{$song->id}}">
                     <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
                 </form>
+                <a href="/song/{{$song->id}}/change" class="btn btn-default pull-right">Editar</a>
                 <a href="/song/{{$song->id}}" class="btn btn-default pull-right" style="padding-top: 5px;">Ver más</a>
             </div>  
         </div>

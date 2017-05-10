@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function() {
-
     Route::get('/song/{id}','SongsController@show');
     Route::post('user/','UsersController@search');
     Route::put('user/','UsersController@edit');
