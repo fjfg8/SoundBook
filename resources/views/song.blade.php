@@ -14,7 +14,10 @@
             <label>Artista: {{$song->artist}} </label><br/>
             <label>Album: {{$song->album}}</label>
             <label> | Fecha: {{$song->date}}</label>
-            <a href="/song/{{$song->id}}/change" class="btn btn-default pull-right">Editar</a>
+            @if(Auth::user()->id == $song->user_id || Auth::user()->isAdmin)
+                <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
+                <a href="/song/{{$song->id}}/change" class="btn btn-default pull-right">Editar</a>
+            @endif
         </div>  
         </div>
 </div>
@@ -38,7 +41,7 @@
                                 <input type="hidden" name="song" value="{{ $song->id }}"></input>
                                 <button type="submit" id="botonL" class="btn btn-default pull-right">Like</button>
                             </form>
-                            @if(session()->get('id') == $comment->user_id)
+                            @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)
                                 <form method="POST" action="{{action('CommentController@delete')}}" id="comentarioN">
                                     <input type="hidden" name="_method" value="DELETE"></input>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
