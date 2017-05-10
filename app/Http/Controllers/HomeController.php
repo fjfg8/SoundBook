@@ -44,18 +44,37 @@ class HomeController extends Controller
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('artist','asc')->paginate(4);
             
 
-        $follow = $this->follow($id);
-        $followers = $this->followers($id);
+        $follow = $this->follow();
+        $followers = $this->followers();
         return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers));
     }
 
 
-    public function follow($id){
-        $res = DB::table('user_user')->where('user_id1','=',$id)->count();
+    public function follow(){
+        $res = DB::table('user_user')->where('user_id1','=',Auth::user()->id)->count();
         return $res;
     }
-    public function followers($id){
-        $res = DB::table('user_user')->where('user_id2','=',$id)->count();
+    public function followers(){
+        $res = DB::table('user_user')->where('user_id2','=',Auth::user()->id)->count();
         return $res;
     }
+
+    public function showFollow(){
+        $user = User::find(Auth::user()->id);
+        $users = $user->users()->paginate(4);
+        
+        return view('followers',array('users'=>$users));
+    }
+
+    public function showFollowers(){
+        $ids = DB::table('user_user')->where('user_id2','=',Auth::user()->id)->get();
+        $users = array();
+        foreach($ids as $id){
+            $aux = User::find($id);
+            $users = $users->merge($aux);
+        }
+        return view('followers',array('users'=>$users));
+    }
+
+
 }

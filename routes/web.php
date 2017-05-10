@@ -58,6 +58,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/searcher','UsersController@unfollow');
 
     Route::get('/wall','WallController@show');
+
+    Route::get('/home/follow','HomeController@showFollow');
+
+    Route::get('/home/followers','HomeController@showFollowers');
 });
 
 Route::group(['middleware' => 'admin'], function() {

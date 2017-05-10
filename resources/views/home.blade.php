@@ -42,10 +42,10 @@
                     <br/>
                 </div>  
                 <div class="form-group">
-                    <label class="control-label col-sm-6">Seguidos:</label>
+                    <label class="control-label col-sm-6"><a href="/home/follow">Seguidos:</a></label>
                     <label class="control-label col-sm-3">{{$follow}}</label>
                     <br/> 
-                    <label class="control-label col-sm-6">Seguidores:</label>
+                    <label class="control-label col-sm-6"><a href="/home/followers">Seguidores:</a></label>
                     <label class="control-label col-sm-3">{{$followers}}</label>
                 </div>  
                 <div class="form-group" align="center">        

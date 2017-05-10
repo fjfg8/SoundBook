@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-5">Fecha de salida</label>
-                            <input type="text" name="date" id="date" placeholder="AAAA-MM-DD">
+                            <input type="date" name="date" id="date" placeholder="AAAA-MM-DD">
                             <br/>
                         </div>
                         <div class="form-group">
