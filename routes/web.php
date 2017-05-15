@@ -1,5 +1,6 @@
 <?php
 Use App\Song;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -42,10 +43,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/upload','SongsController@create');
     Route::get('/groups','GroupsController@show');
     Route::get('/listagrupos','GroupsController@showlista');
-    Route::get('/user/{id}/edit',function($id){
-            $user=Auth::user();
-            return view('edit_user',array('user'=>$user));
-        });
     
     Route::get('/home', 'HomeController@index');
 
@@ -63,6 +60,10 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'admin'], function() {
     Route::get('/admin','UsersController@admin');
     Route::delete('/admin','UsersController@delete');
+      Route::get('/user/{id}/edit',function($id){
+            $user=User::find($id);
+            return view('edit_user',array('user'=>$user));
+        });
 });
 
 

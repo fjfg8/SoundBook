@@ -2,7 +2,6 @@
 
 
 @section('content')
-
 <form method="POST" action="{{action('UsersController@edit')}}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
     <input type="hidden" name="_method" value="PUT"></input>
@@ -55,13 +54,18 @@
             <div class="form-group">        
                 <div class="col-md-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default">Guardar</button> 
+                </div><br/>
+                <br/>
+            </div>
+            <div class="form-group">        
+                <div class="col-md-offset-2 col-sm-10">
+                    <a href="/admin">Volver</a>
                 </div>
             </div>
         </div><!-- /.box-body -->
     </div>
     <br/>
 </form>
-
 
 
 @stop
