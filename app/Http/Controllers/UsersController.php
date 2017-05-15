@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Song;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 class UsersController extends Controller
 {
@@ -24,36 +25,29 @@ class UsersController extends Controller
 
         if($request->has('nick')){
             $user->nick = $request->nick;
-            //$user->save();
         }
 
         if($request->has('name')){
             $user->name = $request->name;
-            //$user->save();
         }
         if($request->has('email')){
             $user->email = $request->email;
-            //$user->save();
         }
         if($request->has('gender')){
             $user->gender = $request->gender;
-            //$user->save();
         }
         if($request->has('status')){
             $user->status = $request->status;
-            //$user->save();
         }
         if($request->has('preferences')){
             $user->preferences = $request->preferences;
-            //$user->save();
         }
         $user->save();
         $request->session()->put([
             'filtro'=>"fecha"
-        ]);
-
-        return redirect()->action('HomeController@index');
-        //return redirect()->back();
+        ]);        
+        
+        return redirect()->back();
     }
 
     public function change(Request $request){
