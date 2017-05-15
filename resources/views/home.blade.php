@@ -73,7 +73,6 @@
 <div class="modal fade" id="edit_user">
     <br/>
     <form method="POST" action="{{action('UsersController@edit')}}">
-    
         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
         <input type="hidden" name="_method" value="PUT"></input>
         <input type="hidden" name="id" value="{{$user->id}}">
