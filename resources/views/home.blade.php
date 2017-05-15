@@ -77,6 +77,7 @@
         <input type="hidden" name="_method" value="PUT"></input>
         <input type="hidden" name="id" value="{{$user->id}}">
         <div class="panel panel-default" style="width:50%;text-align:center;margin:0 auto;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
                 <h3 class="panel-title" >Perfil</h3>
             </div>
