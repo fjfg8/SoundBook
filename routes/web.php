@@ -64,10 +64,6 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'admin'], function() {
     Route::get('/admin','UsersController@admin');
     Route::delete('/admin','UsersController@delete');
-    Route::get('/user/{id}/edit',function($id){
-        $user=User::find($id);
-        return view('edit_user',array('user'=>$user));
-    });
 });
 
 
