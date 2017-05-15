@@ -15,6 +15,13 @@
                     <label class="control-label col-sm-3">{{$user->name}}</label>
                     <br/>
                 </div>
+                @if(Session::has('error_nick'))
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Error</strong> {{Session::get('error_nick')}}
+                </div>
+                    
+                @endif
                 <div class="form-group">
                     <label class="control-label col-sm-6">Nick:</label>
                     <label class="control-label col-sm-3">{{$user->nick}}</label>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Song;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Session;
 
 class UsersController extends Controller
 {
@@ -21,14 +22,27 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request){
+        $this->validate($request,[
+            'name'=>'required',
+            'nick'=>'required',
+            'email'=>'required',
+            'gender'=>'required',
+            'preferences'=>'required'
+        ]);
         $user = User::findOrFail($request->id);
 
         if($request->has('nick')){
-            $user->nick = $request->nick;
+            $existe = User::where('nick','=',$request->nick)->count();
+            if($existe == 0){
+                $user->nick = $request->nick;
+            }else{
+                Session::flash('error_nick', 'Ese nick ya existe');
+                return redirect()->back();
+            }
         }
 
         if($request->has('name')){
-            $user->name = $request->name;
+            $user->name = $request->name;            
         }
         if($request->has('email')){
             $user->email = $request->email;
