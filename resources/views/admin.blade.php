@@ -27,6 +27,8 @@
                                             <input type="hidden" name="_method" value="DELETE"></input>
                                             <input type="hidden" name="user" value="{{$user->id}}">
                                             <br/>
+                                            <br/>
+                                            <br/>
                                             <div class="panel panel-default" style="width:50%;text-align:center;margin:0 auto;">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
@@ -34,16 +36,8 @@
                                                 </div>
                                                 <div class="panel-body" style="background-color:#c4deff;" align="center">
                                                     <div class="form-group">        
-                                                        <div class="col-md-offset-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-default">Si</button> 
-                                                        </div><br/>
-                                                        <br/>
-                                                    </div>
-                                                    <div class="form-group">        
-                                                        <div class="col-md-offset-2 col-sm-10">
-                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button> 
-                                                        </div><br/>
-                                                        <br/>
+                                                        <button type="submit" class="btn btn-default">Si</button> 
+                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -68,39 +62,39 @@
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">Nick</label>
                                             <div class="col-md-10">
-                                                <input type="text" name="nick" id="nick" value="{{$user->nick}}">
+                                                <input type="text" name="nick" id="nick" placeholder="{{$user->nick}}">
                                             </div>
                                             <br/>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">Nombre</label>
                                             <div class="col-md-10">
-                                                <input type="text" name="name" id="name" value="{{$user->name}}">
+                                                <input type="text" name="name" id="name" placeholder="{{$user->name}}">
                                             </div>
                                             <br/>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">Email</label>
                                             <div class="col-md-10">
-                                                <input type="text" name="email" id="email" value="{{$user->email}}">
+                                                <input type="text" name="email" id="email" placeholder="{{$user->email}}">
                                             </div> <br/>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">Genero</label>
                                             <div class="col-md-10">
-                                                <input type="text" name="gender" id="gender" value="{{$user->gender}}">
+                                                <input type="text" name="gender" id="gender" placeholder="{{$user->gender}}">
                                             </div> <br/>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">Estado</label>
                                             <div class="col-md-10">
-                                                <input type="text" name="status" id="status" value="{{$user->status}}">
+                                                <input type="text" name="status" id="status" placeholder="{{$user->status}}">
                                             </div> <br/>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">Preferencias</label>
                                             <div class="col-md-10">
-                                                <input type="text" name="preferences" id="preferences" value="{{$user->preferences}}">
+                                                <input type="text" name="preferences" id="preferences" placeholder="{{$user->preferences}}">
                                             </div><br/>
                                             <br/>
                                         </div>    
