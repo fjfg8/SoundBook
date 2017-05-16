@@ -46,8 +46,12 @@
                             <br/>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-5">Género</label>
-                            <input type="text" name="gender" id="gender">
+                        <label class="control-label col-sm-5">Género</label>
+                            <select id="gender" name="gender">
+                                @foreach($types as $t)
+                                    <option>{{$t->type}}</option>
+                                @endforeach
+                            </select>
                             <br/>
                         </div>
                         <div class="form-group">

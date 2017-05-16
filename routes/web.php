@@ -1,6 +1,7 @@
 <?php
-Use App\Song;
+use App\Song;
 use App\User;
+use App\Type;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/edit','CommentController@edit');
     Route::post('comment/','CommentController@create');
     Route::get('/upload',function(){
-        return view('upload');
+        $tipos = Type::all();
+        return view('upload',array('types'=>$tipos));
     });
     Route::post('/upload','SongsController@create');
     Route::get('/groups','GroupsController@show');
