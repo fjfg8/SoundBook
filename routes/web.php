@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
         $tipos = Type::all();
         return view('upload',array('types'=>$tipos));
     });
-    Route::post('/upload','SongsController@create');
+    Route::put('/uploadSong','SongsController@create');
     Route::get('/groups','GroupsController@show');
     Route::get('/listagrupos','GroupsController@showlista');
     
