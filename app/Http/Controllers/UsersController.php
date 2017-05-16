@@ -22,13 +22,6 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request){
-        $this->validate($request,[
-            'name'=>'required',
-            'nick'=>'required',
-            'email'=>'required',
-            'gender'=>'required',
-            'preferences'=>'required'
-        ]);
         $user = User::findOrFail($request->id);
 
         if($request->has('nick')){
@@ -44,18 +37,29 @@ class UsersController extends Controller
         if($request->has('name')){
             $user->name = $request->name;            
         }
+
         if($request->has('email')){
-            $user->email = $request->email;
+            $existe = User::where('email','=',$request->email)->count();
+            if($existe == 0){
+                $user->email = $request->email;
+            }else{
+                Session::flash('error_email', 'Ese email ya existe');
+                return redirect()->back();
+            }
         }
+
         if($request->has('gender')){
             $user->gender = $request->gender;
         }
+
         if($request->has('status')){
             $user->status = $request->status;
         }
+
         if($request->has('preferences')){
             $user->preferences = $request->preferences;
         }
+
         $user->save();
         $request->session()->put([
             'filtro'=>"fecha"

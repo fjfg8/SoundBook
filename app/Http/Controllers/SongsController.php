@@ -56,7 +56,7 @@ class SongsController extends Controller
         $s = Song::find($request->song);
         $s->delete();
 
-        return redirect()->back();
+        return redirect()->action('HomeController@index');
     }
 
     public function edit(Request $request){
@@ -65,28 +65,26 @@ class SongsController extends Controller
 
         if($request->has('title')){
             $s->title = $request->title;
-            $s->save();
+           
         }
         if($request->has('artist')){
             $s->artist = $request->artist;
-            $s->save();
         }
         if($request->has('gender')){
             $s->gender = $request->gender;
-            $s->save();
         }
         if($request->has('duration')){
             $s->duration = $request->duration;
-            $s->save();
         }
         if($request->has('date')){
             $s->date = $request->date;
-            $s->save();
         }
 
-            $request->session()->put([
-                'filtro'=>"fecha"
-            ]);
+         $s->save();
+
+        $request->session()->put([
+            'filtro'=>"fecha"
+        ]);
 
         return redirect()->action('HomeController@index');
     }

@@ -28,10 +28,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/song','CommentController@like');
     Route::delete('/song','CommentController@delete');
     Route::delete('/user','SongsController@delete');
-    Route::get('/song/{id}/change',function($id){
-        return view('edit_song',array('song'=>$id));
-    });
-    Route::put('change','SongsController@edit');
+
+    Route::put('editSong','SongsController@edit');
+
     Route::get('/song/{id}/edit/{c}',function($id,$c){
         return view('comment',array('song'=>$id,'comment'=>$c));
     });
