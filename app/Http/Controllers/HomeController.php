@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Song;
 use Illuminate\Support\Facades\DB;
+use App\User;
+use App\Song;
+use App\Type;
+
 class HomeController extends Controller
 {
     /**
@@ -28,6 +30,8 @@ class HomeController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::find($id);
+        $types = Type::all();
+
         if(session()->has("filtro")){
            $filtro = session()->get('filtro'); 
         }else{
@@ -46,7 +50,7 @@ class HomeController extends Controller
 
         $follow = $this->follow();
         $followers = $this->followers();
-        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers));
+        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers, 'types'=>$types));
     }
 
 

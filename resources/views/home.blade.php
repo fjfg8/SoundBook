@@ -18,11 +18,11 @@
         @endif
 
 <div class="box box-primary">
-    <div class="box-header with-border" align="center">
+    <div class="box-header with-border" style="background: #e0ecff;" align="center">
         <h2 class="box-title with-border">Mi perfil</h2>
-        <a class="btn btn-default pull-right" data-toggle="modal" data-target="#edit_user">Editar perfil</a>
+        <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#edit_user">Editar perfil</a>
     </div>
-    <div class="box-body">
+    <div class="box-body" style="background: #e0ecff;">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <div class="box-footer">
+    <div class="box-footer" style="background: #e0ecff;">
         <div class="col-md-6">
             <div class="form-group">
                 <label><a href="/home/follow">Seguidos:</a></label>
@@ -83,11 +83,11 @@
 </div>
 
 <div class="box box-success">
-    <div class="box-header with-border" align="center">
+    <div class="box-header with-border" align="center" style="background: #e0ffe5;">
         <h2 class="box-title with-border">Mis canciones</h2>
-        <a class="btn btn-default pull-right" data-toggle="modal" data-target="#upload_song">Subir canción</a>
+        <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#upload_song">Subir canción</a>
     </div>
-    <div class="box-body">
+    <div class="box-body" style="background: #e0ffe5;">
         @if(sizeof($songs)>0)
             <div class="row" align="center">
                 <form method="POST" action="{{action('UsersController@search')}}">
@@ -97,7 +97,7 @@
                         <option value="fecha">Fecha</option> 
                         <option value="artista">Artista</option>    
                     </select>
-                    <button class="btn btn-default" type="submit">Filtrar</button>
+                    <button class="btn btn-primary" type="submit">Filtrar</button>
                     <br/>
                     <br/>
                 </form>
@@ -105,10 +105,10 @@
         @endif
         @forelse($songs as $song)
             <div class="box box-primary">
-                <div class="box-header with-border" align="center">
+                <div class="box-header with-border" style="background: #e0ecff;" align="center">
                     <h2 class="box-title with-border">{{$song->title}}</h2>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="background: #e0ecff;">
                     <div class="col-md-5">
                         <iframe width="250" height="200" align="center" src = {{$song->url}}  allowfullscreen></iframe><br/>
                     </div>
@@ -118,8 +118,8 @@
                         <a href="/song/{{$song->id}}" class="btn btn-primary" style="padding-top: 5px;">Ver más</a>
                     </div>
                 </div>
-                <div class="box-footer">
-                    <a class="btn btn-default pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
+                <div class="box-footer" style="background: #e0ecff;">
+                    <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
                     <div class="modal modal-danger fade" id="delete_song{{$song->id}}">
                         <form method="POST" action="{{action('SongsController@delete')}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -145,7 +145,7 @@
                         </form>                            
                     </div>
 
-                    <a class="btn btn-default pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
+                    <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
                     <div class="modal modal-default fade" id="edit_song{{$song->id}}">
                         <form method="POST" action="{{action('SongsController@edit')}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -195,7 +195,18 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-music"></i>
                                                         </div>
-                                                        <input id="gender" name="gender" type="text" class="form-control" placeholder="{{$song->gender}}">
+                                                        <select class="form-control select2" id="type_id" name="type_id">
+                                                            @foreach($types as $t)
+                                                                @if($t->id == $song->type_id)
+                                                                    <option selected="selected" value="{{$t->id}}">{{$t->type}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                            @foreach($types as $t)
+                                                                @if($t->id != $song->type_id)
+                                                                    <option value="{{$t->id}}">{{$t->type}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -208,12 +219,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Fecha de salida</label></br>
+                                                    <label>Fecha de salida</label> <text>(YYYY/MM/DD)</text></br>
                                                     <div class="input-group">
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                         </div>
-                                                        <input id="date" name="date" type="date" class="form-control" data-inputmask="'alias': 'YYYY/MM/DD'" data-mask="" placeholder="YYYY/MM/DD">
+                                                        <input id="date" name="date" type="date" class="form-control" data-inputmask="'alias': 'YYYY/MM/DD'" data-mask="" placeholder="{{$song->date}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -318,7 +329,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-font"></i>
                                     </div>
-                                    <input id="title" name="title" type="text" class="form-control">
+                                    <input id="title" name="title" type="text" class="form-control" placeholder="Título">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -327,7 +338,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                     </div>
-                                    <input id="artist" name="artist" type="text" class="form-control">
+                                    <input id="artist" name="artist" type="text" class="form-control" placeholder="Artista">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -345,7 +356,11 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-music"></i>
                                     </div>
-                                    <input id="gender" name="gender" type="text" class="form-control">
+                                    <select class="form-control select2" id="gender" name="gender">
+                                        @foreach($types as $t)
+                                            <option>{{$t->type}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -354,11 +369,11 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-book"></i>
                                     </div>
-                                    <input id="album" name="album" type="text" class="form-control">
+                                    <input id="album" name="album" type="text" class="form-control" placeholder="Álbum">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Fecha de salida</label></br>
+                                <label>Fecha de salida</label><text> (YYYY/MM/DD)</text></br>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>

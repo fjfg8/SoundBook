@@ -8,12 +8,16 @@
             <div class="panel-body" align="center" style="background-color:#c4deff;">
                   <form method="POST" action="{{action('SearchController@search')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                    <input type="text" name="busqueda" placeholder="Introduce lo que quieras buscar"></input>
-                    <select name="filtro">
-                        <option value="cancion">Cancion</option> 
-                        <option value="usuario">Usuario</option>    
-                    </select>
-                    <button class="btn btn-default" type="submit">Buscar</button>
+                    <div class="input-group">
+                        <input type="text" name="busqueda" class="form-control" placeholder="Introduzca la búsqueda"></input>
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                        <select name="filtro">
+                            <option value="cancion">Cancion</option> 
+                            <option value="usuario">Usuario</option>    
+                        </select>
+                    </div>   
                 </form>  
             </div>
         </div>
