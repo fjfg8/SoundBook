@@ -37,10 +37,7 @@ Route::group(['middleware' => 'auth'], function() {
     });
     Route::put('/edit','CommentController@edit');
     Route::post('comment/','CommentController@create');
-    Route::get('/upload',function(){
-        $tipos = Type::all();
-        return view('upload',array('types'=>$tipos));
-    });
+
     Route::put('/uploadSong','SongsController@create');
     Route::get('/groups','GroupsController@show');
     Route::get('/listagrupos','GroupsController@showlista');

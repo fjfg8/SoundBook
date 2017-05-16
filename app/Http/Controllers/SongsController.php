@@ -67,15 +67,22 @@ class SongsController extends Controller
         if($request->has('artist')){
             $s->artist = $request->artist;
         }
-        if($request->has('gender')){
-            $s->gender = $request->gender;
-        }
-        if($request->has('duration')){
-            $s->duration = $request->duration;
+        if($request->has('type_id')){
+            $s->type_id = $request->type_id;
         }
         if($request->has('date')){
             $s->date = $request->date;
         }
+        if($request->has('album')){
+            $s->album = $request->album;
+        }
+        if($request->has('url')){
+            $s->url = $request->url;
+        }
+        if($request->has('date')){
+            $s->date = $request->date;
+        }
+
 
          $s->save();
 
