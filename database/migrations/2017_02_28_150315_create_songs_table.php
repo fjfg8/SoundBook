@@ -18,10 +18,12 @@ class CreateSongsTable extends Migration
             $table->string('title');
             $table->string('artist');
             $table->string('album');
-            $table->string('gender');
             $table->date('date'); 
-             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->integer('likes');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade')->onUpdate('cascade');  
             $table->string('url');
             $table->timestamps();
         });

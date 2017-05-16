@@ -29,5 +29,8 @@ class Song extends Model
     public function publications(){
         return $this->hasMany('App\Publication');
     }
+    public function type(){
+        return $this->belongsTo('App\Type');
+    }
 
 }
