@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Group;
+use App\User;
 
 class GroupsController extends Controller {
 
@@ -14,11 +16,8 @@ public function show($id){
 
 public function showlista() {
 
-        $id = session()->get('id');
-        //$groups = members::where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
-        $groups = DB::table('group_user')->where('group_user.user_id','=',$id)
-        ->join('groups','group_user.group_id','=','groups.id')
-        ->select('groups.*')->paginate(3);
+        $user = User::find(Auth::user()->id);
+        $groups = $user->groups()->paginate(3);
         return view('listagrupos',array('lista'=>$groups));
     }
 }
