@@ -2,18 +2,11 @@
 
 @section('content')
 
-<div class="container" >
-    <div class="panel panel-default">
-        <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
-            <div class="panel-title" >{{$song->title}}</div>
-        </div>
-        <div class="panel-body" align="left" style="background-color:#c4deff;">
-            <iframe width="560" height="315" align="center" src = {{$song->url}}  allowfullscreen></iframe><br/>
-            <label>Artista: {{$song->artist}} </label><br/>
-            <label>Album: {{$song->album}}</label>
-            <label> | Fecha: {{$song->date}}</label>
+<div class="box box-primary">
+    <div class="box-header with-border" style="background: #e0ecff;" align="center">
+            <h2 class="box-title with-border pull-left">{{$song->title}}</h2>
             @if(Auth::user()->id == $song->user_id || Auth::user()->isAdmin)
-                <a class="btn btn-default pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
+                <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
                 <div class="modal fade" id="delete_song{{$song->id}}">
                     <form method="POST" action="{{action('SongsController@delete')}}" id="comentarioN">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -36,7 +29,7 @@
                         </div>
                     </form>
                 </div>
-                <a class="btn btn-default pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
+                <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
                 <div class="modal fade" align="center" id="edit_song{{$song->id}}">
                     <br/>
                     <form method="POST" action="{{action('SongsController@edit')}}" align="center">
@@ -57,11 +50,6 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Artista</label>
                                     <input type="text" name="artist" placeholder="{{$song->artist}}">
-                                    <br/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Duracion</label>
-                                    <input type="text" name="duration" placeholder="{{$song->duration}}">
                                     <br/>
                                 </div>
                                 <div class="form-group">
@@ -87,65 +75,100 @@
                     </form>
                 </div>
             @endif
-        </div>  
-        </div>
-</div>
-
-<div class="container" id="comentarios" align="center">
-    <div class="panel panel-default">
-        <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
-            <div class="panel-title" >Comentarios</div>
-        </div>
-        <div class="panel-body" align="center" style="background-color:#c4deff;">
-
-                @if(sizeof($comments)==0)
-                    <div class="alert alert-info">
-                        <strong>No tienes ningun comentario</strong>
-                    </div>
-                @endif
-                @for($i=0;$i<sizeof($comments);$i++)
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color:#ef8300;color:#FFFFFF;">{{$nicks[$i]}}</div>
-                        <div class="panel-body" style="background-color:#ffe4c4;" align="left">
-                            <label>{{$comments[$i]->comment}}</label><br/>
-                            <text syle="text-align: right;">Likes->{{$comments[$i]->likes}}</text>
-                            <form method="POST" action="{{action('CommentController@like')}}" id="comentarioN">
-                                <input type="hidden" name="_method" value="PUT"></input>
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                <input type="hidden" name="comment" value="{{ $comments[$i]->id }}"></input>
-                                <input type="hidden" name="song" value="{{ $song->id }}"></input>
-                                <button type="submit" id="botonL" class="btn btn-default pull-right">Like</button>
-                            </form>     
-
-                            @if(Auth::user()->id == $comments[$i]->user_id || Auth::user()->isAdmin)
-
-                                <form method="POST" action="{{action('CommentController@delete')}}" id="comentarioN">
-                                    <input type="hidden" name="_method" value="DELETE"></input>
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                    <input type="hidden" name="comment" value="{{$comments[$i]->id}}">
-                                    <button type="submit" id="botonL" class="btn btn-default pull-right">Eliminar</button>
-                                </form>
-                                
-                                <a href="/song/{{$song->id}}/edit/{{$comments[$i]->id}}" class="btn btn-default pull-right">Editar</a>
-                            @endif
-                        </div> 
-                        
-                    </div>
-
-                @endfor
-                {{ $comments->links() }}
-                <form method="POST" action="{{action('CommentController@create')}}" id="otro">
+    </div>
+    <div class="box-body" style="background: #e0ecff;">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-6">
+                <iframe width="560" height="315" align="center" src={{$song->url}}  allowfullscreen></iframe>
+            </div>
+            <div class="col-md-2">
+                <form method="POST" action="{{action('SongsController@like')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                    <input type="hidden" name="song" value="{{ $song->id }}"></input>
-                        <div class="form-group">
-                            <textarea form="otro" name="descripcion" rows="5" cols="40"></textarea><br/>
-                        </div>
-
-                        <div class="form-group">        
-                                <button type="submit" id="botonL" class="btn btn-default">Comentar</button>
-                        </div>
+                    <input type="hidden" name="id" value="{{ $song->id }}"></input>
+                    <div class="info-box">
+                        <span class="info-box-icon bg-blue"><i class="fa fa-star-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Likes</span>
+                                <span class="info-box-number">{{$song->likes}}</span>
+                            </div>
+                            <button type="submit" id="botonL" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+                    </div>
                 </form>
+            </div>
         </div>
     </div>
+    <div class="box-footer" style="background: #e0ecff;">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Artista: {{$song->artist}} </label><br/>
+                <label>Album: {{$song->album}}</label>
+                <label> | Fecha: {{$song->date}}</label>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="box box-success" id="comentarios" align="center">
+
+    <div class="box-header with-border" style="background-color:#3c8dbc;color:#FFFFFF;">
+        <h2 class="box-title" >Comentarios</h2>
+    </div>
+    <div class="box-body" align="center" style="background-color:#c4deff;">
+
+            @if(sizeof($comments)==0)
+                <div class="alert alert-info">
+                    <strong>No tienes ningun comentario</strong>
+                </div>
+            @endif
+            @for($i=0;$i<sizeof($comments);$i++)
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background-color:#ef8300;">
+                        <h4 align="left">{{$nicks[$i]}}</h4>
+                    </div>
+                    <div class="panel-body" style="background-color:#ffe4c4;" align="left">
+                        <p>{{$comments[$i]->comment}}</p>
+                        <form method="POST" action="{{action('CommentController@like')}}" id="comentarioN">
+                            <input type="hidden" name="_method" value="PUT"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="comment" value="{{ $comments[$i]->id }}"></input>
+                            <input type="hidden" name="song" value="{{ $song->id }}"></input>
+                            <button type="submit" id="botonL" class="btn btn-app pull-right">
+                                <span class="badge bg-red">{{$comments[$i]->likes}}</span>
+                                <i class="fa fa-heart-o"></i>Like
+                            </button>
+                        </form>     
+
+                        @if(Auth::user()->id == $comments[$i]->user_id || Auth::user()->isAdmin)
+
+                            <form method="POST" action="{{action('CommentController@delete')}}" id="comentarioN">
+                                <input type="hidden" name="_method" value="DELETE"></input>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                <input type="hidden" name="comment" value="{{$comments[$i]->id}}">
+                                <button type="submit" id="botonL" class="btn btn-primary pull-right">Eliminar</button>
+                            </form>
+                            
+                            <a href="/song/{{$song->id}}/edit/{{$comments[$i]->id}}" class="btn btn-default pull-right">Editar</a>
+                        @endif
+                    </div> 
+                    
+                </div>
+
+            @endfor
+            {{ $comments->links() }}
+            <form method="POST" action="{{action('CommentController@create')}}" id="otro">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                <input type="hidden" name="song" value="{{ $song->id }}"></input>
+                    <div class="form-group">
+                        <textarea form="otro" name="descripcion" rows="5" cols="40"></textarea><br/>
+                    </div>
+
+                    <div class="form-group">        
+                            <button type="submit" id="botonL" class="btn btn-primary">Comentar</button>
+                    </div>
+            </form>
+    </div>
+
 </div>
 @stop

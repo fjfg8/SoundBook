@@ -7,17 +7,12 @@ use Illuminate\Support\Facades\DB;
 use App\Song;
 use App\Comment;
 use App\User;
+use App\Type;
 use Illuminate\Support\Facades\Auth;
 class SongsController extends Controller
 {
     public function show($id){
         $song = Song::findOrFail($id);
-        //$comments = Comment::select()->where('song_id','=',$id)->orderby('created_at','desc')->paginate(3);
-        /*$comments = DB::table('comments')
-        ->join('users','comments.user_id','=','users.id')
-        ->where('comments.song_id','=',$id)
-        ->select('comments.*','users.nick')
-        ->orderBy('created_at','desc')->paginate(3);*/
         $comments = $song->comments()->orderby('created_at','desc')->paginate(3);
         $nicks = array();
         for($i=0;$i<sizeof($comments);$i++){
@@ -41,11 +36,13 @@ class SongsController extends Controller
         $s->title = $request->title;
         $s->artist = $request->artist;
         $s->album = $request->album;
-        $s->gender = $request->gender;
+        $s->likes = 0;
         $s->date = $request->date;
         $s->url = $request->url;
         $user = User::find(Auth::user()->id);
         $s->user()->associate($user);
+        $type = Type::where('type','=',$request->gender)->first();
+        $s->type()->associate($type);
 
         $s->save();
 
@@ -70,15 +67,22 @@ class SongsController extends Controller
         if($request->has('artist')){
             $s->artist = $request->artist;
         }
-        if($request->has('gender')){
-            $s->gender = $request->gender;
-        }
-        if($request->has('duration')){
-            $s->duration = $request->duration;
+        if($request->has('type_id')){
+            $s->type_id = $request->type_id;
         }
         if($request->has('date')){
             $s->date = $request->date;
         }
+        if($request->has('album')){
+            $s->album = $request->album;
+        }
+        if($request->has('url')){
+            $s->url = $request->url;
+        }
+        if($request->has('date')){
+            $s->date = $request->date;
+        }
+
 
          $s->save();
 
@@ -87,5 +91,14 @@ class SongsController extends Controller
         ]);
 
         return redirect()->action('HomeController@index');
+    }
+
+    public function like(Request $request){
+        $song = Song::find($request->id);
+        $song->likes = $song->likes + 1;
+
+        $song->save();
+
+        return redirect()->back();
     }
 }

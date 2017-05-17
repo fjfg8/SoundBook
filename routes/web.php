@@ -1,6 +1,7 @@
 <?php
-Use App\Song;
+use App\Song;
 use App\User;
+use App\Type;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/pass',function(){
         return view('pass');
     });
+
     Route::post('pass','UsersController@change');
-    Route::post('/song/{id}','SongsController@show');
+    //Route::post('/song/{id}','SongsController@show');
+    Route::post('/song','SongsController@like');
+
     Route::put('/song','CommentController@like');
     Route::delete('/song','CommentController@delete');
     Route::delete('/user','SongsController@delete');
@@ -36,11 +40,11 @@ Route::group(['middleware' => 'auth'], function() {
     });
     Route::put('/edit','CommentController@edit');
     Route::post('comment/','CommentController@create');
-    Route::get('/upload',function(){
-        return view('upload');
-    });
-    Route::post('/upload','SongsController@create');
+
     Route::get('/groups/{id}','GroupsController@show');
+
+    Route::put('/uploadSong','SongsController@create');
+
     Route::get('/listagrupos','GroupsController@showlista');
     
     Route::get('/home', 'HomeController@index');
@@ -54,6 +58,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/searcher','UsersController@unfollow');
 
     Route::get('/wall','WallController@show');
+    Route::post('/wall','SongsController@like');
 
     Route::get('/home/follow','HomeController@showFollow');
 

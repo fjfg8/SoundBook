@@ -18,30 +18,34 @@ class SongsTableSeeder extends Seeder
             'title' => 'La Gozadera',
             'artist' => 'Marc Anthony',
             'album'=> 'La Gozadera',
-            'gender' => 'Salsa',
             'url' => "https://www.youtube.com/embed/VMp55KH_3wo",
             'date' => '2015-05-12',
-            'user_id' => 1
+            'likes' => 0,
+            'user_id' => 1,
+            'type_id' => 4
         ]);
         DB::table('songs')->insert([
             
             'title' => 'Mi gran noche',
             'artist' => 'Raphael',
             'album' => 'Grandes exitos',
-            'gender' => 'Copla',
             'url' => "https://www.youtube.com/embed/477d0T1YuKE",
             'date' => '1978-02-17',
-            'user_id' => 1
+            'likes' => 0,
+            'user_id' => 1,
+            'type_id' => 5
+            
         ]);
         DB::table('songs')->insert([
             
             'title' => 'Ave Maria',
             'artist' => 'David Bisbal',
             'album' => 'Especial OT',
-            'gender' => 'Salsa',
             'url' => "https://www.youtube.com/embed/gra-sIV1n4U",
             'date' => '2002-03-06',
-            'user_id' => 2
+            'likes' => 0,
+            'user_id' => 2,
+            'type_id' => 11
         ]);
 
         /*for($i=0;$i<=25;$i++){

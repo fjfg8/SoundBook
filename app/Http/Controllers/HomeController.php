@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Song;
 use Illuminate\Support\Facades\DB;
+use App\User;
+use App\Song;
+use App\Type;
+
 class HomeController extends Controller
 {
     /**
@@ -28,25 +30,42 @@ class HomeController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::find($id);
+        $types = Type::all();
+
+        $generos = [
+            "Chica" => "Chica",
+            "Chico" => "Chico",
+            "Prefiero no decirlo" => "Prefiero no decirlo",
+        ];
+
+        $filters = [
+            "Titulo" => "Titulo",
+            "Fecha" => "Fecha",
+            "Artista" => "Artista",
+        ];
+
         if(session()->has("filtro")){
-           $filtro = session()->get('filtro'); 
+            $filtro = session()->get('filtro'); 
         }else{
-            $filtro = "fecha";
+            $filtro = "Fecha";
         }
 
-        if($filtro == "titulo")
+        if($filtro == "Titulo")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('title','asc')->paginate(4);
 
-        if($filtro=="fecha")
+        if($filtro == "Fecha")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','asc')->paginate(4);
 
-        if($filtro=="artista")
+        if($filtro == "Artista")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('artist','asc')->paginate(4);
             
+        session()->put([
+            'filtro'=> $filtro,
+        ]);
 
         $follow = $this->follow();
         $followers = $this->followers();
-        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers));
+        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers, 'types'=>$types, 'generos'=>$generos, 'filters'=>$filters));
     }
 
 
