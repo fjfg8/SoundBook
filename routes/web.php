@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function() {
         return view('pass');
     });
 
-    Route::post('pass','UsersController@change');
+    Route::post('/change','UsersController@changePass');
     //Route::post('/song/{id}','SongsController@show');
     Route::post('/song','SongsController@like');
 
