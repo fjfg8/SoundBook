@@ -3,21 +3,21 @@
 @section('content')
 
 {{-- Error messages --}}
-        @if (count($errors) > 0)
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <i class="icon fa fa-ban"></i>
-                    <strong>Error:    </strong> {{$error}}
-                </div>
-            @endforeach
-        @endif
-        @if (Session::has('msg'))
-        <div class="alert alert-danger"> {{ Session::get('msg') }}</div>
-        @endif
-        @if (Session::has('mess'))
-        <div class="alert alert-danger">{{ Session::get('mess') }}</div>
-        @endif
+@if (count($errors) > 0)
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <i class="icon fa fa-ban"></i>
+            <strong>Error:    </strong> {{$error}}
+        </div>
+    @endforeach
+@endif
+@if (Session::has('msg'))
+    <div class="alert alert-danger"> {{ Session::get('msg') }}</div>
+@endif
+@if (Session::has('mess'))
+    <div class="alert alert-danger">{{ Session::get('mess') }}</div>
+@endif
 
 <div class="box box-primary">
     <div class="box-header with-border" style="background: #e0ecff;" align="center">
@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div class="box-footer" style="background: #e0ecff;">
-                    <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
+                    <a class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
                     <div class="modal modal-danger fade" id="delete_song{{$song->id}}">
                         <form method="POST" action="{{action('SongsController@delete')}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -160,7 +160,7 @@
                         </form>                            
                     </div>
 
-                    <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
+                    <a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
                     <div class="modal modal-default fade" id="edit_song{{$song->id}}">
                         <form method="POST" action="{{action('SongsController@edit')}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>

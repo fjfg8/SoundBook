@@ -2,6 +2,198 @@
 
 @section('content')
 
+
+<div class="box box-widget">
+    <div class="box-header with-border">
+        <div class="user-block">
+            @if(Auth::user()->id == $song->user_id || Auth::user()->isAdmin)
+                <a class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#delete_song">Eliminar</a>
+                <a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#edit_song">Editar</a>
+            @endif 
+            <img class="img-circle" src="http://xacatolicos.com/app/images/icon-user.png" alt="User Image">
+            <span class="username"><a href="#">{{$user->name}}</a></span>
+            <span class="description">{{$song->title}}</span>
+        </div> <!-- /.user-block -->   
+    </div> <!-- /.box-header -->
+    
+    <div class="box-body"> <!-- post text -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{$song->url}}" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Título: {{$song->artititlest}} </label><br/>
+                <label>Artista: {{$song->artist}} </label><br/>
+                <label>Género: {{$song->gender}} </label><br/>
+                <label>Album: {{$song->album}}</label><br/>
+                <label>Fecha: {{$song->date}}</label></br>
+                <label>Url: </label> <a href="{{$song->url}}">{{$song->url}}</a>
+            </div>
+        </div>
+        </br>
+        <form method="POST" action="{{action('SongsController@like')}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+            <input type="hidden" name="id" value="{{ $song->id }}"></input>
+            <button type="submit" class="btn btn-primary btn-xs">
+                <i class="fa fa-thumbs-o-up"></i> Me gusta
+            </button>
+            <span class="pull-right text-muted">{{$song->likes}} me gustas - {{sizeof($comments)}} comentarios</span>
+        </form>
+    </div>
+    <div class="box-footer box-comments">
+        <div class="box-comment">
+            <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+            <div class="comment-text">
+                <span class="username">Maria Gonzales
+                    <span class="text-muted pull-right">8:03 PM Today</span>
+                </span>
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+            </div>
+        </div>
+        <div class="box-comment">
+            <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
+            <div class="comment-text">
+                <span class="username">Nora Havisham
+                    <span class="text-muted pull-right">8:03 PM Today</span>
+                </span>
+                The point of using Lorem Ipsum is that it has a more-or-less
+                normal distribution of letters, as opposed to using
+                'Content here, content here', making it look like readable English.
+            </div>
+        </div>
+    </div>   
+    <div class="box-footer">
+        <form action="#" method="post">
+            <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+            <!-- .img-push is used to add margin to elements next to floating images -->
+            <div class="img-push">
+                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal modal-danger fade" id="delete_song">
+    <form method="POST" action="{{action('SongsController@delete')}}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+        <input type="hidden" name="_method" value="DELETE"></input>
+        <input type="hidden" name="song" value="{{$song->id}}">
+        <div class="modal-dialog" align="center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">¿Estás seguro de borrar la cancion {{$song->title}}?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>No podrás deshacer la acción</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-outline">Si</button>
+                </div>
+            </div>
+        </div>
+    </form>                            
+</div>
+
+<div class="modal modal-default fade" id="edit_song">
+    <form method="POST" action="{{action('SongsController@edit')}}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+        <input type="hidden" name="_method" value="PUT"></input>
+        <input type="hidden" name="id" value="{{$song->id}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Editar canción: {{$song->title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Título</label></br>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-font"></i>
+                                    </div>
+                                    <input id="title" name="title" type="text" class="form-control" placeholder="{{$song->title}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Artista</label></br>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input id="artist" name="artist" type="text" class="form-control" placeholder="{{$song->artist}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Url</label></br>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-globe"></i>
+                                    </div>
+                                    <input id="url" name="url" type="text" class="form-control" placeholder="{{$song->url}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Género</label></br>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-music"></i>
+                                    </div>
+                                    <select class="form-control select2" id="type_id" name="type_id">
+                                        @foreach($types as $t)
+                                            @if($t->id == $song->type_id)
+                                                <option selected="selected" value="{{$t->id}}">{{$t->type}}</option>
+                                            @endif
+                                        @endforeach
+                                        @foreach($types as $t)
+                                            @if($t->id != $song->type_id)
+                                                <option value="{{$t->id}}">{{$t->type}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Álbum</label></br>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                    <input id="album" name="album" type="text" class="form-control" placeholder="{{$song->album}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha de salida</label> <text>(YYYY/MM/DD)</text></br>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input id="date" name="date" type="date" class="form-control" data-inputmask="'alias': 'YYYY/MM/DD'" data-mask="" placeholder="{{$song->date}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="box box-primary">
     <div class="box-header with-border" style="background: #e0ecff;" align="center">
             <h2 class="box-title with-border pull-left">{{$song->title}}</h2>
@@ -171,4 +363,6 @@
     </div>
 
 </div>
+
+
 @stop
