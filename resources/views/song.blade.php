@@ -9,7 +9,7 @@
             @if(Auth::user()->id == $song->user_id || Auth::user()->isAdmin)
                 <a class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#delete_song">Eliminar</a>
                 <a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#edit_song">Editar</a>
-            @endif 
+            @endif
             <img class="img-circle" src="http://xacatolicos.com/app/images/icon-user.png" alt="User Image">
             <span class="username"><a href="#">{{$user->name}}</a></span>
             <span class="description">{{$song->title}}</span>
@@ -51,30 +51,49 @@
         @forelse($comments as $comment)
             <div class="box-comment">
                 @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)
-                    <form method="POST" action="{{action('CommentController@delete')}}">
-                        <input type="hidden" name="_method" value="DELETE"></input>
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                        <input type="hidden" name="comment" value="{{$comment->id}}">
-                        <button type="submit" class="btn btn-xs pull-right" style="color:#3a7cff;background:none;">
-                            Eliminar
-                        </button>
-                        <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-xs pull-right" style="color:#3a7cff;background:none;">Editar</a>
-                    </form>
+                    <button data-toggle="modal" data-target="#delete_comment{{$comment->id}}" class="btn btn-xs pull-right" style="color:#3a7cff;background:none;">
+                        Eliminar
+                    </button>
+                    <div class="modal modal-danger fade" id="delete_comment{{$comment->id}}">
+                        <form method="POST" action="{{action('CommentController@delete')}}">
+                            <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="comment" value="{{$comment->id}}">
+                            <div class="modal-dialog" align="center">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title">¿Estás seguro de borrar el comentario?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>No podrás deshacer la acción</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-outline">Si</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>                            
+                    </div>
+                    <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-xs pull-right" style="color:#3a7cff;background:none;">Editar</a>
                 @endif
                 <img class="img-circle img-sm" src="https://maxcdn.icons8.com/Share/icon/Users//user_female_circle_filled1600.png" alt="User Image">
                 <div class="comment-text">
                     <span class="username">{{$user->nick}}
-                        <span class="text-muted pull-right">{{$comment->created_at}}</span>
+                        <span class="text-muted pull-center"> · {{$comment->created_at}}</span>
                     </span>
                     
                     {{$comment->comment}}
                 </div>
-                <form method="POST" action="{{action('CommentController@like')}}" id="megusta">
+                <form method="POST" action="{{action('CommentController@like')}}">
                     <input type="hidden" name="_method" value="PUT"></input>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                     <input type="hidden" name="comment" value="{{ $comment->id }}"></input>
                     <input type="hidden" name="song" value="{{ $song->id }}"></input>
-                    <button type="submit" form="megusta" class="btn btn-xs" style="color:#3a7cff;background:none;">
+                    <button type="submit" class="btn btn-xs" style="color:#3a7cff;background:none;">
                         Me gusta
                     </button>
                     
@@ -91,7 +110,9 @@
         {{ $comments->links() }}
     </div>   
     <div class="box-footer">
-        <form action="#" method="post">
+        <form action="{{action('CommentController@create')}}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+            <input type="hidden" name="song" value="{{ $song->id }}"></input>
             <img class="img-responsive img-circle img-sm" src="http://xacatolicos.com/app/images/icon-user.png" alt="Alt Text">
             <!-- .img-push is used to add margin to elements next to floating images -->
             <div class="img-push">
@@ -225,7 +246,7 @@
             @if(Auth::user()->id == $song->user_id || Auth::user()->isAdmin)
                 <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
                 <div class="modal fade" id="delete_song{{$song->id}}">
-                    <form method="POST" action="{{action('SongsController@delete')}}" id="comentarioN">
+                    <form method="POST" action="{{action('SongsController@delete')}}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                         <input type="hidden" name="_method" value="DELETE"></input>
                         <input type="hidden" name="song" value="{{$song->id}}">
@@ -309,7 +330,7 @@
                                 <span class="info-box-text">Likes</span>
                                 <span class="info-box-number">{{$song->likes}}</span>
                             </div>
-                            <button type="submit" id="botonL" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+                            <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button>
                     </div>
                 </form>
             </div>
@@ -359,7 +380,7 @@
 
                         @if(Auth::user()->id == $comments[$i]->user_id || Auth::user()->isAdmin)
 
-                            <form method="POST" action="{{action('CommentController@delete')}}" id="comentarioN">
+                            <form method="POST" action="{{action('CommentController@delete')}}">
                                 <input type="hidden" name="_method" value="DELETE"></input>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                                 <input type="hidden" name="comment" value="{{$comments[$i]->id}}">
@@ -374,11 +395,11 @@
 
             @endfor
             {{ $comments->links() }}
-            <form method="POST" action="{{action('CommentController@create')}}" id="otro">
+            <form method="POST" action="{{action('CommentController@create')}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" name="song" value="{{ $song->id }}"></input>
                     <div class="form-group">
-                        <textarea form="otro" name="descripcion" rows="5" cols="40"></textarea><br/>
+                        <textarea name="descripcion" rows="5" cols="40"></textarea><br/>
                     </div>
 
                     <div class="form-group">        
