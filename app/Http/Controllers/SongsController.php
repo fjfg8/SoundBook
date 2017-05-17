@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class SongsController extends Controller
 {
     public function show($id){
-        $id = Auth::user()->id;
-        $user = User::find($id);
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
         $song = Song::findOrFail($id);
         $types = Type::all();
         $comments = $song->comments()->orderby('created_at','desc')->paginate(5);
