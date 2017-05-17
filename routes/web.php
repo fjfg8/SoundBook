@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/pass',function(){
         return view('pass');
     });
-    Route::post('pass','UsersController@change');
+    Route::post('pass','UsersController@changePass');
     Route::post('/song/{id}','SongsController@show');
     Route::put('/song','CommentController@like');
     Route::delete('/song','CommentController@delete');
