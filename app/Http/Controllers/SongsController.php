@@ -92,4 +92,13 @@ class SongsController extends Controller
 
         return redirect()->action('HomeController@index');
     }
+
+    public function like(Request $request){
+        $song = Song::find($request->id);
+        $song->likes = $song->likes + 1;
+
+        $song->save();
+
+        return redirect()->back();
+    }
 }
