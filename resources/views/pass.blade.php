@@ -17,7 +17,7 @@
 <div class="alert alert-info">{{ Session::get('mess') }}</div>
 @endif
 <div class="container" id="contraseña" align="center">
-    <form method="POST" action="{{action('UsersController@change')}}" align="center">
+    <form method="POST" action="{{action('UsersController@changePass')}}" align="center">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <div class="panel panel-default" style="width:40%;">
                 <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">

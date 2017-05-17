@@ -62,13 +62,13 @@ class UsersController extends Controller
 
         $user->save();
         $request->session()->put([
-            'filtro'=>"fecha"
+            'filtro'=>"Fecha"
         ]);        
         
         return redirect()->back();
     }
 
-    public function change(Request $request){
+    public function changePass(Request $request){
         $this->validate($request,[
             'old'=>'required',
             'new'=>'required',
@@ -89,7 +89,7 @@ class UsersController extends Controller
         $user->save();
 
         $request->session()->put([
-            'filtro'=>"fecha"
+            'filtro'=>"Fecha"
         ]);
 
         return redirect()->action('HomeController@index');
