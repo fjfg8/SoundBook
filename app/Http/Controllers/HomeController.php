@@ -53,7 +53,7 @@ class HomeController extends Controller
         if($filtro == "Titulo")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('title','asc')->paginate(4);
 
-        if($filtro == "Fecha")
+        //if($filtro == "Fecha")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','asc')->paginate(4);
 
         if($filtro == "Artista")

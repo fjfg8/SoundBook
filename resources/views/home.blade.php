@@ -4,17 +4,19 @@
 
 {{-- Error messages --}}
         @if (count($errors) > 0)
-            <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="icon fa fa-ban"></i>
+                    <strong>Error:    </strong> {{$error}}
+                </div>
             @endforeach
-            </ul>
         @endif
         @if (Session::has('msg'))
-        <div class="alert alert-info">{{ Session::get('msg') }}</div>
+        <div class="alert alert-danger"> {{ Session::get('msg') }}</div>
         @endif
         @if (Session::has('mess'))
-        <div class="alert alert-info">{{ Session::get('mess') }}</div>
+        <div class="alert alert-danger">{{ Session::get('mess') }}</div>
         @endif
 
 <div class="box box-primary">
@@ -32,7 +34,8 @@
                 @if(Session::has('error_nick'))
                     <div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Error</strong> {{Session::get('error_nick')}}
+                        <i class="icon fa fa-ban"></i>
+                        <strong>Error:    </strong> {{Session::get('error_nick')}}
                     </div>
                 @endif
                 <div class="form-group">
@@ -46,7 +49,8 @@
                 @if(Session::has('error_email'))
                     <div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Error</strong> {{Session::get('error_email')}}
+                        <i class="icon fa fa-ban"></i>
+                        <strong>Error:    </strong> {{Session::get('error_email')}}
                     </div>
                 @endif
             </div>
@@ -303,7 +307,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-envelope"></i>
                                     </div>
-                                    <input id="email" name="email" type="text" class="form-control" placeholder="{{$user->email}}">
+                                    <input id="email" name="email" type="email" class="form-control" placeholder="{{$user->email}}">
                                 </div>
                             </div>
                             <div class="form-group">
