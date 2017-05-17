@@ -20,11 +20,11 @@
 @endif
 
 <div class="box box-primary">
-    <div class="box-header with-border" style="background: #e0ecff;" align="center">
+    <div class="box-header with-border" align="center">
         <h2 class="box-title with-border">Mi perfil</h2>
         <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#edit_user">Editar perfil</a>
     </div>
-    <div class="box-body" style="background: #e0ecff;">
+    <div class="box-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div class="box-footer" style="background: #e0ecff;">
+    <div class="box-footer">
         <div class="col-md-6">
             <div class="form-group">
                 <label><a href="/home/follow">Seguidos:</a></label>
@@ -86,12 +86,12 @@
     </div>
 </div>
 
-<div class="box box-success">
-    <div class="box-header with-border" align="center" style="background: #e0ffe5;">
+<div class="box box-primary">
+    <div class="box-header with-border" align="center">
         <h2 class="box-title with-border">Mis canciones</h2>
         <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#upload_song">Subir canción</a>
     </div>
-    <div class="box-body" style="background: #e0ffe5;">
+    <div class="box-body">
         @if(sizeof($songs)>0)
             <div class="row" align="center">
                 <form method="POST" action="{{action('UsersController@search')}}">
@@ -120,10 +120,10 @@
         @endif
         @forelse($songs as $song)
             <div class="box box-primary">
-                <div class="box-header with-border" style="background: #e0ecff;" align="center">
+                <div class="box-header with-border" style="background: #f4fcff;" align="center">
                     <h2 class="box-title with-border">{{$song->title}}</h2>
                 </div>
-                <div class="box-body" style="background: #e0ecff;">
+                <div class="box-body" style="background: #f4fcff;">
                     <div class="col-md-5">
                         <iframe width="250" height="200" align="center" src = {{$song->url}}  allowfullscreen></iframe><br/>
                     </div>
@@ -133,7 +133,7 @@
                         <a href="/song/{{$song->id}}" class="btn btn-primary" style="padding-top: 5px;">Ver más</a>
                     </div>
                 </div>
-                <div class="box-footer" style="background: #e0ecff;">
+                <div class="box-footer" style="background: #f4fcff;">
                     <a class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#delete_song{{$song->id}}">Eliminar</a>
                     <div class="modal modal-danger fade" id="delete_song{{$song->id}}">
                         <form method="POST" action="{{action('SongsController@delete')}}">

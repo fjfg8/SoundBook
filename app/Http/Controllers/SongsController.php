@@ -16,13 +16,9 @@ class SongsController extends Controller
         $user = User::find($id);
         $song = Song::findOrFail($id);
         $types = Type::all();
-        $comments = $song->comments()->orderby('created_at','desc')->paginate(3);
-        $nicks = array();
-        for($i=0;$i<sizeof($comments);$i++){
-            $nicks[$i] = $comments[$i]->user->nick;
-        }
+        $comments = $song->comments()->orderby('created_at','desc')->paginate(5);
         
-        return view('song',array('user' => $user,'song' => $song,'comments'=>$comments,'nicks'=>$nicks,'types'=>$types));
+        return view('song',array('user' => $user,'song' => $song,'comments'=>$comments,'types'=>$types));
     }
 
     public function create(Request $request){

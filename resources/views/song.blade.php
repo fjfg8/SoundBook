@@ -24,9 +24,14 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label>Título: {{$song->artititlest}} </label><br/>
+                <label>Título: {{$song->title}} </label><br/>
                 <label>Artista: {{$song->artist}} </label><br/>
-                <label>Género: {{$song->gender}} </label><br/>
+                <label>Género: </label>
+                @foreach($types as $t)
+                    @if($t->id == $song->type_id)
+                        <label>{{$t->type}} </label><br/>
+                    @endif
+                @endforeach
                 <label>Album: {{$song->album}}</label><br/>
                 <label>Fecha: {{$song->date}}</label></br>
                 <label>Url: </label> <a href="{{$song->url}}">{{$song->url}}</a>
@@ -43,34 +48,54 @@
         </form>
     </div>
     <div class="box-footer box-comments">
-        <div class="box-comment">
-            <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
-            <div class="comment-text">
-                <span class="username">Maria Gonzales
-                    <span class="text-muted pull-right">8:03 PM Today</span>
-                </span>
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
+        @forelse($comments as $comment)
+            <div class="box-comment">
+                @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)
+                    <form method="POST" action="{{action('CommentController@delete')}}">
+                        <input type="hidden" name="_method" value="DELETE"></input>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                        <input type="hidden" name="comment" value="{{$comment->id}}">
+                        <button type="submit" class="btn btn-xs pull-right" style="color:#3a7cff;background:none;">
+                            Eliminar
+                        </button>
+                        <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-xs pull-right" style="color:#3a7cff;background:none;">Editar</a>
+                    </form>
+                @endif
+                <img class="img-circle img-sm" src="https://maxcdn.icons8.com/Share/icon/Users//user_female_circle_filled1600.png" alt="User Image">
+                <div class="comment-text">
+                    <span class="username">{{$user->nick}}
+                        <span class="text-muted pull-right">{{$comment->created_at}}</span>
+                    </span>
+                    
+                    {{$comment->comment}}
+                </div>
+                <form method="POST" action="{{action('CommentController@like')}}" id="megusta">
+                    <input type="hidden" name="_method" value="PUT"></input>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                    <input type="hidden" name="comment" value="{{ $comment->id }}"></input>
+                    <input type="hidden" name="song" value="{{ $song->id }}"></input>
+                    <button type="submit" form="megusta" class="btn btn-xs" style="color:#3a7cff;background:none;">
+                        Me gusta
+                    </button>
+                    
+                    <text class="pull-right" style="color:#3a7cff">{{$comment->likes}}
+                    <i class="fa fa-thumbs-o-up " aria-hidden="true" style="color:#3a7cff"></i>
+                    </text>  
+                </form>
             </div>
-        </div>
-        <div class="box-comment">
-            <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
-            <div class="comment-text">
-                <span class="username">Nora Havisham
-                    <span class="text-muted pull-right">8:03 PM Today</span>
-                </span>
-                The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of letters, as opposed to using
-                'Content here, content here', making it look like readable English.
+        @empty
+            <div class="alert alert-info">
+                <strong>La canción no tiene ningun comentario</strong>
             </div>
-        </div>
+        @endforelse
+        {{ $comments->links() }}
     </div>   
     <div class="box-footer">
         <form action="#" method="post">
-            <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+            <img class="img-responsive img-circle img-sm" src="http://xacatolicos.com/app/images/icon-user.png" alt="Alt Text">
             <!-- .img-push is used to add margin to elements next to floating images -->
             <div class="img-push">
-                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                <input type="text" class="form-control input-sm" placeholder="Presiona enter para comentar">
             </div>
         </form>
     </div>
@@ -317,7 +342,7 @@
             @for($i=0;$i<sizeof($comments);$i++)
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color:#ef8300;">
-                        <h4 align="left">{{$nicks[$i]}}</h4>
+                        <h4 align="left"></h4>
                     </div>
                     <div class="panel-body" style="background-color:#ffe4c4;" align="left">
                         <p>{{$comments[$i]->comment}}</p>
