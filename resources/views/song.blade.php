@@ -79,8 +79,22 @@
     <div class="box-body" style="background: #e0ecff;">
         <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-2">
+            <div class="col-md-6">
                 <iframe width="560" height="315" align="center" src={{$song->url}}  allowfullscreen></iframe>
+            </div>
+            <div class="col-md-2">
+                <form method="POST" action="{{action('SongsController@like')}}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                    <input type="hidden" name="id" value="{{ $song->id }}"></input>
+                    <div class="info-box">
+                        <span class="info-box-icon bg-blue"><i class="fa fa-star-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Likes</span>
+                                <span class="info-box-number">{{$song->likes}}</span>
+                            </div>
+                            <button type="submit" id="botonL" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -122,8 +136,8 @@
                             <input type="hidden" name="song" value="{{ $song->id }}"></input>
                             <button type="submit" id="botonL" class="btn btn-app pull-right">
                                 <span class="badge bg-red">{{$comments[$i]->likes}}</span>
-                                <i class="fa fa-heart-o"></i>
-                                    Like</button>
+                                <i class="fa fa-heart-o"></i>Like
+                            </button>
                         </form>     
 
                         @if(Auth::user()->id == $comments[$i]->user_id || Auth::user()->isAdmin)
