@@ -12,14 +12,13 @@ use Illuminate\Support\Facades\Auth;
 class SongsController extends Controller
 {
     public function show($id){
+        $id = Auth::user()->id;
+        $user = User::find($id);
         $song = Song::findOrFail($id);
-        $comments = $song->comments()->orderby('created_at','desc')->paginate(3);
-        $nicks = array();
-        for($i=0;$i<sizeof($comments);$i++){
-            $nicks[$i] = $comments[$i]->user->nick;
-        }
+        $types = Type::all();
+        $comments = $song->comments()->orderby('created_at','desc')->paginate(5);
         
-        return view('song',array('song' => $song,'comments'=>$comments,'nicks'=>$nicks));
+        return view('song',array('user' => $user,'song' => $song,'comments'=>$comments,'types'=>$types));
     }
 
     public function create(Request $request){
@@ -90,7 +89,7 @@ class SongsController extends Controller
             'filtro'=>"fecha"
         ]);
 
-        return redirect()->action('HomeController@index');
+        return redirect()->back();
     }
 
     public function like(Request $request){
