@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
         return view('upload');
     });
     Route::post('/upload','SongsController@create');
-    Route::get('/groups','GroupsController@show');
+    Route::get('/groups/{id}','GroupsController@show');
     Route::get('/listagrupos','GroupsController@showlista');
     
     Route::get('/home', 'HomeController@index');
