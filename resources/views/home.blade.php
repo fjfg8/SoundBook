@@ -92,12 +92,23 @@
             <div class="row" align="center">
                 <form method="POST" action="{{action('UsersController@search')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                    <select name="filtro">
-                        <option value="titulo">Titulo</option> 
-                        <option value="fecha">Fecha</option> 
-                        <option value="artista">Artista</option>    
-                    </select>
-                    <button class="btn btn-primary" type="submit">Filtrar</button>
+                    <div class="input-group" style="width: 30%">
+                        <select class="form-control select2" name="filtro" >
+                            @foreach($filters as $filter)
+                                @if($filter == Session::get('filtro'))
+                                    <option selected="selected" value="{{$filter}}">{{$filter}}</option>
+                                @endif
+                            @endforeach
+                            @foreach($filters as $filter)
+                                @if($filter != Session::get('filtro'))
+                                    <option value="{{$filter}}">{{$filter}}</option>
+                                @endif
+                            @endforeach  
+                        </select>
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                        </div>
+                    </div> 
                     <br/>
                     <br/>
                 </form>
@@ -270,30 +281,68 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nick</label></br>
-                                <input type="text" id="nick" name="nick" placeholder="{{$user->nick}}" size="50">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input id="nick" name="nick" type="text" class="form-control" placeholder="{{$user->nick}}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Nombre</label></br>
-                                <input type="text" id="name" name="name" placeholder="{{$user->name}}" size="50">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-font"></i>
+                                    </div>
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="{{$user->name}}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Email</label></br>
-                                <input type="text" id="email" name="email" placeholder="{{$user->email}}" size="50">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                    <input id="email" name="email" type="text" class="form-control" placeholder="{{$user->email}}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Género</label></br>
-                                <select id="gender" name="gender">
-                                    <option value="chico">Chico</option> 
-                                    <option value="chica">Chica</option>   
-                                </select>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-transgender"></i>
+                                    </div>
+                                    <select class="form-control select2" id="gender" name="gender">
+                                        @foreach($generos as $g)
+                                            @if($user->gender == $g)
+                                                <option selected="selected" value="{{$g}}">{{$g}}</option>
+                                            @endif
+                                        @endforeach
+                                        @foreach($generos as $g)
+                                            @if($user->gender != $g)
+                                                <option value="{{$g}}">{{$g}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Estado</label></br>
-                                <input type="text" id="status" name="status" placeholder="{{$user->status}}" size="50">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info"></i>
+                                    </div>
+                                    <input id="status" name="status" type="text" class="form-control" placeholder="{{$user->status}}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Preferencias</label></br>
-                                <input type="text" id="preferences" name="preferences" placeholder="{{$user->preferences}}" size="50">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </div>
+                                    <input id="preferences" name="preferences" type="text" class="form-control" placeholder="{{$user->status}}">
+                                </div>
                             </div>
                         </div>
                     </div>      
