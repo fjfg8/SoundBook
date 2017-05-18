@@ -22,7 +22,8 @@ class SongsTableSeeder extends Seeder
             'date' => '2015-05-12',
             'likes' => 0,
             'user_id' => 1,
-            'type_id' => 4
+            'type_id' => 4,
+            'created_at'=>'2017-02-03'
         ]);
         DB::table('songs')->insert([
             
@@ -33,7 +34,8 @@ class SongsTableSeeder extends Seeder
             'date' => '1978-02-17',
             'likes' => 0,
             'user_id' => 1,
-            'type_id' => 5
+            'type_id' => 5,
+            'created_at'=>'2017-02-01'
             
         ]);
         DB::table('songs')->insert([
@@ -45,7 +47,8 @@ class SongsTableSeeder extends Seeder
             'date' => '2002-03-06',
             'likes' => 0,
             'user_id' => 2,
-            'type_id' => 11
+            'type_id' => 11,
+            'created_at'=>'2017-02-02'
         ]);
 
         /*for($i=0;$i<=25;$i++){

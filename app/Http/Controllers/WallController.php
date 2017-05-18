@@ -12,20 +12,18 @@ class WallController extends Controller
 {
     public function show(){
         $result = $this->publicaciones();
-
-       // $users = User::find(Auth::user()->id);
-       $users = array();
-        for($i=0;$i<sizeof($result);$i++){
+        $users = array();
+        
+       /* for($i=0;$i<sizeof($result);$i++){
             $users[$i] = User::find($result[$i]->user_id);
+        }*/
+        $i=0;
+        foreach($result as $r){
+            $users[$i] = User::find($r->user_id);
+            $i++;
         }
 
-        /*foreach($result as $r){
-            $aux = User::find($r->user_id);
-            $users = $users->merge($aux);
-        }*/
-
-
-        return view('wall',array('songs' => $result,'users'=>$users));
+        return view('wall',array('songs' => $result,'users'=>$users,'i'=>0));
     }
 
     public function publicaciones(){
@@ -38,8 +36,9 @@ class WallController extends Controller
             $aux = $o->songs;
             $songs = $songs->merge($aux);
         }
+        $aux2 = $songs->sortByDesc('created_at');
 
-        return $songs;
+        return $aux2;
     }
 
 }

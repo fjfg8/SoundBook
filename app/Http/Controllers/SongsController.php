@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Auth;
 class SongsController extends Controller
 {
     public function show($id){
-        $user_id = Auth::user()->id;
-        $user = User::find($user_id);
+    
         $song = Song::findOrFail($id);
+        $user_id = $song->user_id;
+        $user = User::find($user_id);
         $types = Type::all();
         $comments = $song->comments()->orderby('created_at','desc')->paginate(5);
         $count = $song->comments()->count();
