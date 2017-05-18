@@ -44,7 +44,7 @@
             <button type="submit" class="btn btn-primary btn-xs">
                 <i class="fa fa-thumbs-o-up"></i> Me gusta
             </button>
-            <span class="pull-right text-muted">{{$song->likes}} me gustas - {{sizeof($comments)}} comentarios</span>
+            <span class="pull-right text-muted">{{$song->likes}} me gustas - {{$count}} comentarios</span>
         </form>
     </div>
     <div class="box-footer box-comments">
@@ -99,7 +99,7 @@
                     </button>
                     
                     <text class="pull-right" style="color:#3a7cff">{{$comment->likes}}
-                    <i class="fa fa-thumbs-o-up " aria-hidden="true" style="color:#3a7cff"></i>
+                        <i class="fa fa-thumbs-o-up " aria-hidden="true" style="color:#3a7cff"></i>
                     </text>  
                 </form>
             </div>
