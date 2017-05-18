@@ -17,7 +17,11 @@
                 <span class="text-muted pull-right">{{$songs[$i]->date}}</span>
                     <div class="user-block">
                         <img class="img-circle" src="http://xacatolicos.com/app/images/icon-user.png" alt="User Image">
-                        <span class="description"><a href="#">{{$users[$i]->name}}</a></span>
+                        @if(Auth::user()->id == $users[$i]->id)
+                            <span class="description"><a href="/home">{{$users[$i]->name}}</a></span>
+                        @else
+                            <span class="description"><a href="visit/{{$users[$i]->id}}">{{$users[$i]->name}}</a></span>
+                        @endif
                         <span class="username">{{$songs[$i]->title}}</span>
                     </div>
                     

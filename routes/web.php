@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/song/{id}','SongsController@show');
+    Route::get('/visit/{id}','HomeController@visitProfile');
+    Route::delete('/vistit','UsersController@unfollow');
+    Route::put('/visit','UsersController@follow');
+
     Route::post('user/','UsersController@search');
     Route::put('user/','UsersController@edit');
     Route::get('/pass',function(){
@@ -63,6 +67,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home/follow','HomeController@showFollow');
 
     Route::get('/home/followers','HomeController@showFollowers');
+
 });
 
 Route::group(['middleware' => 'admin'], function() {
