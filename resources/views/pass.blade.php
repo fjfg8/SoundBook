@@ -43,7 +43,7 @@
                         <button type="submit" class="btn btn-default">Cambiar</button>
                     </div>
                 </div>  
-        </div>
+            </div>
     </form>
 </div>
 @stop

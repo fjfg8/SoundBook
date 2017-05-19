@@ -23,7 +23,8 @@ class UsersTableSeeder extends Seeder
             'isAdmin' => true,
             'gender' => '-',
             'status' => '-',
-            'preferences' => '-'
+            'preferences' => '-',
+            'image' => 'http://www.carkeysystem.com/wp-content/uploads/2015/05/reprogramacion-de-coches.jpg'
             
         ]);
 
@@ -36,7 +37,8 @@ class UsersTableSeeder extends Seeder
             'isAdmin' => false,
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rock'
+            'preferences' => 'Rock',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
            
         ]);
 
@@ -49,7 +51,8 @@ class UsersTableSeeder extends Seeder
             'isAdmin' => false,
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rap'
+            'preferences' => 'Rap',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
         
         ]);
 
@@ -62,7 +65,8 @@ class UsersTableSeeder extends Seeder
             'isAdmin' => false,
             'gender' => 'Hombre',
             'status' => 'Soltero',
-            'preferences' => 'Rap'
+            'preferences' => 'Rap',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
             
         ]);
 
@@ -75,7 +79,8 @@ class UsersTableSeeder extends Seeder
             'isAdmin' => false,
             'gender' => 'Hombre',
             'status' => 'Casado',
-            'preferences' => 'HipHop'
+            'preferences' => 'HipHop',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
             
         ]);
     

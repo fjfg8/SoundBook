@@ -10,7 +10,7 @@
                 <a class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#delete_song">Eliminar</a>
                 <a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#edit_song">Editar</a>
             @endif
-            <img class="img-circle" src="http://xacatolicos.com/app/images/icon-user.png" alt="User Image">
+            <img class="img-circle" src="{{$user->image}}" alt="User Image">
             <span class="username"><a href="#">{{$user->name}}</a></span>
             <span class="description">{{$song->artist}} - {{$song->title}}</span>
         </div> <!-- /.user-block -->   
