@@ -87,8 +87,6 @@ class HomeController extends Controller
         }
     }
 
-
-
     public function follow($id){
         $res = DB::table('user_user')->where('user_id1','=',$id)->count();
         return $res;

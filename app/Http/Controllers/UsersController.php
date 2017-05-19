@@ -118,8 +118,8 @@ class UsersController extends Controller
 
         $user1->users()->attach($user2->id);
 
-        return redirect()->action('HomeController@index');
-
+        //return redirect()->action('HomeController@index');
+        return redirect()->back();
     }
 
     public function unfollow(Request $request){
@@ -130,8 +130,8 @@ class UsersController extends Controller
 
         $result->delete();
 
-        return redirect()->action('HomeController@index');
-
+        //return redirect()->action('HomeController@index');
+        return redirect()->back();
     }
 
     public function changeImage(Request $request){

@@ -3,7 +3,9 @@
 
 @section('content')
 
-<form method="POST" action="{{action('CommentController@edit')}}" id="comentarioN">
+<button data-toggle="collapse" data-target="#comentario">Collapsible</button>
+
+<form method="POST" action="{{action('CommentController@edit')}}" id="comentario">
     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="song" value="{{ $song }}"></input>
