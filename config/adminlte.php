@@ -130,7 +130,7 @@ return [
                 ],
                 [
                     'text' => 'Cambiar imagen perfil',
-                    'url'  => '#',
+                    'url'  => 'changeImage',
                     'icon' => 'photo',
                 ],
             ],

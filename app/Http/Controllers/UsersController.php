@@ -101,7 +101,7 @@ class UsersController extends Controller
     }*/
 
     public function admin(){
-        $users = User::select('*')->paginate(6);
+        $users = User::select('*')->paginate(4);
         return view('admin',array('users' => $users));
     }
 
@@ -132,6 +132,15 @@ class UsersController extends Controller
 
         return redirect()->action('HomeController@index');
 
+    }
+
+    public function changeImage(Request $request){
+        $user = User::find(Auth::user()->id);
+
+        $user->image = $request->new;
+        $user->save();
+
+        return redirect()->action('HomeController@index');
     }
 
 
