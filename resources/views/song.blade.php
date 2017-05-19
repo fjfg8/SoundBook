@@ -50,45 +50,50 @@
     <div class="box-footer box-comments">
         @forelse($comments as $comment)
             <div class="box-comment">
-                <img class="img-circle img-sm" src="https://maxcdn.icons8.com/Share/icon/Users//user_female_circle_filled1600.png" alt="User Image">
-                <div class="comment-text">
-                    <span class="username">{{$user->nick}}
-                        <span class="text-muted pull-center"> · {{$comment->created_at}}</span>
-                        @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)
-                             <span class="text-muted"> ·  </span>
-                            <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-primary btn-xs">Editar</a>
-                            <button data-toggle="modal" data-target="#delete_comment{{$comment->id}}" class="btn btn-danger btn-xs" >
-                                Eliminar
-                            </button>
-                            <div class="modal modal-danger fade" id="delete_comment{{$comment->id}}">
-                                <form method="POST" action="{{action('CommentController@delete')}}">
-                                    <input type="hidden" name="_method" value="DELETE"></input>
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                    <input type="hidden" name="comment" value="{{$comment->id}}">
-                                    <div class="modal-dialog" align="center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">¿Estás seguro de borrar el comentario?</h4>
-                                                <p>{{$comment->comment}}</p>
+                @foreach($users as $u)
+                    @if($comment->user_id == $u->id)
+                        <img class="img-circle img-sm" src="{{$u->image}}" alt="User Image">
+                    
+                        <div class="comment-text">
+                            <span class="username">{{$u->nick}}
+                                <span class="text-muted pull-center"> · {{$comment->created_at}}</span>
+                                @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)
+                                    <span class="text-muted"> ·  </span>
+                                    <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-primary btn-xs">Editar</a>
+                                    <button data-toggle="modal" data-target="#delete_comment{{$comment->id}}" class="btn btn-danger btn-xs" >
+                                        Eliminar
+                                    </button>
+                                    <div class="modal modal-danger fade" id="delete_comment{{$comment->id}}">
+                                        <form method="POST" action="{{action('CommentController@delete')}}">
+                                            <input type="hidden" name="_method" value="DELETE"></input>
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                            <input type="hidden" name="comment" value="{{$comment->id}}">
+                                            <div class="modal-dialog" align="center">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <h4 class="modal-title">¿Estás seguro de borrar el comentario?</h4>
+                                                        <p>{{$comment->comment}}</p>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>No podrás deshacer la acción</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-outline">Si</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                <p>No podrás deshacer la acción</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-outline">Si</button>
-                                            </div>
-                                        </div>
+                                        </form>                            
                                     </div>
-                                </form>                            
-                            </div>
-                        @endif
-                    </span>
-                    {{$comment->comment}}
-                </div>
+                                @endif
+                            </span>
+                            {{$comment->comment}}
+                        </div>
+                    @endif
+                @endforeach
                 <form method="POST" action="{{action('CommentController@like')}}">
                     <input type="hidden" name="_method" value="PUT"></input>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>

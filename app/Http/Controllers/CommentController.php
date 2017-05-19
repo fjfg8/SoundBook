@@ -12,7 +12,10 @@ class CommentController extends Controller
 {
 
     public function create(Request $request){
-        
+        $this->validate($request,[
+            'descripcion'=>'required',
+        ]);
+
         $song = Song::find($request->song);
         $user = User::find(Auth::user()->id);
         $c = new Comment();
