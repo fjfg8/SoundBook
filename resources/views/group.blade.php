@@ -8,3 +8,16 @@
                 <div class="panel-title" >Tus grupos</div>
             </div>
             <div class="panel-body" align="center" style="background-color:#c4deff;">
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+@stop
