@@ -69,13 +69,18 @@ class HomeController extends Controller
     }
 
     public function visitProfile($id){
-        $user = User::find($id);
-        $songs = $user->songs()->paginate(4);
-        $follow = $this->follow($user->id);
-        $followers = $this->followers($user->id);
-        $bool = $this->followProfile($user->id);
+        if(Auth::user()->id != $id){
+            $user = User::find($id);
+            $songs = $user->songs()->paginate(4);
+            $follow = $this->follow($user->id);
+            $followers = $this->followers($user->id);
+            $bool = $this->followProfile($user->id);
 
-        return view('user',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers,'bool'=>$bool));
+            return view('user',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers,'bool'=>$bool));
+        }
+        else{
+            return redirect()->action('HomeController@index');
+        }
     }
 
     public function followProfile($id){
