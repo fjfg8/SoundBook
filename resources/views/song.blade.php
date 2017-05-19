@@ -122,10 +122,20 @@
             <img class="img-responsive img-circle img-sm" src="http://xacatolicos.com/app/images/icon-user.png" alt="Alt Text">
             <!-- .img-push is used to add margin to elements next to floating images -->
             <div class="img-push">
-                <input type="text" name="descripcion" class="form-control input-sm" placeholder="Presiona enter para comentar">
+                <input type="text" id="comentario" name="comentario" class="form-control input-sm" placeholder="Presiona enter para comentar">
             </div>
         </form>
     </div>
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </div>
 
 <div class="modal modal-danger fade" id="delete_song">

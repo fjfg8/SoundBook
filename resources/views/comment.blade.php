@@ -16,7 +16,7 @@
         </div>
         <div class="panel-body" style="background-color:#c4deff;">
             <div class="form-group">
-                <textarea form="comentarioN" name="descripcion" rows="5" cols="40"></textarea><br/>
+                <textarea form="comentarioN" id="comentario" name="comentario" rows="5" cols="40"></textarea><br/>
             </div>
 
             <div class="form-group">        
