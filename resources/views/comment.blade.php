@@ -12,7 +12,7 @@
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="song" value="{{ $song }}"></input>
     <input type="hidden" name="comment" value="{{ $comment }}"></input>
-    <div class="panel panel-default fade" style="width:30%;text-align:center;margin:0 auto;" align="center">
+    <div class="panel panel-default" style="width:30%;text-align:center;margin:0 auto;" align="center">
         <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
             <h3 class="panel-title" >Editar comentario</h3>
         </div>

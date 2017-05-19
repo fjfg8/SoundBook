@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Song;
 use App\User;
+use App\Type;
 
 class WallController extends Controller
 {
     public function show(){
         $result = $this->publicaciones();
         $users = array();
+        $types = Type::all();
         
        /* for($i=0;$i<sizeof($result);$i++){
             $users[$i] = User::find($result[$i]->user_id);
@@ -23,7 +25,7 @@ class WallController extends Controller
             $i++;
         }
 
-        return view('wall',array('songs' => $result,'users'=>$users,'i'=>0));
+        return view('wall',array('songs' => $result,'users'=>$users,'i'=>0, 'types'=>$types));
     }
 
     public function publicaciones(){
