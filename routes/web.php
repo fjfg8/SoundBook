@@ -68,6 +68,11 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/home/followers','HomeController@showFollowers');
 
+    Route::get('/changeImage',function(){
+        return view('image');
+    });
+    Route::post('/changeImage','UsersController@changeImage');
+
 });
 
 Route::group(['middleware' => 'admin'], function() {

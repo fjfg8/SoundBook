@@ -9,9 +9,9 @@
         <div class="col-md-8">
             <div class="box box-primary">
                 <div class="box-header with-border" style="background: #f4fcff;">
-                <span class="text-muted pull-right">{{$song->date}}</span>
+                <span class="text-muted pull-right">{{$s->created_at}}</span>
                     <div class="user-block">
-                        <img class="img-circle" src="http://xacatolicos.com/app/images/icon-user.png" alt="User Image">
+                        <img class="img-circle" src="{{$users[$i]->image}}" alt="User Image">
                         @if(Auth::user()->id == $users[$i]->id)
                             <span class="description"><a href="/home">{{$users[$i]->name}}</a></span>
                         @else
@@ -54,9 +54,8 @@
                     
                 </div>
             </div>
-        </div>
+        </div><p style="color: #f4fcff; align: right">{{$i++}}</p>
     </div>
-
     <p style="color: #f4fcff; align: right">{{$i++}}</p>
 
 @empty
@@ -64,6 +63,5 @@
         <strong>No tienes ninguna canción</strong>
     </div>
 @endforelse
-    
 
 @endsection
