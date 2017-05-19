@@ -24,8 +24,7 @@ class UsersTableSeeder extends Seeder
             'gender' => '-',
             'status' => '-',
             'preferences' => '-',
-            'image' => 'http://www.carkeysystem.com/wp-content/uploads/2015/05/reprogramacion-de-coches.jpg'
-            
+            'image' => 'https://adminlte.io/themes/AdminLTE/dist/img/user1-128x128.jpg'
         ]);
 
         DB::table('users')->insert([
@@ -36,10 +35,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('jonay'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Soltero',
+            'status' => 'Casado/a',
             'preferences' => 'Rock',
             'image' => 'http://xacatolicos.com/app/images/icon-user.png'
-           
         ]);
 
         DB::table('users')->insert([
@@ -50,10 +48,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('fran'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Soltero',
+            'status' => 'Soltero/a',
             'preferences' => 'Rap',
             'image' => 'http://xacatolicos.com/app/images/icon-user.png'
-        
         ]);
 
          DB::table('users')->insert([
@@ -64,10 +61,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('raul'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Soltero',
+            'status' => 'Soltero/a',
             'preferences' => 'Rap',
             'image' => 'http://xacatolicos.com/app/images/icon-user.png'
-            
         ]);
 
         DB::table('users')->insert([
@@ -78,10 +74,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('larry'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Casado',
+            'status' => 'Comprometido/a',
             'preferences' => 'HipHop',
             'image' => 'http://xacatolicos.com/app/images/icon-user.png'
-            
         ]);
     
 

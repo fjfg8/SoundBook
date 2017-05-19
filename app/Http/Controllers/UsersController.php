@@ -77,15 +77,15 @@ class UsersController extends Controller
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        if($user->password != $request->old ){
+        if($user->password != bcrypt($request->old)){
             return redirect()->back()->with('msg', 'Contraseña antigua mal introducida');
         }
 
-        if($request->new != $request->copy){
+        if($request->new != bcrypt($request->copy)){
             return redirect()->back()->with('mess', 'Las contraseñas son distintas');
         }
 
-        $user->password = $request->new;
+        $user->password = bcrypt($request->new);
         $user->save();
 
         $request->session()->put([
@@ -102,7 +102,21 @@ class UsersController extends Controller
 
     public function admin(){
         $users = User::select('*')->paginate(4);
-        return view('admin',array('users' => $users));
+        $generos = [
+            "Mujer" => "Mujer",
+            "Hombre" => "Hombre",
+            "Prefiero no decirlo" => "Prefiero no decirlo",
+        ];
+        $estados = [
+            "Soltero/a" => "Soltero/a",
+            "Comprometido/a" => "Comprometido/a",
+            "Casado/a" => "Casado/a",
+            "Divorciado/a" => "Divorciado/a",
+            "Viudo/a" => "Viudo/a",
+            "Prefiero no decirlo" => "Prefiero no decirlo",
+        ];
+
+        return view('admin',array('users' => $users,'generos'=>$generos,'estados'=>$estados));
     }
 
     public function delete(Request $request){

@@ -8,7 +8,7 @@
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <i class="icon fa fa-ban"></i>
-            <strong>Error:    </strong> {{$error}}
+            <strong>Error: </strong> {{$error}}
         </div>
     @endforeach
 @endif
@@ -19,78 +19,62 @@
     <div class="alert alert-danger">{{ Session::get('mess') }}</div>
 @endif
 
-<div class="box box-primary">
-    <div class="box-header with-border" align="center">
-        <h2 class="box-title with-border">Mi perfil</h2>
-        <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#edit_user">Editar perfil</a>
+<div class="row">
+    <div class="col-md-3">
     </div>
-    <div class="box-body">
-        <div class="row">
-            
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Nick:</label>
-                    <text>{{$user->nick}}</text>
-                </div>
-                @if(Session::has('error_nick'))
-                    <div class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <i class="icon fa fa-ban"></i>
-                        <strong>Error:    </strong> {{Session::get('error_nick')}}
-                    </div>
-                @endif
-                <div class="form-group">
-                    <label>Nombre:</label>
-                    <text>{{$user->name}}</text>
-                </div>
-                <div class="form-group">
-                    <label>Email:</label>
-                    <text>{{$user->email}}</text>
-                </div>
-                @if(Session::has('error_email'))
-                    <div class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <i class="icon fa fa-ban"></i>
-                        <strong>Error:    </strong> {{Session::get('error_email')}}
-                    </div>
-                @endif
+    <div class="col-md-6">
+        <div class="box box-widget widget-user">
+            <div class="widget-user-header bg-aqua-active">
+                <a class="btn btn-warning pull-right" data-toggle="modal" data-target="#edit_user">Editar perfil</a>  
+                <h2 class="widget-user-desc">{{$user->nick}}</h2>
+                <h4 class="widget-user-name">Nombre: {{$user->name}} </h4>
+                <h4 class="widget-user-name">Email: {{$user->email}} </h4>
+                
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Genero:</label>
-                    <text>{{$user->gender}}</text>
+            <div class="widget-user-image">
+                <img class="img-circle" src="{{$user->image}}" alt="UserAvatar">
+            </div>
+            <div class="box-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Genero:</label>
+                            <text>{{$user->gender}}</text>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado:</label>
+                            <text>{{$user->status}}</text>
+                        </div>
+                        <div class="form-group" >
+                            <label>Preferencias:</label>
+                            <text>{{$user->preferences}}</text>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Estado:</label>
-                    <text>{{$user->status}}</text>
+            </div>
+            <div class="box-footer">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><a href="/home/follow">Seguidos:</a></label>
+                        <text>{{$follow}}</text>
+                    </div>
                 </div>
-                <div class="form-group" >
-                    <label>Preferencias:</label>
-                    <text>{{$user->preferences}}</text>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><a href="/home/followers">Seguidores:</a></label>
+                        <text>{{$followers}}</text>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="box-footer">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label><a href="/home/follow">Seguidos:</a></label>
-                <text>{{$follow}}</text>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label><a href="/home/followers">Seguidores:</a></label>
-                <text>{{$followers}}</text>
-            </div>
-        </div>
+    <div class="col-md-3">
     </div>
 </div>
-
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
         <h2 class="box-title with-border">Mis canciones</h2>
-        <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#upload_song">Subir canción</a>
+        <a class="btn btn-success pull-right" data-toggle="modal" data-target="#upload_song">Subir canción</a>
     </div>
     <div class="box-body">
         @if(sizeof($songs)>0)
@@ -334,12 +318,23 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Estado</label></br>
+                                <label>Estado civil</label></br>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-info"></i>
                                     </div>
-                                    <input id="status" name="status" type="text" class="form-control" placeholder="{{$user->status}}">
+                                    <select class="form-control select2" id="status" name="status">
+                                        @foreach($estados as $s)
+                                            @if($user->status == $s)
+                                                <option selected="selected" value="{{$s}}">{{$s}}</option>
+                                            @endif
+                                        @endforeach
+                                        @foreach($estados as $s)
+                                            @if($user->status != $s)
+                                                <option value="{{$s}}">{{$s}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">

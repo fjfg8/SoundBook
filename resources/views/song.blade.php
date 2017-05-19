@@ -70,7 +70,7 @@
                                         <form method="POST" action="{{action('CommentController@delete')}}">
                                             <input type="hidden" name="_method" value="DELETE"></input>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                            <input type="hidden" name="comentario" value="{{$comment->id}}">
+                                            <input type="hidden" name="comment" value="{{$comment->id}}">
                                             <div class="modal-dialog" align="center">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
