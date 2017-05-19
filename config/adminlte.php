@@ -125,7 +125,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Cambiar contraseña',
-                    'url'  => 'pass',
+                    'url'  => 'changePass',
                     'icon' => 'lock',
                 ],
                 [

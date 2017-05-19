@@ -18,66 +18,67 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/song/{id}','SongsController@show');
-    Route::get('/visit/{id}','HomeController@visitProfile');
-    Route::delete('/vistit','UsersController@unfollow');
-    Route::put('/visit','UsersController@follow');
 
-    Route::post('user/','UsersController@search');
-    Route::put('user/','UsersController@edit');
-    Route::get('/pass',function(){
-        return view('pass');
-    });
-
+    Route::post('/user','UsersController@search');
     Route::post('/change','UsersController@changePass');
-    //Route::post('/song/{id}','SongsController@show');
+    Route::post('/changeImage','UsersController@changeImage');
+    Route::put('/editUser','UsersController@edit');
+    Route::put('/follow','UsersController@follow');
+    Route::delete('/unfollow','UsersController@unfollow');
+    
+
+
+    Route::get('/song/{id}','SongsController@show');
     Route::post('/song','SongsController@like');
+    Route::post('/wall','SongsController@like');
+    Route::put('/uploadSong','SongsController@create');    
+    Route::put('/editSong','SongsController@edit');
+    Route::delete('/deleteSong','SongsController@delete');
+    
 
-    Route::put('/song','CommentController@like');
-    Route::delete('/song','CommentController@delete');
-    Route::delete('/user','SongsController@delete');
 
-    Route::put('editSong','SongsController@edit');
-
-    Route::get('/song/{id}/edit/{c}',function($id,$c){
-        return view('comment',array('song'=>$id,'comment'=>$c));
-    });
-    Route::put('/edit','CommentController@edit');
-    Route::post('comment/','CommentController@create');
+    Route::post('/comment','CommentController@create');
+    Route::put('/likeComment','CommentController@like');
+    Route::put('/editComment','CommentController@edit');
+    Route::delete('/deleteComment','CommentController@delete');
+    
+    
 
     Route::get('/groups/{id}','GroupsController@show');
-
-    Route::put('/uploadSong','SongsController@create');
-
     Route::get('/listagrupos','GroupsController@showlista');
+
+
     
     Route::get('/home', 'HomeController@index');
-
-    Route::get('/searcher','SearchController@show');
-
-    Route::post('/searcher','SearchController@search');
-
-    Route::put('/searcher','UsersController@follow');
-
-    Route::delete('/searcher','UsersController@unfollow');
-
-    Route::get('/wall','WallController@show');
-    Route::post('/wall','SongsController@like');
-
+    Route::get('/visit/{id}','HomeController@visitProfile');
     Route::get('/home/follow','HomeController@showFollow');
-
     Route::get('/home/followers','HomeController@showFollowers');
 
+
+
+    Route::get('/searcher','SearchController@show');
+    Route::post('/search','SearchController@search');
+
+    
+
+    Route::get('/wall','WallController@show');
+    
+    
+
     Route::get('/changeImage',function(){
-        return view('image');
+        return view('change_image');
     });
-    Route::post('/changeImage','UsersController@changeImage');
+
+    Route::get('/changePass',function(){
+        return view('change_pass');
+    });
+    
 
 });
 
 Route::group(['middleware' => 'admin'], function() {
     Route::get('/admin','UsersController@admin');
-    Route::delete('/admin','UsersController@delete');
+    Route::delete('/deleteUser','UsersController@delete');
 });
 
 
