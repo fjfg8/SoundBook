@@ -26,10 +26,8 @@
     </div>
     <div class="box-body">
         <div class="row">
-            <div class="col-md-2">
-                <img src="{{$user->image}}" width="250" height="250"></img>
-            </div>
-            <div class="col-md-8">
+            
+            <div class="col-md-6">
                 <div class="form-group">
                     <label>Nick:</label>
                     <text>{{$user->nick}}</text>
@@ -163,7 +161,9 @@
                         </form>                            
                     </div>
 
-                    <a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
+                    <span class="pull-right">&nbsp;</span>
+
+                    <a class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#edit_song{{$song->id}}">Editar</a>
                     <div class="modal modal-default fade" id="edit_song{{$song->id}}">
                         <form method="POST" action="{{action('SongsController@edit')}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>

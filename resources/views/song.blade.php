@@ -8,10 +8,15 @@
         <div class="user-block">
             @if(Auth::user()->id == $song->user_id || Auth::user()->isAdmin)
                 <a class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#delete_song">Eliminar</a>
-                <a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#edit_song">Editar</a>
+                <span class="pull-right">&nbsp;</span>
+                <a class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#edit_song">Editar</a>
             @endif
             <img class="img-circle" src="{{$user->image}}" alt="User Image">
-            <span class="username"><a href="#">{{$user->name}}</a></span>
+            @if(Auth::user()->id == $user->id)
+                <span class="username"><a href="/home">{{$user->name}}</a></span>
+            @else
+                <span class="username"><a href="/visit/{{$user->id}}">{{$user->name}}</a></span>
+            @endif
             <span class="description">{{$song->artist}} - {{$song->title}}</span>
         </div> <!-- /.user-block -->   
     </div> <!-- /.box-header -->
@@ -58,16 +63,14 @@
                             <span class="username">{{$u->nick}}
                                 <span class="text-muted pull-center"> · {{$comment->created_at}}</span>
                                 @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)
-                                    <span class="text-muted"> ·  </span>
-                                    <a href="/song/{{$song->id}}/edit/{{$comment->id}}" class="btn btn-primary btn-xs">Editar</a>
-                                    <button data-toggle="modal" data-target="#delete_comment{{$comment->id}}" class="btn btn-danger btn-xs" >
-                                        Eliminar
-                                    </button>
+                                    <span class="text-muted"> · </span>
+                                    
+                                    <a class="btn btn-danger btn-xs pull-right" data-toggle="modal" data-target="#delete_comment{{$comment->id}}" >Eliminar</a>
                                     <div class="modal modal-danger fade" id="delete_comment{{$comment->id}}">
                                         <form method="POST" action="{{action('CommentController@delete')}}">
                                             <input type="hidden" name="_method" value="DELETE"></input>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                            <input type="hidden" name="comment" value="{{$comment->id}}">
+                                            <input type="hidden" name="comentario" value="{{$comment->id}}">
                                             <div class="modal-dialog" align="center">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -87,6 +90,35 @@
                                                 </div>
                                             </div>
                                         </form>                            
+                                    </div>
+
+                                    <span class="pull-right">&nbsp;</span>
+
+                                    <a class="btn btn-warning btn-xs pull-right" data-toggle="modal" data-target="#edit_comment{{$comment->id}}">Editar</a>
+                                    <div class="modal modal-default fade" id="edit_comment{{$comment->id}}">
+                                        <form method="POST" action="{{action('CommentController@edit')}}">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <input type="hidden" name="song" value="{{ $song->id }}"></input>
+                                            <input type="hidden" name="comment_id" value="{{ $comment->id }}"></input>
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" align="center">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <h4 class="modal-title">Editar comentario</h4>
+                                                    </div>
+                                                    <div class="modal-body" align="center">
+                                                        <textarea class="formcontrol" id="comentario" name="comentario" rows="5" cols="40">{{$comment->comment}}</textarea><br/>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 @endif
                             </span>

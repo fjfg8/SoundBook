@@ -26,12 +26,15 @@ class CommentController extends Controller
 
         $c->save();
 
-    return redirect()->action('SongsController@show',$request->song);
+        return redirect()->action('SongsController@show',$request->song);
     }
 
     public function edit(Request $request){
-        
-        $c = Comment::find($request->comment);
+        $this->validate($request,[
+            'comentario'=>'required',
+        ]);
+
+        $c = Comment::find($request->comment_id);
         $c->comment = $request->comentario;
         $c->save();
 

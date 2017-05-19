@@ -31,23 +31,19 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::post('/change','UsersController@changePass');
     //Route::post('/song/{id}','SongsController@show');
+    Route::put('/uploadSong','SongsController@create');    
     Route::post('/song','SongsController@like');
+    Route::put('editSong','SongsController@edit');
+    Route::delete('/user','SongsController@delete');
 
     Route::put('/song','CommentController@like');
     Route::delete('/song','CommentController@delete');
-    Route::delete('/user','SongsController@delete');
-
-    Route::put('editSong','SongsController@edit');
-
-    Route::get('/song/{id}/edit/{c}',function($id,$c){
-        return view('comment',array('song'=>$id,'comment'=>$c));
-    });
     Route::put('/edit','CommentController@edit');
     Route::post('comment/','CommentController@create');
 
+
     Route::get('/groups/{id}','GroupsController@show');
 
-    Route::put('/uploadSong','SongsController@create');
 
     Route::get('/listagrupos','GroupsController@showlista');
     
