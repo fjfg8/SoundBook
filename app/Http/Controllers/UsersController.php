@@ -14,11 +14,11 @@ class UsersController extends Controller
 {
 
     public function search(Request $request){
-
         $request->session()->put([
             'filtro'=>$request->filtro
         ]);
-         return redirect()->action('HomeController@index');
+
+        return redirect()->action('HomeController@index');
     }
 
     public function edit(Request $request){

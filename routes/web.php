@@ -22,11 +22,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/user','UsersController@search');
     Route::post('/change','UsersController@changePass');
     Route::post('/changeImage','UsersController@changeImage');
-    Route::put('/user','UsersController@edit');
-    Route::put('/visit','UsersController@follow');
-    Route::put('/searcher','UsersController@follow');
-    Route::delete('/vistit','UsersController@unfollow');
-    Route::delete('/searcher','UsersController@unfollow');
+    Route::put('/editUser','UsersController@edit');
+    Route::put('/follow','UsersController@follow');
+    Route::delete('/unfollow','UsersController@unfollow');
     
 
 
@@ -34,15 +32,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/song','SongsController@like');
     Route::post('/wall','SongsController@like');
     Route::put('/uploadSong','SongsController@create');    
-    Route::put('editSong','SongsController@edit');
-    Route::delete('/user','SongsController@delete');
+    Route::put('/editSong','SongsController@edit');
+    Route::delete('/deleteSong','SongsController@delete');
     
 
 
-    Route::post('comment/','CommentController@create');
-    Route::put('/song','CommentController@like');
-    Route::put('/edit','CommentController@edit');
-    Route::delete('/song','CommentController@delete');
+    Route::post('/comment','CommentController@create');
+    Route::put('/likeComment','CommentController@like');
+    Route::put('/editComment','CommentController@edit');
+    Route::delete('/deleteComment','CommentController@delete');
     
     
 
@@ -59,21 +57,20 @@ Route::group(['middleware' => 'auth'], function() {
 
 
     Route::get('/searcher','SearchController@show');
-    Route::post('/searcher','SearchController@search');
+    Route::post('/search','SearchController@search');
 
     
 
     Route::get('/wall','WallController@show');
     
-
     
 
     Route::get('/changeImage',function(){
-        return view('image');
+        return view('change_image');
     });
 
-    Route::get('/pass',function(){
-        return view('pass');
+    Route::get('/changePass',function(){
+        return view('change_pass');
     });
     
 
@@ -81,7 +78,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::group(['middleware' => 'admin'], function() {
     Route::get('/admin','UsersController@admin');
-    Route::delete('/admin','UsersController@delete');
+    Route::delete('/deleteUser','UsersController@delete');
 });
 
 

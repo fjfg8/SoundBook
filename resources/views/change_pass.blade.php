@@ -11,10 +11,10 @@
     </ul>
 @endif
 @if (Session::has('msg'))
-<div class="alert alert-info">{{ Session::get('msg') }}</div>
+    <div class="alert alert-info">{{ Session::get('msg') }}</div>
 @endif
 @if (Session::has('mess'))
-<div class="alert alert-info">{{ Session::get('mess') }}</div>
+    <div class="alert alert-info">{{ Session::get('mess') }}</div>
 @endif
 <div class="container" id="contraseña" align="center">
     <form method="POST" action="{{action('UsersController@changePass')}}" align="center">
