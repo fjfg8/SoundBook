@@ -2,15 +2,8 @@
 
 @section('content')
 
-    @if(sizeof($songs)<1)
-        <div class="alert alert-info">
-            <strong>No tienes ninguna canción</strong>
-        </div>
-    @endif
 
-    
-    @foreach($songs as $song)
-    
+@forelse($songs as $song)
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
@@ -63,8 +56,14 @@
             </div>
         </div>
     </div>
+
     <p style="color: #f4fcff; align: right">{{$i++}}</p>
-    @endforeach
+
+@empty
+    <div class="alert alert-info">
+        <strong>No tienes ninguna canción</strong>
+    </div>
+@endforelse
     
 
 @endsection
