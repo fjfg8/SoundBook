@@ -4,7 +4,7 @@
 
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
-        <h2 class="box-title with-border">Mi perfil</h2>
+        <h2 class="box-title with-border">Perfil de: {{$user->nick}}</h2>
         @if($bool == true)
             <form method="POST" action="{{action('UsersController@unfollow')}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>

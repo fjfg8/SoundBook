@@ -19,8 +19,32 @@ class SongsController extends Controller
         $types = Type::all();
         $comments = $song->comments()->orderby('created_at','desc')->paginate(5);
         $count = $song->comments()->count();
+        $users = User::all();
+        //proceso para controlar los likes y si ya le hemos dado like a la cancion
+        $likesSong = $song->users_likes()->count();
+        $likedSong = false;
+        if($song->users_likes()->where('user_id','=',Auth::user()->id)->count() == 1){
+            $likedSong = true;
+        }
+        ////////
+
+        //proceso para controlar los likes y si ya le hemos dado like a un comentario
+        $likesComm = array();
+        $likedComm = array();
+        $i=0;
+        foreach($comments as $c){
+            $likesComm[$i] = $c->users_likes()->count();
+            $aux = false;
+            if($c->users_likes()->where('user_id','=',Auth::user()->id)->count() == 1){
+                $aux = true;
+            }
+            $likedComm[$i] = $aux;
+            $i++;
+        }
+        ////////
         
-        return view('song',array('user' => $user,'song' => $song,'comments'=>$comments,'types'=>$types,'count'=>$count));
+        return view('song',array('user' => $user,'song' => $song,'comments'=>$comments,'types'=>$types,'count'=>$count,'users'=>$users,
+         'likesSong'=>$likesSong, 'likedSong'=>$likedSong,'likesComm'=>$likesComm,'likedComm'=>$likedComm,'i'=>0));
     }
 
     public function create(Request $request){
@@ -96,9 +120,10 @@ class SongsController extends Controller
 
     public function like(Request $request){
         $song = Song::find($request->id);
-        $song->likes = $song->likes + 1;
-
-        $song->save();
+        $user = User::find(Auth::user()->id);
+        //$song->likes = $song->likes + 1;
+        $song->users_likes()->attach($user->id);
+        //$song->save();
 
         return redirect()->back();
     }

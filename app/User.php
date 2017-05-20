@@ -53,4 +53,12 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User','user_user','user_id1','user_id2');
     }
 
+    public function songs_likes(){
+        return $this->belongsToMany('App\Song','song_user','song_id','user_id');
+    }
+
+    public function comments_likes(){
+        return $this->belongsToMany('App\Comment','comment_user','comment_id','user_id');
+    }
+
 }

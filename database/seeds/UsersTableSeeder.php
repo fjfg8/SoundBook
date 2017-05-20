@@ -21,10 +21,10 @@ class UsersTableSeeder extends Seeder
             'nick' => 'admin',
             'password' => bcrypt('admin'),
             'isAdmin' => true,
-            'gender' => '-',
-            'status' => '-',
-            'preferences' => '-'
-            
+            'gender' => 'Hombre',
+            'status' => 'Soltero/a',
+            'preferences' => 'Rap',
+            'image' => 'https://adminlte.io/themes/AdminLTE/dist/img/user1-128x128.jpg'
         ]);
 
         DB::table('users')->insert([
@@ -35,9 +35,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('jonay'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Soltero',
-            'preferences' => 'Rock'
-           
+            'status' => 'Casado/a',
+            'preferences' => 'Rock',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
         ]);
 
         DB::table('users')->insert([
@@ -48,9 +48,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('fran'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Soltero',
-            'preferences' => 'Rap'
-        
+            'status' => 'Soltero/a',
+            'preferences' => 'Rap',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
         ]);
 
          DB::table('users')->insert([
@@ -61,9 +61,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('raul'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Soltero',
-            'preferences' => 'Rap'
-            
+            'status' => 'Soltero/a',
+            'preferences' => 'Rap',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
         ]);
 
         DB::table('users')->insert([
@@ -74,9 +74,9 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('larry'),
             'isAdmin' => false,
             'gender' => 'Hombre',
-            'status' => 'Casado',
-            'preferences' => 'HipHop'
-            
+            'status' => 'Comprometido/a',
+            'preferences' => 'HipHop',
+            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
         ]);
     
 

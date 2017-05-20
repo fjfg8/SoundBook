@@ -26,15 +26,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         $id = Auth::user()->id;
         $user = User::find($id);
         $types = Type::all();
 
         $generos = [
-            "Chica" => "Chica",
-            "Chico" => "Chico",
+            "Mujer" => "Mujer",
+            "Hombre" => "Hombre",
+            "Prefiero no decirlo" => "Prefiero no decirlo",
+        ];
+
+        $estados = [
+            "Soltero/a" => "Soltero/a",
+            "Comprometido/a" => "Comprometido/a",
+            "Casado/a" => "Casado/a",
+            "Divorciado/a" => "Divorciado/a",
+            "Viudo/a" => "Viudo/a",
             "Prefiero no decirlo" => "Prefiero no decirlo",
         ];
 
@@ -44,17 +52,17 @@ class HomeController extends Controller
             "Artista" => "Artista",
         ];
 
+        $filtro = "Fecha";
+
         if(session()->has("filtro")){
             $filtro = session()->get('filtro'); 
-        }else{
-            $filtro = "Fecha";
         }
+
+        $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','asc')->paginate(4);
 
         if($filtro == "Titulo")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('title','asc')->paginate(4);
-
-        if($filtro == "Fecha")
-            $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','asc')->paginate(4);
+            
 
         if($filtro == "Artista")
             $songs = Song::select('*')->where('user_id','=',$id)->orderby('artist','asc')->paginate(4);
@@ -65,17 +73,24 @@ class HomeController extends Controller
 
         $follow = $this->follow(Auth::user()->id);
         $followers = $this->followers(Auth::user()->id);
-        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers, 'types'=>$types, 'generos'=>$generos, 'filters'=>$filters));
+        
+        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers, 
+            'types'=>$types, 'generos'=>$generos, 'filters'=>$filters, 'estados'=>$estados));
     }
 
     public function visitProfile($id){
-        $user = User::find($id);
-        $songs = $user->songs()->paginate(4);
-        $follow = $this->follow($user->id);
-        $followers = $this->followers($user->id);
-        $bool = $this->followProfile($user->id);
+        if(Auth::user()->id != $id){
+            $user = User::find($id);
+            $songs = $user->songs()->paginate(4);
+            $follow = $this->follow($user->id);
+            $followers = $this->followers($user->id);
+            $bool = $this->followProfile($user->id);
 
-        return view('user',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers,'bool'=>$bool));
+            return view('user',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers,'bool'=>$bool));
+        }
+        else{
+            return redirect()->action('HomeController@index');
+        }
     }
 
     public function followProfile($id){
@@ -86,8 +101,6 @@ class HomeController extends Controller
             return false;
         }
     }
-
-
 
     public function follow($id){
         $res = DB::table('user_user')->where('user_id1','=',$id)->count();

@@ -36,22 +36,23 @@
                         <div class="panel-heading" style="background-color:#ef8300;color:#000000;">{{$busqueda[$i]->title}}</div>
                         <div class="panel-body" align="left" style="background-color:#ffe4c4;">
                             <label>Artista: {{$busqueda[$i]->artist}} </label><br/>
-                            <label>Duracion: {{$busqueda[$i]->duration}}</label>
+                            <label>Album: {{$busqueda[$i]->album}}</label>
                             <label> | Fecha: {{$busqueda[$i]->date}}</label>
-                            <a href="/song/{{$s->id}}" class="btn btn-default pull-right" style="padding-top: 5px;">Ver más</a>
+                            <a href="/song/{{$s->id}}" class="btn btn-primary pull-right" style="padding-top: 5px;">Ver más</a>
                         </div>  
                     </div>
                     @endif
                     @if($filtro=="usuario")
                     <div class="panel panel-default">
                         <div class="panel-body" align="left" style="background-color:#ffe4c4;">
+                            <img src="{{$busqueda[$i]->image}}" width="100" height="100"></img>
                             <label>Nick: {{$busqueda[$i]->nick}} </label><br/>
                             @if($followers[$i]==1)
                             <form method="POST" action="{{action('UsersController@unfollow')}}">
                             <input type="hidden" name="_method" value="DELETE"></input>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                             <input type="hidden" name="user" value="{{ $busqueda[$i]->id }}"></input>
-                                <button class="btn btn-default pull-right" type="submit">Unfollow</button>
+                                <button class="btn btn-primary pull-right" type="submit">Unfollow</button>
                             </form>
                             @endif
                             @if($followers[$i]==0)
@@ -59,7 +60,7 @@
                             <input type="hidden" name="_method" value="PUT"></input>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                             <input type="hidden" name="user" value="{{ $busqueda[$i]->id }}"></input>
-                                <button class="btn btn-default pull-right" type="submit">Follow</button>
+                                <button class="btn btn-primary pull-right" type="submit">Follow</button>
                             </form>
                             @endif
                             

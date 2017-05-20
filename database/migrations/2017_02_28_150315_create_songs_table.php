@@ -18,8 +18,7 @@ class CreateSongsTable extends Migration
             $table->string('title');
             $table->string('artist');
             $table->string('album');
-            $table->date('date'); 
-            $table->integer('likes');
+            $table->date('date');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('type_id')->unsigned();

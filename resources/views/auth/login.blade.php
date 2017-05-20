@@ -4,7 +4,8 @@
 
     <div class="login-box">
         <div class="login-logo">
-            <p href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Sound</b>Book') !!}</a>
+            <!-- <p href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Sound</b>Book') !!}</a>  -->
+            <img class="logo logo-dark" alt="Logo" src="logo.png">
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">

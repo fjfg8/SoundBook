@@ -20,7 +20,6 @@ class SongsTableSeeder extends Seeder
             'album'=> 'La Gozadera',
             'url' => "https://www.youtube.com/embed/VMp55KH_3wo",
             'date' => '2015-05-12',
-            'likes' => 0,
             'user_id' => 1,
             'type_id' => 4,
             'created_at'=>'2017-02-03'
@@ -32,7 +31,6 @@ class SongsTableSeeder extends Seeder
             'album' => 'Grandes exitos',
             'url' => "https://www.youtube.com/embed/477d0T1YuKE",
             'date' => '1978-02-17',
-            'likes' => 0,
             'user_id' => 1,
             'type_id' => 5,
             'created_at'=>'2017-02-01'
@@ -45,7 +43,6 @@ class SongsTableSeeder extends Seeder
             'album' => 'Especial OT',
             'url' => "https://www.youtube.com/embed/gra-sIV1n4U",
             'date' => '2002-03-06',
-            'likes' => 0,
             'user_id' => 2,
             'type_id' => 11,
             'created_at'=>'2017-02-02'

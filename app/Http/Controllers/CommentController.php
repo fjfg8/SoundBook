@@ -12,24 +12,30 @@ class CommentController extends Controller
 {
 
     public function create(Request $request){
-        
+        $this->validate($request,[
+            'comentario'=>'required',
+        ]);
+
         $song = Song::find($request->song);
         $user = User::find(Auth::user()->id);
         $c = new Comment();
-        $c->comment = $request->descripcion;
+        $c->comment = $request->comentario;
         $c->likes = 0;
         $c->user()->associate($user);
         $c->song()->associate($song);
 
         $c->save();
 
-    return redirect()->action('SongsController@show',$request->song);
+        return redirect()->action('SongsController@show',$request->song);
     }
 
     public function edit(Request $request){
-        
-        $c = Comment::find($request->comment);
-        $c->comment = $request->descripcion;
+        $this->validate($request,[
+            'comentario'=>'required',
+        ]);
+
+        $c = Comment::find($request->comment_id);
+        $c->comment = $request->comentario;
         $c->save();
 
         return redirect()->action('SongsController@show',$request->song);
@@ -38,9 +44,11 @@ class CommentController extends Controller
     public function like(Request $request){
      
      $c = Comment::findOrFail($request->comment);
-
-     $c->likes = $c->likes + 1;
-     $c->save();
+     $user = User::find(Auth::user()->id);
+    
+    //$c->likes = $c->likes + 1;
+     //$c->save();
+     $c->users_likes()->attach($user->id);
 
      return redirect()->action('SongsController@show',$request->song);
 

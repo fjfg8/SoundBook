@@ -14,24 +14,23 @@ class UsersController extends Controller
 {
 
     public function search(Request $request){
-
         $request->session()->put([
             'filtro'=>$request->filtro
         ]);
-         return redirect()->action('HomeController@index');
+
+        return redirect()->action('HomeController@index');
     }
 
     public function edit(Request $request){
         $user = User::findOrFail($request->id);
 
+        $this->validate($request,[
+            'nick'=>'unique:users',
+            'email'=>'unique:users',
+        ]);
+
         if($request->has('nick')){
-            $existe = User::where('nick','=',$request->nick)->count();
-            if($existe == 0){
-                $user->nick = $request->nick;
-            }else{
-                Session::flash('error_nick', 'Ese nick ya existe');
-                return redirect()->back();
-            }
+            $user->nick = $request->nick;
         }
 
         if($request->has('name')){
@@ -39,13 +38,7 @@ class UsersController extends Controller
         }
 
         if($request->has('email')){
-            $existe = User::where('email','=',$request->email)->count();
-            if($existe == 0){
-                $user->email = $request->email;
-            }else{
-                Session::flash('error_email', 'Ese email ya existe');
-                return redirect()->back();
-            }
+            $user->email = $request->email;
         }
 
         if($request->has('gender')){
@@ -77,15 +70,15 @@ class UsersController extends Controller
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        if($user->password != $request->old ){
+        if($user->password != bcrypt($request->old)){
             return redirect()->back()->with('msg', 'Contraseña antigua mal introducida');
         }
 
-        if($request->new != $request->copy){
+        if($request->new != bcrypt($request->copy)){
             return redirect()->back()->with('mess', 'Las contraseñas son distintas');
         }
 
-        $user->password = $request->new;
+        $user->password = bcrypt($request->new);
         $user->save();
 
         $request->session()->put([
@@ -101,8 +94,22 @@ class UsersController extends Controller
     }*/
 
     public function admin(){
-        $users = User::select('*')->paginate(6);
-        return view('admin',array('users' => $users));
+        $users = User::select('*')->paginate(4);
+        $generos = [
+            "Mujer" => "Mujer",
+            "Hombre" => "Hombre",
+            "Prefiero no decirlo" => "Prefiero no decirlo",
+        ];
+        $estados = [
+            "Soltero/a" => "Soltero/a",
+            "Comprometido/a" => "Comprometido/a",
+            "Casado/a" => "Casado/a",
+            "Divorciado/a" => "Divorciado/a",
+            "Viudo/a" => "Viudo/a",
+            "Prefiero no decirlo" => "Prefiero no decirlo",
+        ];
+
+        return view('admin',array('users' => $users,'generos'=>$generos,'estados'=>$estados));
     }
 
     public function delete(Request $request){
@@ -118,8 +125,8 @@ class UsersController extends Controller
 
         $user1->users()->attach($user2->id);
 
-        return redirect()->action('HomeController@index');
-
+        //return redirect()->action('HomeController@index');
+        return redirect()->back();
     }
 
     public function unfollow(Request $request){
@@ -130,8 +137,17 @@ class UsersController extends Controller
 
         $result->delete();
 
-        return redirect()->action('HomeController@index');
+        //return redirect()->action('HomeController@index');
+        return redirect()->back();
+    }
 
+    public function changeImage(Request $request){
+        $user = User::find(Auth::user()->id);
+
+        $user->image = $request->new;
+        $user->save();
+
+        return redirect()->action('HomeController@index');
     }
 
 

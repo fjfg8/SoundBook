@@ -125,12 +125,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Cambiar contraseña',
-                    'url'  => 'pass',
+                    'url'  => 'changePass',
                     'icon' => 'lock',
                 ],
                 [
                     'text' => 'Cambiar imagen perfil',
-                    'url'  => '#',
+                    'url'  => 'changeImage',
                     'icon' => 'photo',
                 ],
             ],
