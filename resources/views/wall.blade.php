@@ -55,7 +55,7 @@
                     
                 </div>
             </div>
-        </div><p style="color: #f4fcff; align: right">{{$i++}}</p>
+        </div><p style="display: none">{{$i++}}</p>
     </div>
 
 @empty

@@ -148,7 +148,7 @@
                         <text class="pull-right" style="color:#3a7cff">{{$likesComm[$i]}}
                             <i class="fa fa-thumbs-o-up " aria-hidden="true" style="color:#3a7cff"></i>
                         </text> 
-                        <text style="color: #f4fcff; align: right">{{$i++}} </text>
+                        <text style="display: none">{{$i++}} </text>
                     </form>
                     
                 </div>   
