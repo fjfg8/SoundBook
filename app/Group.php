@@ -16,5 +16,9 @@ class Group extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function type(){
+        return $this->belongsTo('App\Type');
+    }
+
     
 }

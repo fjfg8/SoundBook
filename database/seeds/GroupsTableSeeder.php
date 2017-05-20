@@ -33,5 +33,12 @@ class GroupsTableSeeder extends Seeder
             'musicStyle' => 'Tropical',
             'description' => 'ritmos caribeños y mojitos al sol'
         ]);
+
+        DB::table('groups')->insert([
+            
+            'name' => 'otro',
+            'musicStyle' => 'Tropical',
+            'description' => 'ritmos caribeños sol'
+        ]);
     }
 }
