@@ -16,6 +16,21 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('principal.index');
 });
+Route::get('/index',function(){
+    return view('principal.index');
+});
+Route::get('/features',function(){
+    return view('principal.features');
+});
+Route::get('/testimonials',function(){
+    return view('principal.testimonials');
+});
+Route::get('/blog',function(){
+    return view('principal.blog');
+});
+Route::get('/contact',function(){
+    return view('principal.contact');
+});
 
 Route::group(['middleware' => 'auth'], function() {
 
