@@ -43,10 +43,14 @@
                     <form method="POST" action="{{action('SongsController@like')}}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                         <input type="hidden" name="id" value="{{ $song->id }}"></input>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-thumbs-o-up"></i> Me gusta
-                        </button>
-                        <span class="text-muted">&nbsp&nbsp{{$song->likes}} me gustas</span>
+                        @if($liked[$i] == false)
+                            <button type="submit" class="btn btn-primary btn-xs">
+                                <i class="fa fa-thumbs-o-up"></i> Me gusta
+                            </button>
+                        @else
+                            <label>Ya te gusta</label>
+                        @endif
+                        <span class="text-muted">&nbsp&nbsp{{$likes[$i]}} me gustas</span>
                     </form>
                     
                 </div>

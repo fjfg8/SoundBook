@@ -49,10 +49,14 @@
             <form method="POST" action="{{action('SongsController@like')}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" name="id" value="{{ $song->id }}"></input>
-                <button type="submit" class="btn btn-primary btn-xs">
-                    <i class="fa fa-thumbs-o-up"></i> Me gusta
-                </button>
-                <span class="pull-right text-muted">{{$song->likes}} me gustas - {{$count}} comentarios</span>
+                @if($likedSong == false)
+                    <button type="submit" class="btn btn-primary btn-xs">
+                        <i class="fa fa-thumbs-o-up"></i> Me gusta
+                    </button>
+                @else
+                    <label>Ya te gusta</label>
+                @endif
+                <span class="pull-right text-muted">{{$likesSong}} me gustas - {{$count}} comentarios</span>
             </form>
         </div>
         <div class="box-footer box-comments">
@@ -134,15 +138,20 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                         <input type="hidden" name="comment" value="{{ $comment->id }}"></input>
                         <input type="hidden" name="song" value="{{ $song->id }}"></input>
-                        <button type="submit" class="btn btn-xs" style="color:#3a7cff;background:none;">
-                            Me gusta
-                        </button>
-                        
-                        <text class="pull-right" style="color:#3a7cff">{{$comment->likes}}
+                        @if($likedComm[$i] == false)
+                            <button type="submit" class="btn btn-xs" style="color:#3a7cff;background:none;">
+                                Me gusta
+                            </button>
+                        @else
+                            <label>Ya te gusta</label>
+                        @endif
+                        <text class="pull-right" style="color:#3a7cff">{{$likesComm[$i]}}
                             <i class="fa fa-thumbs-o-up " aria-hidden="true" style="color:#3a7cff"></i>
-                        </text>  
+                        </text> 
+                        <text style="color: #f4fcff; align: right">{{$i++}} </text>
                     </form>
-                </div>
+                    
+                </div>   
             @empty
                 <div class="alert alert-info">
                     <strong>No hay comentarios</strong>

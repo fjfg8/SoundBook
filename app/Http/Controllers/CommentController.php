@@ -44,9 +44,11 @@ class CommentController extends Controller
     public function like(Request $request){
      
      $c = Comment::findOrFail($request->comment);
-
-     $c->likes = $c->likes + 1;
-     $c->save();
+     $user = User::find(Auth::user()->id);
+    
+    //$c->likes = $c->likes + 1;
+     //$c->save();
+     $c->users_likes()->attach($user->id);
 
      return redirect()->action('SongsController@show',$request->song);
 

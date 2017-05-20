@@ -32,5 +32,8 @@ class Song extends Model
     public function type(){
         return $this->belongsTo('App\Type');
     }
+    public function users_likes(){
+        return $this->belongsToMany('App\User','song_user','song_id','user_id');
+    }
 
 }
