@@ -22,7 +22,9 @@
             <div class="col-md-2">
                 <select form="buscador" class="styled-select" name="filtro">
                     <option value="cancion">Canción</option> 
-                    <option value="usuario">Usuario</option>    
+                    <option value="usuario">Usuario</option>  
+                    <option value="album">Album</option>  
+                    <option value="grupo">Grupo</option>
                 </select>
             </div>
         </div>
@@ -36,7 +38,21 @@
                         @endif
                         @for($i=0;$i<sizeof($busqueda);$i++)
 
-                            @if($filtro=="cancion")
+                            @if($filtro=="grupo")
+                            <div class="box-body" style="background-color:#ffe4c4;">
+                                <div class="col-md-4" align="center">
+                                    <img class="img-circle" width="50" height="50" src="http://icon-icons.com/icons2/67/PNG/512/group_users_13234.png">
+                                    <h3>{{$busqueda[$i]->name}} </h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{$busqueda[$i]->description}}</p></br>
+                                    <label>{{$type[$i]->type}}</label>
+                                     <a href="/groups/{{$busqueda[$i]->id}}" class="btn btn-primary pull-right" style="padding-top: 5px;">Ver más</a>
+                                </div>
+                                  
+                            </div>
+                            @endif
+                            @if($filtro=="cancion" || $filtro=="album")
                             <div class="box-body" style="background-color:#ffe4c4;">
                         
                                 <div class="col-md-2" align="center">
@@ -46,7 +62,8 @@
                                 <div class="col-md-8">
                                     <h2 class="box-title with-border">{{$busqueda[$i]->title}}</h2>
                                     <label>Artista: {{$busqueda[$i]->artist}} </label><br/>
-                                    <label>Fecha: {{$busqueda[$i]->date}}</label></br>
+                                    <label>Album: {{$busqueda[$i]->album}}</label></br>
+                                    <label>Genero: {{$type[$i]->type}}</label>
                                 </div>
                                 <a href="/song/{{$busqueda[$i]->id}}" class="btn btn-primary pull-right" style="padding-top: 5px;">Ver más</a>
                             

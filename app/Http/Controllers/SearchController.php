@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Song;
 use App\User;
+use App\Type;
 
 class SearchController extends Controller
 {
@@ -20,18 +21,39 @@ class SearchController extends Controller
     }
 
     public function search(Request $request){
+        $result=array();
         $follow = array();
         $users = array();
+        $type = array();
+
+        if($request->filtro=="grupo"){
+            $result = DB::table('groups')->where('name','like','%'.$request->busqueda.'%')->paginate(3);
+            $i=0;
+            foreach($result as $r){
+                $type[$i] = Type::find($r->type_id);
+                $i++;
+            }
+        }
         if($request->filtro=="cancion"){
-            $result = DB::table('songs')->where('title','=',$request->busqueda)->paginate(3);
+            $result = DB::table('songs')->where('title','like','%'.$request->busqueda.'%')->paginate(3);
             $i=0;
             foreach($result as $r){
                 $users[$i] = User::find($r->user_id);
+                $type[$i] = Type::find($r->type_id);
+                $i++;
+            }
+        }
+        if($request->filtro=="album"){
+            $result = DB::table('songs')->where('album','like','%'.$request->busqueda.'%')->paginate(3);
+            $i=0;
+            foreach($result as $r){
+                $users[$i] = User::find($r->user_id);
+                $type[$i] = Type::find($r->type_id);
                 $i++;
             }
         }
         if($request->filtro=="usuario"){
-            $result = DB::table('users')->where('nick','=',$request->busqueda)->paginate(3);
+            $result = DB::table('users')->where('nick','like','%'.$request->busqueda.'%')->paginate(3);
             
             for($i=0;$i<sizeof($result);$i++){
                 $bool = $this->followers($result[$i]->id);
@@ -43,7 +65,7 @@ class SearchController extends Controller
             }
         }
 
-        return view('searcher',array('busqueda'=>$result,'filtro'=>$request->filtro,'followers'=>$follow,'users'=>$users));
+        return view('searcher',array('busqueda'=>$result,'filtro'=>$request->filtro,'followers'=>$follow,'users'=>$users,'type'=>$type));
     }
 
     public function followers($user){
