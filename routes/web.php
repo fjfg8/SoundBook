@@ -22,7 +22,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/visit/{id}','HomeController@visitProfile');
     Route::delete('/visit','UsersController@unfollow');
     Route::put('/visit','UsersController@follow');
-
     Route::post('user/','UsersController@search');
     Route::put('user/','UsersController@edit');
     Route::get('/pass',function(){
