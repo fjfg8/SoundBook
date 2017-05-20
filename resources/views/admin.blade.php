@@ -114,7 +114,7 @@
                                                                     <div class="input-group-addon">
                                                                         <i class="fa fa-thumbs-up"></i>
                                                                     </div>
-                                                                    <input id="preferences" name="preferences" type="text" class="form-control" placeholder="{{$user->status}}">
+                                                                    <input id="preferences" name="preferences" type="text" class="form-control" placeholder="{{$user->preferences}}">
                                                                 </div>
                                                             </div>
                                                         </div>
