@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Route::get('/', function () {
-    return redirect('/index.html');
+    return view('principal.index');
 });
 
 Route::group(['middleware' => 'auth'], function() {
