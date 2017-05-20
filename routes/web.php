@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('principal.index');
 });
+Route::get('/logout', function () {
+    Session::flush();
+    return redirect('/');
+});
+
 
 Route::group(['middleware' => 'auth'], function() {
 
