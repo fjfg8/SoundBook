@@ -1,5 +1,5 @@
 
-@extends('principal::master')
+@extends('principal.master')
 
 
 @section('body')
