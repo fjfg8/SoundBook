@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function() {
 
+
     Route::post('/user','UsersController@search');
     Route::post('/change','UsersController@changePass');
     Route::post('/changeImage','UsersController@changeImage');
@@ -34,6 +35,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/uploadSong','SongsController@create');    
     Route::put('/editSong','SongsController@edit');
     Route::delete('/deleteSong','SongsController@delete');
+    Route::put('/uploadSong','SongsController@create');
     
 
 
@@ -46,7 +48,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/groups/{id}','GroupsController@show');
     Route::get('/listagrupos','GroupsController@showlista');
-
+    Route::get('/allGroups','GroupsController@showAll');
+    Route::get('/listagrupos','GroupsController@showlista');
+    Route::put('/createGroup','GroupsController@create');
 
     
     Route::get('/home', 'HomeController@index');

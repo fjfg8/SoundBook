@@ -22,20 +22,20 @@ class GroupUserTableSeeder extends Seeder
         ]);
         DB::table('group_user')->insert([
             
-            'user_id' => '4',
+            'user_id' => '3',
             'group_id' => '3',
         
         ]);
         DB::table('group_user')->insert([
             
-            'user_id' => '4',
+            'user_id' => '1',
             'group_id' => '2',
         
         ]);
         DB::table('group_user')->insert([
             
-            'user_id' => '4',
-            'group_id' => '1',
+            'user_id' => '1',
+            'group_id' => '4',
         
         ]);
     }

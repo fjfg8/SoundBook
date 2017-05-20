@@ -16,8 +16,9 @@ class CreateGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('musicStyle');
             $table->string('description');
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade')->onUpdate('cascade'); 
 
             $table->timestamps();
         });
