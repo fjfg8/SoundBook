@@ -38,7 +38,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="box-footer">
+                <div class="box-footer" style="background: #f4fcff;">
                     <a href="/song/{{$song->id}}" class="btn btn-primary pull-right" style="padding-top: 5px;">Ver más</a>
                     <form method="POST" action="{{action('SongsController@like')}}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>

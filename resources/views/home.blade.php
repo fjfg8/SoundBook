@@ -20,9 +20,9 @@
 @endif
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="box box-widget widget-user">
             <div class="widget-user-header bg-aqua-active">
                 <a class="btn btn-warning pull-right" data-toggle="modal" data-target="#edit_user">Editar perfil</a>  

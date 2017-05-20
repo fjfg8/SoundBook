@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Song;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
 use Session;
 
 class UsersController extends Controller
@@ -70,11 +71,11 @@ class UsersController extends Controller
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        if($user->password != bcrypt($request->old)){
-            return redirect()->back()->with('msg', 'Contraseña antigua mal introducida');
+        if(Hash::check($request->password, $user->password)){
+            return redirect()->back()->with('msg', 'La contraseña guardada no coincide con la introducida');
         }
 
-        if($request->new != bcrypt($request->copy)){
+        if($request->new != $request->copy){
             return redirect()->back()->with('mess', 'Las contraseñas son distintas');
         }
 
