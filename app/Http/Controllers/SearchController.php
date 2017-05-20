@@ -21,8 +21,14 @@ class SearchController extends Controller
 
     public function search(Request $request){
         $follow = array();
+        $users = array();
         if($request->filtro=="cancion"){
             $result = DB::table('songs')->where('title','=',$request->busqueda)->paginate(3);
+            $i=0;
+            foreach($result as $r){
+                $users[$i] = User::find($r->user_id);
+                $i++;
+            }
         }
         if($request->filtro=="usuario"){
             $result = DB::table('users')->where('nick','=',$request->busqueda)->paginate(3);
@@ -37,7 +43,7 @@ class SearchController extends Controller
             }
         }
 
-        return view('searcher',array('busqueda'=>$result,'filtro'=>$request->filtro,'followers'=>$follow));
+        return view('searcher',array('busqueda'=>$result,'filtro'=>$request->filtro,'followers'=>$follow,'users'=>$users));
     }
 
     public function followers($user){
