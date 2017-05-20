@@ -17,27 +17,27 @@ class GroupsTableSeeder extends Seeder
         DB::table('groups')->insert([
             
             'name' => 'Los Angeles del Infierno',
-            'musicStyle' => 'Rock',
+            'type_id' => 7,
             'description' => 'Para los amantes der rock duro y las motos'
         
         ]);
         DB::table('groups')->insert([
             
             'name' => 'La ruta del bakalao',
-            'musicStyle' => 'Techno',
+            'type_id' => 1,
             'description' => 'Viva la fiesta'
         ]);
         DB::table('groups')->insert([
             
             'name' => 'Salsaludos',
-            'musicStyle' => 'Tropical',
+            'type_id' => 4,
             'description' => 'ritmos caribeños y mojitos al sol'
         ]);
 
         DB::table('groups')->insert([
             
             'name' => 'otro',
-            'musicStyle' => 'Tropical',
+            'type_id' => 11,
             'description' => 'ritmos caribeños sol'
         ]);
     }
