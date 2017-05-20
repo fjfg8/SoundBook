@@ -36,9 +36,6 @@
                                 <label>{{$t->type}} </label><br/>
                             @endif
                         @endforeach
-                        <label>Album: {{$song->album}}</label><br/>
-                        <label>Fecha: {{$song->date}}</label></br>
-                        <label>Url: </label> <a href="{{$song->url}}">{{$song->url}}</a>
                     </div>
                 </div>
                 <div class="box-footer">
@@ -49,7 +46,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-thumbs-o-up"></i> Me gusta
                         </button>
-                        <span class="text-muted">{{$song->likes}} me gustas</span>
+                        <span class="text-muted">&nbsp&nbsp{{$song->likes}} me gustas</span>
                     </form>
                     
                 </div>

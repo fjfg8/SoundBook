@@ -21,9 +21,9 @@ class UsersTableSeeder extends Seeder
             'nick' => 'admin',
             'password' => bcrypt('admin'),
             'isAdmin' => true,
-            'gender' => '-',
-            'status' => '-',
-            'preferences' => '-',
+            'gender' => 'Hombre',
+            'status' => 'Soltero/a',
+            'preferences' => 'Rap',
             'image' => 'https://adminlte.io/themes/AdminLTE/dist/img/user1-128x128.jpg'
         ]);
 

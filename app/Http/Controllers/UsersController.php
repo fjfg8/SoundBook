@@ -24,14 +24,13 @@ class UsersController extends Controller
     public function edit(Request $request){
         $user = User::findOrFail($request->id);
 
+        $this->validate($request,[
+            'nick'=>'unique:users',
+            'email'=>'unique:users',
+        ]);
+
         if($request->has('nick')){
-            $existe = User::where('nick','=',$request->nick)->count();
-            if($existe == 0){
-                $user->nick = $request->nick;
-            }else{
-                Session::flash('error_nick', 'Ese nick ya existe');
-                return redirect()->back();
-            }
+            $user->nick = $request->nick;
         }
 
         if($request->has('name')){
@@ -39,13 +38,7 @@ class UsersController extends Controller
         }
 
         if($request->has('email')){
-            $existe = User::where('email','=',$request->email)->count();
-            if($existe == 0){
-                $user->email = $request->email;
-            }else{
-                Session::flash('error_email', 'Ese email ya existe');
-                return redirect()->back();
-            }
+            $user->email = $request->email;
         }
 
         if($request->has('gender')){
