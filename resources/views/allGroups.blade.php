@@ -4,22 +4,29 @@
 
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
-        <h3 class="box-title with-border"><strong>Grupos</strong></h3>
         <a href="/listagrupos" class="btn btn-primary pull-right" style="margin:20px">Mis Grupos</a>
+        <h3><strong>Grupos</strong></h3>
     </div>
     <div class="box-body">
          @forelse($all as $one)
             <div class="box-header with-border" >
-                <div class="box-title with-border"><strong>{{$one->name}}</strong></div>
-                <div class="box-header" align="left">
+                <h3 class="box-title with-border"><strong>{{$one->name}}</strong></h3>
+                @if($groups->find($one->id))
+                <a href="/groups/{{$one->id}}" class="btn btn-primary pull-right" style="margin:10px">Acceder</a> 
+                @endif
+                <div class="box-body" align="left">
                     @foreach($types as $t)
                         @if($one->type_id == $t->id)
                             <label>{{$t->type}}</label></br>
                         @endif
                     @endforeach
                     @if($groups->find($one->id))
-                        <a href="/groups/{{$one->id}}" class="btn btn-primary pull-right">Acceder</a>
-                        <button type="button" class="btn btn-primary pull-right disabled">Subscrito</button>
+                        <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
+                            <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="group" value="{{ $one->id }}"></input>
+                            <button class="btn btn-primary pull-right" type="submit">Cancelar Subscripción</button>
+                        </form>
                     @else
                         <form method="POST" action="{{action('GroupsController@subscribe')}}">
                             <input type="hidden" name="_method" value="PUT"></input>
@@ -37,7 +44,7 @@
                 <strong>No hay grupos creados. Se el primero en crear un grupo</strong>
             </div>
         @endforelse
-        <div class="box-header with-border" >
+        <div class="box-footer with-border" align="center">
             {{ $all->links() }}
             <a class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#create_group" style="margin:10px">Crear Grupo</a>
         </div>
