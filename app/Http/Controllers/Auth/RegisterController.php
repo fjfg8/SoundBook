@@ -64,10 +64,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'nick' => $data['nick'],
             'name' => $data['name'],
             'email' => $data['email'],
-            'nick' => $data['nick'],
             'password' => bcrypt($data['password']),
+            'isAdmin' => false,
+            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg',
         ]);
     }
 }
