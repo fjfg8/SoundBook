@@ -18,7 +18,7 @@
                 <h2 class="box-title with-border">Cambia la contraseña</h2>
             </div>
             <div class="box-body">
-                <form method="POST" action="{{action('UsersController@changePass')}}" align="center">
+                <form method="POST" action="{{action('UsersController@changePass')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                     <div class="row">
                         <div class="col-md-2">
