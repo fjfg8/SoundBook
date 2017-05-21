@@ -5,19 +5,18 @@
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
         <h3 class="box-title with-border"><strong>Grupos</strong></h3>
-        <a href="/listagrupos" class="btn btn-primary pull-right">Mis Grupos</a>
+        <a href="/listagrupos" class="btn btn-primary pull-right" style="margin:20px">Mis Grupos</a>
     </div>
     <div class="box-body">
          @forelse($all as $one)
             <div class="box-header with-border" >
                 <div class="box-title with-border"><strong>{{$one->name}}</strong></div>
-                <div class="box-body" align="left">
+                <div class="box-header" align="left">
                     @foreach($types as $t)
                         @if($one->type_id == $t->id)
                             <label>{{$t->type}}</label></br>
                         @endif
                     @endforeach
-                    <text style="text-align: right;">{{$one->description}}</text>
                     <a href="/groups/{{$one->id}}" class="btn btn-primary pull-right">Subscribirse</a>
                             
                 </div> 
@@ -31,7 +30,7 @@
         @endforelse
         <div class="box-header with-border" >
             {{ $all->links() }}
-            <a class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#create_group" style="margin:15px">Crear Grupo</a>
+            <a class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#create_group" style="margin:10px">Crear Grupo</a>
         </div>
     </div>
 </div>

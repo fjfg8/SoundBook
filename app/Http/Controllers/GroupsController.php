@@ -12,7 +12,9 @@ class GroupsController extends Controller {
 
 public function show($id){
         $group = Group::findorFail($id);
-        return view('group', array('group'=>$group));
+        $type = Type::where('id','=',$group->type_id)->first();
+        $members = $group->users()->count();
+        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members));
     }
 
 
