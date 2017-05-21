@@ -12,7 +12,9 @@ class GroupsController extends Controller {
 
 public function show($id){
         $group = Group::findorFail($id);
-        return view('group', array('group'=>$group));
+        $type = Type::where('id','=',$group->type_id)->first();
+        $members = $group->users()->count();
+        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members));
     }
 
 
@@ -26,9 +28,11 @@ public function showlista() {
 
 public function showAll() {
 
-        $groups = DB::table('groups')->paginate(3);
-
-        return view('allGroups', array('all'=>$groups));
+        $user = User::find(Auth::user()->id);
+        $all = DB::table('groups')->paginate(3);
+        $groups = $user->groups()->get();
+        $type = Type::all();
+        return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups));
 }
 
 
@@ -52,5 +56,21 @@ public function create(Request $request) {
         //$group->save();
 
         return redirect()->action('GroupsController@showlista');
+    }
+
+public function subscribe(Request $request) {
+
+        $user = User::find(Auth::user()->id);
+        $user->groups()->attach($request->group);
+
+        return redirect()->action('GroupsController@showAll');
+    }
+
+public function members($id) {
+
+        $group = Group::findorFail($id);
+        $users = $group->users()->paginate(3);
+
+        return view('members', array('users'=>$users));
     }
 }

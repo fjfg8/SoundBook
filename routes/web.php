@@ -69,8 +69,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/groups/{id}','GroupsController@show');
     Route::get('/listagrupos','GroupsController@showlista');
     Route::get('/allGroups','GroupsController@showAll');
-    Route::get('/listagrupos','GroupsController@showlista');
     Route::put('/createGroup','GroupsController@create');
+    Route::get('/members/{id}','GroupsController@members');
+    Route::put('/subscribe','GroupsController@subscribe');
 
     
     Route::get('/home', 'HomeController@index');

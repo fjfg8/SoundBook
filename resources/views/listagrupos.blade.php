@@ -5,15 +5,18 @@
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
         <h3 class="box-title with-border"><strong>Mis Grupos</strong></h3>
-        <a href="/allGroups" class="btn btn-primary pull-right">Ver todos</a>
+        <a href="/allGroups" class="btn btn-primary pull-right" style="margin:20px">Ver todos</a>
     </div>
     <div class="box-body">
          @forelse($lista as $list)
             <div class="box-header with-border" >
                 <div class="box-title with-border"><strong>{{$list->name}}</strong></div>
                 <div class="box-body" align="left">
-                    <label>{{$list->musicStyle}}</label><br/>
-                    <text style="text-align: right;">{{$list->description}}</text>
+                    @foreach($types as $t)
+                        @if($list->type_id == $t->id)
+                            <label>{{$t->type}}</label></br>
+                        @endif
+                    @endforeach
                     <a href="/groups/{{$list->id}}" class="btn btn-primary pull-right">Acceder</a>
                             
                 </div> 
@@ -27,7 +30,7 @@
         @endforelse
         <div class="box-header with-border" >
             {{ $lista->links() }}
-            <a class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#create_group" style="margin:15px">Crear Grupo</a>
+            <a class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#create_group" style="margin:10px">Crear Grupo</a>
         </div>
     </div>
 </div>
