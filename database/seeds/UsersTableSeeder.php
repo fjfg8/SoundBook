@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Casado/a',
             'preferences' => 'Rock',
-            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
+            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
         ]);
 
         DB::table('users')->insert([
@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero/a',
             'preferences' => 'Rap',
-            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
+            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
         ]);
 
          DB::table('users')->insert([
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero/a',
             'preferences' => 'Rap',
-            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
+            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
         ]);
 
         DB::table('users')->insert([
@@ -76,7 +76,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Comprometido/a',
             'preferences' => 'HipHop',
-            'image' => 'http://xacatolicos.com/app/images/icon-user.png'
+            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
         ]);
     
 
