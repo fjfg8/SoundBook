@@ -147,7 +147,11 @@ class UsersController extends Controller
     public function changeImage(Request $request){
         $user = User::find(Auth::user()->id);
 
-        $user->image = $request->new;
+        $this->validate($request,[
+            'Imagen' => 'required'
+        ]);
+
+        $user->image = $request->Imagen;
         $user->save();
 
         return redirect()->action('HomeController@index');
