@@ -26,8 +26,10 @@ class UsersController extends Controller
         $user = User::findOrFail($request->id);
 
         $this->validate($request,[
-            'nick'=>'unique:users',
-            'email'=>'unique:users',
+            'nick'=>'unique:users|max:20',
+            'name' => 'max:30',
+            'email'=>'unique:users|max:50',
+            'preferences' => 'max:100',
         ]);
 
         if($request->has('nick')){
