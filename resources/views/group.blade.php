@@ -33,7 +33,18 @@
         <h6 class="box-title with-border"><strong>PUBLICACIONES</strong></h6>
     </div>
     <div class="box-body">
-
+        @forelse($publications as $publi)
+            <div class="box-header with-border" >
+                <div class="box-title with-border"><strong>{{$publi->title}}</strong></div>
+                <div class="box-header" align="left">{{$publi->description}}</div>
+                
+            </div>
+            @empty
+            <div class="alert alert-info">
+                <strong>Este grupo no contiene ninguna publicacion</strong>
+            </div>
+        @endforelse
+        {{ $publications->links() }}
     </div>
 </div>
 

@@ -29,7 +29,7 @@ class GroupUserTableSeeder extends Seeder
         DB::table('group_user')->insert([
             
             'user_id' => '1',
-            'group_id' => '1',
+            'group_id' => '2',
         
         ]);
         DB::table('group_user')->insert([
