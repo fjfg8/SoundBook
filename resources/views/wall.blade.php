@@ -61,6 +61,96 @@
 @empty
     <div class="alert alert-info">
         <strong>No tienes ninguna canción</strong>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+        <a class="btn btn-primary" data-toggle="modal" data-target="#upload_song">¡Sube una ahora!</a>
+    </div>
+    <div class="modal modal-default fade" id="upload_song">
+        <form method="POST" action="{{action('SongsController@create')}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+            <input type="hidden" name="user" value="{{Auth::user()->id}}"></input>
+            <input type="hidden" name="_method" value="PUT"></input>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" align="center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">Subir nueva canción</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Título</label></br>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-font"></i>
+                                        </div>
+                                        <input id="title" name="title" type="text" class="form-control" placeholder="Título">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Artista</label></br>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input id="artist" name="artist" type="text" class="form-control" placeholder="Artista">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Url</label></br>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-globe"></i>
+                                        </div>
+                                        <input id="url" name="url" type="text" class="form-control" placeholder="http://www.youtube.com/...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Género</label></br>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-music"></i>
+                                        </div>
+                                        <select class="form-control select2" id="gender" name="gender">
+                                            @foreach($types as $t)
+                                                <option>{{$t->type}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Álbum</label></br>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-book"></i>
+                                        </div>
+                                        <input id="album" name="album" type="text" class="form-control" placeholder="Álbum">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha de salida</label><text> (YYYY/MM/DD)</text></br>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input id="date" name="date" type="date" class="form-control" data-inputmask="'alias': 'YYYY/MM/DD'" data-mask="" placeholder="YYYY/MM/DD">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Subir</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 @endforelse
 

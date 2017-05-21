@@ -64,19 +64,19 @@ class UsersController extends Controller
 
     public function changePass(Request $request){
         $this->validate($request,[
-            'old'=>'required',
-            'new'=>'required',
-            'copy'=>'required'
+            'old'=>'required|min:6',
+            'new'=>'required|min:6',
+            'copy'=>'required|min:6'
         ]);
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        if(Hash::check($request->password, $user->password)){
+        if(!Hash::check($request->old, $user->password)){
             return redirect()->back()->with('msg', 'La contraseña guardada no coincide con la introducida');
         }
 
         if($request->new != $request->copy){
-            return redirect()->back()->with('mess', 'Las contraseñas son distintas');
+            return redirect()->back()->with('mess', 'La nueva contraseña no coincide con la confirmación');
         }
 
         $user->password = bcrypt($request->new);
