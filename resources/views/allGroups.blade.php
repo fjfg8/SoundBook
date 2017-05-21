@@ -18,8 +18,13 @@
                         @endif
                     @endforeach
                     @if($groups->find($one->id))
+                        <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
+                            <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="group" value="{{ $one->id }}"></input>
+                            <button class="btn btn-primary pull-right" type="submit">Cancelar Subscripción</button>
+                        </form>
                         <a href="/groups/{{$one->id}}" class="btn btn-primary pull-right">Acceder</a>
-                        <button type="button" class="btn btn-primary pull-right disabled">Subscrito</button>
                     @else
                         <form method="POST" action="{{action('GroupsController@subscribe')}}">
                             <input type="hidden" name="_method" value="PUT"></input>

@@ -17,6 +17,12 @@
                             <label>{{$t->type}}</label></br>
                         @endif
                     @endforeach
+                     <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
+                            <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="group" value="{{ $list->id }}"></input>
+                            <button class="btn btn-primary pull-right" type="submit">Cancelar Subscripción</button>
+                        </form>
                     <a href="/groups/{{$list->id}}" class="btn btn-primary pull-right">Acceder</a>
                             
                 </div> 

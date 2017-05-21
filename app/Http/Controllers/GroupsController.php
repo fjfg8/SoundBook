@@ -66,6 +66,18 @@ public function subscribe(Request $request) {
         return redirect()->action('GroupsController@showAll');
     }
 
+    public function cancelSubscribe(Request $request){
+        $user = Auth::user();
+        $group = $request->group;
+
+        $result = DB::table('group_user')->where('user_id','=',$user->id)->where('group_id','=',$group);
+
+        $result->delete();
+
+        //return redirect()->action('HomeController@index');
+        return redirect()->back();
+    }
+
 public function members($id) {
 
         $group = Group::findorFail($id);
