@@ -12,7 +12,11 @@
             <div class="box-header with-border" >
                 <div class="box-title with-border"><strong>{{$list->name}}</strong></div>
                 <div class="box-body" align="left">
-                    <label>{{$list->musicStyle}}</label><br/>
+                    @foreach($types as $t)
+                        @if($list->type_id == $t->id)
+                            <label>{{$t->type}}</label></br>
+                        @endif
+                    @endforeach
                     <text style="text-align: right;">{{$list->description}}</text>
                     <a href="/groups/{{$list->id}}" class="btn btn-primary pull-right">Acceder</a>
                             

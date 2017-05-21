@@ -26,9 +26,10 @@ public function showlista() {
 
 public function showAll() {
 
+        $user = User::find(Auth::user()->id);
         $groups = DB::table('groups')->paginate(3);
-
-        return view('allGroups', array('all'=>$groups));
+        $type = Type::all();
+        return view('allGroups', array('all'=>$groups, 'types'=>$type, 'user'=>$user));
 }
 
 

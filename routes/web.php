@@ -69,7 +69,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/groups/{id}','GroupsController@show');
     Route::get('/listagrupos','GroupsController@showlista');
     Route::get('/allGroups','GroupsController@showAll');
-    Route::get('/listagrupos','GroupsController@showlista');
     Route::put('/createGroup','GroupsController@create');
 
     

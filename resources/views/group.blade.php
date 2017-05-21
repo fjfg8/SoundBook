@@ -4,7 +4,7 @@
 
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
-        <h2 class="box-title with-border"><strong>{{$group->name}}</strong></h2>
+        <h6 class="box-title with-border"><strong>{{$group->name}}</strong></h6>
     </div>
     
 </div>
