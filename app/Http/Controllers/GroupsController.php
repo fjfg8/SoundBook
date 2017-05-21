@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Group;
 use App\User;
 use App\Type;
+use App\Publication;
 
 class GroupsController extends Controller {
 
@@ -14,7 +15,8 @@ public function show($id){
         $group = Group::findorFail($id);
         $type = Type::where('id','=',$group->type_id)->first();
         $members = $group->users()->count();
-        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members));
+        $publication = $group->publications()->paginate(3);
+        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members, 'publications'=>$publication));
     }
 
 
