@@ -39,7 +39,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12 text-center">
-							<a href="index.html">
+							<a href="/index">
 							<img class="logo logo-dark" alt="Logo" src="logo.png">
 						</div>
 						<div class="col-sm-12">
@@ -50,7 +50,7 @@
 					
 						<div class="col-sm-12 columns text-center">
 							<ul class="menu">
-								<a></a><li><a href="index.html" target="_self">Home</a></li><li><a href="features.html" target="_self">Features</a></li><li><a href="testimonials.html" target="_self">Testimonials</a></li><li><a href="blog.html" target="_self">Blog</a></li><li><a href="contact.html" target="_self">Contact</a></li>		
+								<a></a><li><a href="/index" target="_self">Home</a></li><li><a href="/features" target="_self">Features</a></li><li><a href="/testimonials" target="_self">Testimonials</a></li><li><a href="/blog" target="_self">Blog</a></li><li><a href="/contact" target="_self">Contact</a></li>		
 							</ul>
 						</div>
 					</div>
