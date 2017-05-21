@@ -11,10 +11,10 @@
     </ul>
 @endif
 @if (Session::has('msg'))
-    <div class="alert alert-info">{{ Session::get('msg') }}</div>
+    <div class="alert alert-danger">{{ Session::get('msg') }}</div>
 @endif
 @if (Session::has('mess'))
-    <div class="alert alert-info">{{ Session::get('mess') }}</div>
+    <div class="alert alert-danger">{{ Session::get('mess') }}</div>
 @endif
 <div class="container" id="contraseña" align="center">
     <form method="POST" action="{{action('UsersController@changePass')}}" align="center">
@@ -23,6 +23,7 @@
                 <div class="panel-heading" style="background-color:#3c8dbc;color:#FFFFFF;">
                     <h3 class="panel-title" >Cambia la contraseña</h3>
                 </div>
+                {{Auth::user()->password}}
                 <div class="panel-body" style="background-color:#c4deff;">
                     <div class="form-group">
                         <label class="control-label col-sm-5">Contraseña antigua</label>

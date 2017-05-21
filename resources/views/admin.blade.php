@@ -6,15 +6,20 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-8">
-        <div class="box">
+        <div class="box box-primary" align="center">
             <div class="box-header">
                 <h3 class="box-title" >Listado de usuarios</h3>
             </div>
-            <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
+            <div class="box-body table-responsive no-padding" > 
+                <table class="table table-hover" style="text-align:center;">
                     <tbody>
                         <tr>
-                            <th>ID</th><th>Nick</th><th>Nombre</th><th>Email</th><th>Editar</th><th>Eliminar</th>
+                            <th style="text-align:center;"><i class="fa fa-info-circle" aria-hidden="true"></i> ID</th>
+                            <th style="text-align:center;"><i class="fa fa-user" aria-hidden="true"></i> Nick</th>
+                            <th style="text-align:center;"><i class="fa fa-font" aria-hidden="true"></i> Nombre</th>
+                            <th style="text-align:center;"><i class="fa fa-envelope" aria-hidden="true"></i> Email</th>
+                            <th style="text-align:center;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</th>
+                            <th style="text-align:center;"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</th>
                         </tr>
                         @forelse($users as $user)
                             <tr>

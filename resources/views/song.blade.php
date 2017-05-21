@@ -69,9 +69,7 @@
                             <div class="comment-text">
                                 <span class="username">{{$u->nick}}
                                     <span class="text-muted pull-center"> · {{$comment->created_at}}</span>
-                                    @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)
-                                        <span class="text-muted"> · </span>
-                                        
+                                    @if(Auth::user()->id == $comment->user_id || Auth::user()->isAdmin)                                        
                                         <a class="btn btn-danger btn-xs pull-right" data-toggle="modal" data-target="#delete_comment{{$comment->id}}" >Eliminar</a>
                                         <div class="modal modal-danger fade" id="delete_comment{{$comment->id}}">
                                             <form method="POST" action="{{action('CommentController@delete')}}">
@@ -130,6 +128,7 @@
                                     @endif
                                 </span>
                                 {{$comment->comment}}
+                                </br>
                             </div>
                         @endif
                     @endforeach
@@ -143,12 +142,13 @@
                                 Me gusta
                             </button>
                         @else
-                            <label>Ya te gusta</label>
+                            <text>Ya te gusta</text>
                         @endif
-                        <text class="pull-right" style="color:#3a7cff">{{$likesComm[$i]}}
+                        <span >&nbsp;</span>
+                        <text style="color:#3a7cff">{{$likesComm[$i]}}
                             <i class="fa fa-thumbs-o-up " aria-hidden="true" style="color:#3a7cff"></i>
                         </text> 
-                        <text style="color: #f4fcff; align: right">{{$i++}} </text>
+                        <text style="display: none">{{$i++}} </text>
                     </form>
                     
                 </div>   
@@ -163,7 +163,7 @@
             <form action="{{action('CommentController@create')}}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" name="song" value="{{ $song->id }}"></input>
-                <img class="img-responsive img-circle img-sm" src="http://xacatolicos.com/app/images/icon-user.png" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="{{Auth::user()->image}}" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                     <input type="text" id="comentario" name="comentario" class="form-control input-sm" placeholder="Presiona enter para comentar">

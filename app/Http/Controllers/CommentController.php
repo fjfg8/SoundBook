@@ -20,7 +20,6 @@ class CommentController extends Controller
         $user = User::find(Auth::user()->id);
         $c = new Comment();
         $c->comment = $request->comentario;
-        $c->likes = 0;
         $c->user()->associate($user);
         $c->song()->associate($song);
 

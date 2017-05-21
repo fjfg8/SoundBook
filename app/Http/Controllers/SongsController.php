@@ -61,7 +61,6 @@ class SongsController extends Controller
         $s->title = $request->title;
         $s->artist = $request->artist;
         $s->album = $request->album;
-        $s->likes = 0;
         $s->date = $request->date;
         $s->url = $request->url;
         $user = User::find(Auth::user()->id);

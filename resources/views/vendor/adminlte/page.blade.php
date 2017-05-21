@@ -57,6 +57,46 @@
                 <div class="navbar-custom-menu">
 
                     <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{Auth::user()->image}}" class="user-image" alt="User Image">
+                                <span class="hidden-xs">{{Auth::user()->name}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header" style="color: #3c8dbc;">
+                                    <img src="{{Auth::user()->image}}" class="img-circle" alt="User Image">
+                                    <p>
+                                        {{Auth::user()->name}} 
+                                        <small>{{Auth::user()->nick}}</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center border-right" style="color: #FFFFFF;">
+                                            <a href="/home">Canciones</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center border-right">
+                                            <a href="/home/followers">Seguidores</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="/home/follow">Siguiendo</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="/wall" class="btn btn-primary btn-flat">Muro</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="/home" class="btn btn-primary btn-flat">Perfil</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
@@ -90,7 +130,15 @@
 
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="{{Auth::user()->image}}" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>{{Auth::user()->name}}</p>
+                        <small><i class="fa fa-circle text-success"></i> Online</small>
+                    </div>
+                </div>
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
                     @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')

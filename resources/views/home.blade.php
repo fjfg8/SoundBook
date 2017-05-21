@@ -20,9 +20,9 @@
 @endif
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="box box-widget widget-user">
             <div class="widget-user-header bg-aqua-active">
                 <a class="btn btn-warning pull-right" data-toggle="modal" data-target="#edit_user">Editar perfil</a>  
@@ -153,6 +153,12 @@
                             <div class="col-md-6">
                                 <label>Artista: {{$song->artist}} </label><br/>
                                 <label>Fecha: {{$song->date}}</label></br>
+                                <label>Género: </label>
+                                @foreach($types as $t)
+                                    @if($t->id == $song->type_id)
+                                        <label>{{$t->type}} </label><br/>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                         <div class="box-footer" style="background: #f4fcff;">
