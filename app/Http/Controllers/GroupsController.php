@@ -29,9 +29,10 @@ public function showlista() {
 public function showAll() {
 
         $user = User::find(Auth::user()->id);
-        $groups = DB::table('groups')->paginate(3);
+        $all = DB::table('groups')->paginate(3);
+        $groups = $user->groups()->get();
         $type = Type::all();
-        return view('allGroups', array('all'=>$groups, 'types'=>$type, 'user'=>$user));
+        return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups));
 }
 
 
@@ -55,5 +56,21 @@ public function create(Request $request) {
         //$group->save();
 
         return redirect()->action('GroupsController@showlista');
+    }
+
+public function subscribe(Request $request) {
+
+        $user = User::find(Auth::user()->id);
+        $user->groups()->attach($request->group);
+
+        return redirect()->action('GroupsController@showAll');
+    }
+
+public function members($id) {
+
+        $group = Group::findorFail($id);
+        $users = $group->users()->paginate(3);
+
+        return view('members', array('users'=>$users));
     }
 }

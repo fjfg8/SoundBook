@@ -17,8 +17,17 @@
                             <label>{{$t->type}}</label></br>
                         @endif
                     @endforeach
-                    <a href="/groups/{{$one->id}}" class="btn btn-primary pull-right">Subscribirse</a>
-                            
+                    @if($groups->find($one->id))
+                        <a href="/groups/{{$one->id}}" class="btn btn-primary pull-right">Acceder</a>
+                        <button type="button" class="btn btn-primary pull-right disabled">Subscrito</button>
+                    @else
+                        <form method="POST" action="{{action('GroupsController@subscribe')}}">
+                            <input type="hidden" name="_method" value="PUT"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="group" value="{{ $one->id }}"></input>
+                            <button class="btn btn-primary pull-right" type="submit">Subscribirse</button>
+                        </form>
+                    @endif  
                 </div> 
                         
             </div>
@@ -38,7 +47,6 @@
 <div class="modal modal-default fade" id="create_group">
     <form method="POST" action="{{action('GroupsController@create')}}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-        <input type="hidden" name="user" value="{{$user->id}}"></input>
         <input type="hidden" name="_method" value="PUT"></input>
         <div class="modal-dialog">
             <div class="modal-content">
