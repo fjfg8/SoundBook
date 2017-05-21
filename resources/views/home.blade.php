@@ -153,6 +153,12 @@
                             <div class="col-md-6">
                                 <label>Artista: {{$song->artist}} </label><br/>
                                 <label>Fecha: {{$song->date}}</label></br>
+                                <label>Género: </label>
+                                @foreach($types as $t)
+                                    @if($t->id == $song->type_id)
+                                        <label>{{$t->type}} </label><br/>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                         <div class="box-footer" style="background: #f4fcff;">

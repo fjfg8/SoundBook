@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="box box-widget widget-user">
             <div class="widget-user-header bg-aqua-active"> 
                 @if($bool == true)
@@ -100,8 +100,7 @@
     <div class="col-md-8">
         <div class="box box-primary">
             <div class="box-header with-border" align="center">
-                <h2 class="box-title with-border">Mis canciones</h2>
-                <a class="btn btn-success pull-right" data-toggle="modal" data-target="#upload_song">Subir canción</a>
+                <h2 class="box-title with-border">Canciones de {{$user->name}}</h2>
             </div>
             <div class="box-body">
                 @forelse($songs as $song)
