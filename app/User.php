@@ -61,4 +61,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Comment','comment_user','comment_id','user_id');
     }
 
+    public function admin_groups(){
+        return $this->hasMany('App\Group');
+    }   
+
 }

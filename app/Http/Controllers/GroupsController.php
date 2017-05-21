@@ -48,9 +48,10 @@ public function create(Request $request) {
         $group->name = $request->name;
         $type = Type::where('type','=',$request->musicStyle)->first();
         $group->type()->associate($type);
+        $user = User::find(Auth::user()->id);
+        $group->user_admin()->associate($user);
         $group->description = $request->description;
         $group->save();
-        $user = User::find(Auth::user()->id);
         $group->users()->attach($user->id);
 
         //$group->save();
@@ -66,7 +67,7 @@ public function subscribe(Request $request) {
         return redirect()->action('GroupsController@showAll');
     }
 
-    public function cancelSubscribe(Request $request){
+public function cancelSubscribe(Request $request){
         $user = Auth::user();
         $group = $request->group;
 
@@ -74,8 +75,7 @@ public function subscribe(Request $request) {
 
         $result->delete();
 
-        //return redirect()->action('HomeController@index');
-        return redirect()->back();
+        return redirect()->action('GroupsController@showlista');
     }
 
 public function members($id) {
@@ -84,5 +84,13 @@ public function members($id) {
         $users = $group->users()->paginate(3);
 
         return view('members', array('users'=>$users));
+    }
+
+public function deleteGroup(Request $request){
+
+        $group = Group::find($request->group);
+        $group->delete();
+
+        return redirect()->back();
     }
 }

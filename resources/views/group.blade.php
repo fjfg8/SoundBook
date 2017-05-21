@@ -4,6 +4,7 @@
 
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
+        <a href="/listagrupos" class="btn btn-primary pull-right" style="margin:20px">Mis Grupos</a>
         <h3><strong>{{$group->name}}</strong></h3>
     </div>
     <div class="box-body">
