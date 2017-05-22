@@ -13,14 +13,14 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                         <input type="hidden" name="_method" value="DELETE"></input>
                         <input type="hidden" name="user" value="{{ $user->id }}"></input>
-                        <button type="submit" class="btn btn-primary pull-right">Unfollow</button>
+                        <button type="submit" class="btn btn-danger pull-right">Unfollow</button>
                     </form>
                 @else
                     <form method="POST" action="{{action('UsersController@follow')}}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                         <input type="hidden" name="_method" value="PUT"></input>
                         <input type="hidden" name="user" value="{{ $user->id }}"></input>
-                        <button type="submit" class="btn btn-primary pull-right">Follow</button>
+                        <button type="submit" class="btn btn-success pull-right">Follow</button>
                     </form>
                 @endif
                 <h2 class="widget-user-desc">{{$user->nick}}</h2>

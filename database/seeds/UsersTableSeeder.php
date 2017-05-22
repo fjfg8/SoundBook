@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero/a',
             'preferences' => 'Rap',
-            'image' => 'raul.jpg'
+            'image' => 'img/raul.jpg'
         ]);
 
         DB::table('users')->insert([
@@ -76,7 +76,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Comprometido/a',
             'preferences' => 'HipHop',
-            'image' => 'larry.png'
+            'image' => 'img/larry.png'
         ]);
     
 
