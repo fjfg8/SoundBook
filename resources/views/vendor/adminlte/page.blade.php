@@ -55,16 +55,15 @@
             @endif
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
-
                     <ul class="nav navbar-nav">
-                        <li class="dropdown user user-menu">
+                        <li class="dropdown user user-menu" >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{Auth::user()->image}}" class="user-image" alt="User Image">
                                 <span class="hidden-xs">{{Auth::user()->name}}</span>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="color: #3c8dbc;">
                                 <!-- User image -->
-                                <li class="user-header" style="color: #3c8dbc;">
+                                <li class="user-header">
                                     <img src="{{Auth::user()->image}}" class="img-circle" alt="User Image">
                                     <p>
                                         {{Auth::user()->name}} 

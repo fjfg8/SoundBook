@@ -9,15 +9,18 @@ use App\Song;
 use App\User;
 use App\Type;
 
-class SearchController extends Controller
-{
-
+class SearchController extends Controller{
 
     public function show(){
-
         $array = array();
         $f = array();
-        return view('searcher',array('busqueda'=>$array,'filtro'=>"cancion",'followers'=>$f));
+        $filters = [
+            "Cancion" => "Cancion",
+            "Usuario" => "Usuario",
+            "Album" => "Album",
+            "Grupo" => "Grupo",
+        ];
+        return view('searcher',array('busqueda'=>$array,'filtro'=>"cancion",'followers'=>$f,'filters'=>$filters));
     }
 
     public function search(Request $request){
@@ -26,16 +29,23 @@ class SearchController extends Controller
         $users = array();
         $type = array();
 
+        $filters = [
+            "Cancion" => "Cancion",
+            "Usuario" => "Usuario",
+            "Album" => "Album",
+            "Grupo" => "Grupo",
+        ];
+
         if($request->busqueda != ""){
-            if($request->filtro=="grupo"){
-                        $result = DB::table('groups')->where('name','like','%'.$request->busqueda.'%')->paginate(3);
-                        $i=0;
-                        foreach($result as $r){
-                            $type[$i] = Type::find($r->type_id);
-                            $i++;
-                        }
-                    }
-            if($request->filtro=="cancion"){
+            if($request->filtro=="Grupo"){
+                $result = DB::table('groups')->where('name','like','%'.$request->busqueda.'%')->paginate(3);
+                $i=0;
+                foreach($result as $r){
+                    $type[$i] = Type::find($r->type_id);
+                    $i++;
+                }
+            }
+            if($request->filtro == "Cancion"){
                 $result = DB::table('songs')->where('title','like','%'.$request->busqueda.'%')->paginate(3);
                 $i=0;
                 foreach($result as $r){
@@ -44,7 +54,7 @@ class SearchController extends Controller
                     $i++;
                 }
             }
-            if($request->filtro=="album"){
+            if($request->filtro == "Album"){
                 $result = DB::table('songs')->where('album','like','%'.$request->busqueda.'%')->paginate(3);
                 $i=0;
                 foreach($result as $r){
@@ -53,9 +63,8 @@ class SearchController extends Controller
                     $i++;
                 }
             }
-            if($request->filtro=="usuario"){
+            if($request->filtro == "Usuario"){
                 $result = DB::table('users')->where('nick','like','%'.$request->busqueda.'%')->paginate(3);
-                
                 for($i=0;$i<sizeof($result);$i++){
                     $bool = $this->followers($result[$i]->id);
                     if($bool==true){
@@ -67,9 +76,11 @@ class SearchController extends Controller
             }
         }
 
-        
+        session()->put([
+            'filtroBusqueda'=> $request->filtro,
+        ]);
 
-        return view('searcher',array('busqueda'=>$result,'filtro'=>$request->filtro,'followers'=>$follow,'users'=>$users,'type'=>$type));
+        return view('searcher',array('busqueda'=>$result,'filtro'=>$request->filtro,'followers'=>$follow,'users'=>$users,'type'=>$type,'filters'=>$filters));
     }
 
     public function followers($user){
