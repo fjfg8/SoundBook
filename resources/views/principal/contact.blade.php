@@ -16,33 +16,30 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h5>Contact details</h5>
-					<p>
-						Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
-					
-					<p>Kiewit Building 
-					<br>200 Avenue Street , Chicago
+					<h5>Detalles</h5>					
+					<p>Edificio Politécnica 4, Universidad de Alicante
+					<br>03690, San Vicente del Raspeig
 					<br>+70 424 495 952 
-					<br>contact@company.com</p>
+					<br>contact@soundbook.com</p>
 				</div>
 				
 				
 				
 				<div class="col-sm-6">
-					<h5>Message form</h5>
+					<h5>Envianos un mensaje</h5>
 					<div class="form-wrapper clearfix">
 					<form class="form-contact email-form">
 						<div class="inputs-wrapper">
-							<input class="form-name validate-required" type="text" placeholder="Your Name" name="name">
-							<input class="form-email validate-required validate-email" type="text" placeholder="Your Email Address" name="email">
-							<textarea class="form-message validate-required" name="message" placeholder="Your Message"></textarea>
+							<input class="form-name validate-required" type="text" placeholder="Nombre" name="name">
+							<input class="form-email validate-required validate-email" type="text" placeholder="Email" name="email">
+							<textarea class="form-message validate-required" name="message" placeholder="Mensaje"></textarea>
 						</div>
 						<input type="submit" class="send-form" value="Send Form">
 						<div class="form-success">
-							<span class="text-white">Message sent - Thanks for your enquiry</span>
+							<span class="text-white">Mensaje enviado.</span>
 						</div>
 						<div class="form-error">
-							<span class="text-white">Please complete all fields correctly</span>
+							<span class="text-white">Rellene todos los campos.</span>
 						</div>
 					</form>
 				</div>

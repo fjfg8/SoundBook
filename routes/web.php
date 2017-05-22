@@ -30,9 +30,6 @@ Route::get('/features',function(){
 Route::get('/testimonials',function(){
     return view('principal.testimonials');
 });
-Route::get('/blog',function(){
-    return view('principal.blog');
-});
 Route::get('/contact',function(){
     return view('principal.contact');
 });

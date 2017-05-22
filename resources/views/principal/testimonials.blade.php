@@ -27,7 +27,7 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="team-1-member">
-						<img alt="Team Member" src="img/larry.png" widht="200" height="200">
+						<img alt="Team Member" src="img/larry.png" widht="200" height="200" style="border-radius:150px;">
 						<h2>Larry Rider</h2>
 						<h5>Web Designer</h5>
 						<p class="space-top-small">
@@ -38,7 +38,7 @@
 				
 				<div class="col-sm-3">
 					<div class="team-1-member">
-						<img alt="Team Member" src="img/jonay.jpg" widht="200" height="200">
+						<img alt="Team Member" src="img/jonay.png" widht="200" height="200" style="border-radius:150px;">
 						<h2>Jonay Gilabert</h2>
 						<h5>Web Designer</h5>
 						<p class="space-top-small">
@@ -49,7 +49,7 @@
 				
 				<div class="col-sm-3">
 					<div class="team-1-member">
-						<img alt="Team Member" src="img/fran.jpg" widht="200" height="200">
+						<img alt="Team Member" src="img/fran.jpg" widht="200" height="200" style="border-radius:150px;">
 						<h2>Fran Falcó</h2>
 						<h5>Team Leader</h5>
 						<p class="space-top-small">
@@ -59,7 +59,7 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="team-1-member">
-						<img alt="Team Member" src="img/testimonials_4.png ">
+						<img alt="Team Member" src="img/raul.jpg" widht="200" height="200" style="border-radius:150px;">
 						<h2>Raul Cerro</h2>
 						<h5>Mobile designer</h5>
 						<p class="space-top-small">
