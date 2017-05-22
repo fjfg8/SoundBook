@@ -10,8 +10,9 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <div class="input-group" style="width: 20%">
                 <select class="form-control select2" name="filtro" >
+                    <option selected="selected" value="-1">--Todos--</value>
                     @foreach($types as $t)
-                        <option selected="selected" value="{{$t->id}}">{{$t->type}}</option>  
+                        <option value="{{$t->id}}">{{$t->type}}</option>  
                     @endforeach  
                 </select>
                 <div class="input-group-btn">

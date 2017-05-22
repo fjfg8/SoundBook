@@ -32,7 +32,11 @@ public function showAll() {
 
         $user = User::find(Auth::user()->id);
         if(session()->has('filtroGrupos')){
-            $all = Group::where('type_id','=',session()->get('filtroGrupos'))->orderby('name')->paginate(3);
+            if(session()->get('filtroGrupos') == "-1"){
+                $all = Group::orderby('name')->paginate(3);
+            }else{
+                $all = Group::where('type_id','=',session()->get('filtroGrupos'))->orderby('name')->paginate(3);
+            }
         }else{
             $all = Group::orderby('name')->paginate(3);
         }

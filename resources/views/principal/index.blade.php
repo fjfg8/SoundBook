@@ -9,16 +9,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-10 col-md-offset-1 text-center">
-					<h2 class="text-white">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqu.</h2>
+					<h2 class="text-white">SoundBook, la red social con la que te escucharán en todos lados.</h2>
 					<p class="text-white">
-						Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.
+						Tanto si te gusta la música y quieres compartir tus canciones favoritas, como si eres cantautor y quieres darte a conocer, esta es tu red social. 
+						No esperes más y <strong>¡unete!</strong>
 					</p>
-					<a href="#" class="btn btn-primary btn-white">Learn more</a>
-					<a href="#" class="btn btn-primary btn-filled">Purchase App</a>
 				</div>
-				<div class="col-sm-12 col-md-10 col-md-offset-1 text-center">
-					<img alt="Screenshot" src="img/ipad2.png">
-				</div>
+				
 			</div>
 		</div>principal
 	</header>
@@ -91,86 +88,6 @@
 								<span class="author text-white">Richard Hanson - Web developer</span>
 							</li>
 						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<section class="pricing-2">
-		<div class="container">
-			<div class="row text-center">
-				<h1>Choose an option that fits to your needs</h1>
-			</div>
-			
-			<div class="row pricing-tables">
-				<div class="col-md-3 no-pad-right hidden-sm">
-					<div class="pricing-table feature-list">
-						<ul class="features">
-							<li><strong>&nbsp;</strong></li>
-							<li><strong>Disc space</strong></li>
-							<li><strong>Users tracking</strong></li>
-							<li><span>Free updates</span></li>
-							<li><strong>24/h support</strong></li>
-							<li><strong>Free templates</strong></li>
-						</ul>
-					</div>
-				</div>
-				
-				<div class="col-md-3 no-pad hidden-sm">
-					<div class="pricing-table">
-						<ul class="features">
-							<li><strong>Simple</strong></li>
-							<li><strong>1&nbsp;</strong>GB</li>
-							<li><strong>No</strong></li>
-							<li><strong>No</strong></li>
-							<li><span>Yes</span></li>
-							<li><strong>10&nbsp;</strong>Templates</li>
-						</ul>
-						<div class="price">
-							<span class="sub">$</span>
-							<span class="amount">9.99 </span>
-							<span class="sub">/month</span>	
-						</div>
-						<a href="#" class="btn btn-primary">Choose option</a>
-					</div>
-				</div>
-				
-				<div class="col-md-3 no-pad hidden-sm">
-					<div class="pricing-table emphasis">
-						<ul class="features">
-							<li><strong class="vdw">Medium</strong></li>
-							<li><strong>10&nbsp;</strong>GB</li>
-							<li><span>Yes</span></li>
-							<li><strong>No</strong></li>
-							<li><strong>Yes</strong></li>
-							<li><strong>20&nbsp;</strong>Templates</li>
-						</ul>
-						<div class="price">
-							<span class="sub">$</span>
-							<span class="amount">19.99</span>
-							<span class="sub">/month</span>	
-						</div>
-						<a href="#" class="btn btn-primary btn-white">Choose option</a>
-					</div>
-				</div>
-				
-				<div class="col-md-3 no-pad-left hidden-sm">
-					<div class="pricing-table">
-						<ul class="features">
-							<li><strong>Advanced</strong></li>
-							<li><strong>unlimited&nbsp;</strong>GB</li>
-							<li><span>Yes</span></li>
-							<li><strong>Yes</strong></li>
-							<li><strong>Yes</strong></li>
-							<li><strong>100&nbsp;</strong>Templates</li>
-						</ul>
-						<div class="price">
-							<span class="sub">$</span>
-							<span class="amount">59.99</span>
-							<span class="sub">/month</span>	
-						</div>
-						<a href="#" class="btn btn-primary">Choose option</a>
 					</div>
 				</div>
 			</div>
