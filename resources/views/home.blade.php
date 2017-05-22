@@ -33,7 +33,7 @@
             </div>
             <a href="/changeImage">
                 <div class="widget-user-image">
-                    <img class="img-circle" src="{{$user->image}}" alt="UserAvatar">
+                    <img class="img-circle" src="{{url($user->image)}}" alt="UserAvatar">
                 </div>
             </a>
             <div class="box-footer">

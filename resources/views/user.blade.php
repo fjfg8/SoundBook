@@ -30,7 +30,7 @@
             </div>
             
             <div class="widget-user-image">
-                <img class="img-circle" src="{{$user->image}}" alt="UserAvatar">
+                <img class="img-circle" src="{{url($user->image)}}" alt="UserAvatar">
             </div>
             
             <div class="box-footer">

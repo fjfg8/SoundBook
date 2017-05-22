@@ -20,7 +20,7 @@
             </div>
             <div class="box-body">
                 <div class="col-md-6" align="center">
-                        <img src="{{Auth::user()->image}}" height="200" width="200"></img><br/>
+                        <img src="{{url(Auth::user()->image)}}" height="200" width="200"></img><br/>
                 </div>
                 <div class="col-md-6">
                     <form class="form-horizontal" method="POST" action="{{action('UsersController@changeImage')}}" align="center">
