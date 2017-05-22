@@ -38,7 +38,7 @@ public function showAll() {
         }
         $groups = $user->groups()->get();
         $type = Type::all();
-        return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups));
+        return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups, 'user'=>$user));
 }
 
 

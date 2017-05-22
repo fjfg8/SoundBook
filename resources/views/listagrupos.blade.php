@@ -18,14 +18,7 @@
                             <label>{{$t->type}}</label></br>
                         @endif
                     @endforeach
-                    
-                    
-                     <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
-                            <input type="hidden" name="_method" value="DELETE"></input>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                            <input type="hidden" name="group" value="{{ $list->id }}"></input>
-                            <button class="btn btn-primary pull-right" type="submit">Cancelar Subscripción</button>
-                    </form> 
+                     
                     
                     @if($list->user_admin_id == $user->id)
                     <form method="POST" action="{{action('GroupsController@deleteGroup')}}">
@@ -33,6 +26,13 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                             <input type="hidden" name="group" value="{{ $list->id }}"></input>
                             <button class="btn btn-danger pull-right" type="submit">Borrar Grupo</button>
+                    </form>
+                    @else
+                    <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
+                            <input type="hidden" name="_method" value="DELETE"></input>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                            <input type="hidden" name="group" value="{{ $list->id }}"></input>
+                            <button class="btn btn-primary pull-right" type="submit">Cancelar Subscripción</button>
                     </form>
                     @endif
                     
