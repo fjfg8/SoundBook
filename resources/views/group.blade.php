@@ -119,7 +119,7 @@
         <div class="box-footer">
             <form action="{{action('PublicationController@create')}}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                <input type="hidden" name="group" value="{{ $publi->group_id }}"></input>
+                <input type="hidden" name="group" value="{{ $group->id }}"></input>
                 <img class="img-responsive img-circle img-sm" src="{{Auth::user()->image}}" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
