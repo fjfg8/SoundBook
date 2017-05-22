@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Casado/a',
             'preferences' => 'Rock',
-            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
+            'image' => 'img/jonay.png'
         ]);
 
         DB::table('users')->insert([
@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero/a',
             'preferences' => 'Rap',
-            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
+            'image' => 'img/fran.jpg'
         ]);
 
          DB::table('users')->insert([
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Soltero/a',
             'preferences' => 'Rap',
-            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
+            'image' => 'raul.jpg'
         ]);
 
         DB::table('users')->insert([
@@ -76,7 +76,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'Hombre',
             'status' => 'Comprometido/a',
             'preferences' => 'HipHop',
-            'image' => 'https://openclipart.org/download/247319/abstract-user-flat-3.svg'
+            'image' => 'larry.png'
         ]);
     
 
