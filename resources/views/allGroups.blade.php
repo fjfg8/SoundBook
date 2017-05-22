@@ -15,7 +15,7 @@
                     @endforeach  
                 </select>
                 <div class="input-group-btn">
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    <button type="submit" class="btn btn-search">Filtrar</button>
                 </div>
             </div>
         </form>

@@ -78,31 +78,33 @@
                                     </div>
                                 @endif
                                 @if($filtro=="Usuario")
-                                    <div class="box-body" style="background-color:#ffe4c4;">
-                                        <div class="col-md-2" align="center">
-                                            <img src="{{$busqueda[$i]->image}}" width="100" height="100"></img>
-                                            <h3>{{$busqueda[$i]->nick}} </h3>
+                                    @if($busqueda[$i]->id != Auth::user()->id)
+                                        <div class="box-body" style="background-color:#ffe4c4;">
+                                            <div class="col-md-2" align="center">
+                                                <img src="{{$busqueda[$i]->image}}" width="100" height="100"></img>
+                                                <h3>{{$busqueda[$i]->nick}} </h3>
+                                            </div>
+                                            <div class="col-md-8">
+                                                @if($followers[$i]==1)
+                                                    <form method="POST" action="{{action('UsersController@unfollow')}}">
+                                                    <input type="hidden" name="_method" value="DELETE"></input>
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                                    <input type="hidden" name="user" value="{{ $busqueda[$i]->id }}"></input>
+                                                        <button class="btn btn-primary pull-right" type="submit">Unfollow</button>
+                                                    </form>
+                                                @endif
+                                                @if($followers[$i]==0)
+                                                    <form method="POST" action="{{action('UsersController@follow')}}">
+                                                    <input type="hidden" name="_method" value="PUT"></input>
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                                    <input type="hidden" name="user" value="{{ $busqueda[$i]->id }}"></input>
+                                                        <button class="btn btn-primary pull-right" type="submit">Follow</button>
+                                                    </form>
+                                                @endif
+                                                <a href="/visit/{{$busqueda[$i]->id}}" class="btn btn-primary pull-right" style="padding-top: 5px;">Ver más</a>
+                                            </div>  
                                         </div>
-                                        <div class="col-md-8">
-                                            @if($followers[$i]==1)
-                                                <form method="POST" action="{{action('UsersController@unfollow')}}">
-                                                <input type="hidden" name="_method" value="DELETE"></input>
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                                <input type="hidden" name="user" value="{{ $busqueda[$i]->id }}"></input>
-                                                    <button class="btn btn-primary pull-right" type="submit">Unfollow</button>
-                                                </form>
-                                            @endif
-                                            @if($followers[$i]==0)
-                                                <form method="POST" action="{{action('UsersController@follow')}}">
-                                                <input type="hidden" name="_method" value="PUT"></input>
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                                                <input type="hidden" name="user" value="{{ $busqueda[$i]->id }}"></input>
-                                                    <button class="btn btn-primary pull-right" type="submit">Follow</button>
-                                                </form>
-                                            @endif
-                                            <a href="/visit/{{$busqueda[$i]->id}}" class="btn btn-primary pull-right" style="padding-top: 5px;">Ver más</a>
-                                        </div>  
-                                    </div>
+                                    @endif
                                 @endif
                             @endfor
                         </div>
