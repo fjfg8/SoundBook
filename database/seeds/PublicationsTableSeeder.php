@@ -19,7 +19,7 @@ class PublicationsTableSeeder extends Seeder
             'title' => 'Concierto en bar manolo',
             'description' => 'Concierto de un grupo muy especial para la ruta del bakalao',
             'group_id' => 2,
-            'song_id' => 1
+            'user_id' => 1
         ]);
 
         DB::table('publications')->insert([
@@ -27,7 +27,7 @@ class PublicationsTableSeeder extends Seeder
             'title' => 'Concierto en barpaco',
             'description' => 'Concierto de un grupo muy especial para la ruta del bakalao',
             'group_id' => 2,
-            'song_id' => 1
+            'user_id' => 1
         ]);
 
         DB::table('publications')->insert([
@@ -35,7 +35,7 @@ class PublicationsTableSeeder extends Seeder
             'title' => 'Concierto en Alicante',
             'description' => 'Concierto de un grupo muy especial para la ruta del bakalao',
             'group_id' => 2,
-            'song_id' => 2
+            'user_id' => 2
         ]);
 
         DB::table('publications')->insert([
@@ -43,7 +43,7 @@ class PublicationsTableSeeder extends Seeder
             'title' => 'Autografos en granvia',
             'description' => 'Firma de autografos',
             'group_id' => 2,
-            'song_id' => 1
+            'user_id' => 1
         ]);
         
 
