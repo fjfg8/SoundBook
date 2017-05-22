@@ -6,6 +6,19 @@
     <div class="box-header with-border" align="center">
         <a href="/listagrupos" class="btn btn-primary pull-right" style="margin:20px">Mis Grupos</a>
         <h3><strong>Grupos</strong></h3>
+        <form method="POST" action="{{action('GroupsController@search')}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+            <div class="input-group" style="width: 20%">
+                <select class="form-control select2" name="filtro" >
+                    @foreach($types as $t)
+                        <option selected="selected" value="{{$t->id}}">{{$t->type}}</option>  
+                    @endforeach  
+                </select>
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="box-body">
          @forelse($all as $one)

@@ -31,7 +31,11 @@ public function showlista() {
 public function showAll() {
 
         $user = User::find(Auth::user()->id);
-        $all = DB::table('groups')->paginate(3);
+        if(session()->has('filtroGrupos')){
+            $all = Group::where('type_id','=',session()->get('filtroGrupos'))->orderby('name')->paginate(3);
+        }else{
+            $all = Group::orderby('name')->paginate(3);
+        }
         $groups = $user->groups()->get();
         $type = Type::all();
         return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups));
@@ -95,4 +99,13 @@ public function deleteGroup(Request $request){
 
         return redirect()->back();
     }
+
+    public function search(Request $request){
+        $request->session()->put([
+            'filtroGrupos'=>$request->filtro
+        ]);
+
+        return redirect()->action('GroupsController@showAll');
+    }
+
 }
