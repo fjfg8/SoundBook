@@ -34,7 +34,7 @@ public function showAll() {
         $all = DB::table('groups')->paginate(3);
         $groups = $user->groups()->get();
         $type = Type::all();
-        return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups));
+        return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups, 'user'=>$user));
 }
 
 
