@@ -50,7 +50,7 @@
 					
 						<div class="col-sm-12 columns text-center">
 							<ul class="menu">
-								<a></a><li><a href="/index" target="_self">Home</a></li><li><a href="/features" target="_self">Features</a></li><li><a href="/testimonials" target="_self">Equipo</a></li><li><a href="/contact" target="_self">Contacto</a></li>		
+								<a></a><li><a href="/index" target="_self">Home</a></li><li><a href="/testimonials" target="_self">Equipo</a></li><li><a href="/contact" target="_self">Contacto</a></li>		
 							</ul>
 						</div>
 					</div>
