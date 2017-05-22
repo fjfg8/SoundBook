@@ -12,7 +12,7 @@
                     <span class="pull-right">&nbsp;</span>
                     <a class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#edit_song">Editar</a>
                 @endif
-                <img class="img-circle" src="{{$user->image}}" alt="User Image">
+                <img class="img-circle" src="{{url($user->image)}}" alt="User Image">
                 @if(Auth::user()->id == $user->id)
                     <span class="username"><a href="/home">{{$user->name}}</a></span>
                 @else
@@ -64,7 +64,7 @@
                 <div class="box-comment">
                     @foreach($users as $u)
                         @if($comment->user_id == $u->id)
-                            <img class="img-circle img-sm" src="{{$u->image}}" alt="User Image">
+                            <img class="img-circle img-sm" src="{{url($u->image)}}" alt="User Image">
                         
                             <div class="comment-text">
                                 <span class="username">{{$u->nick}}

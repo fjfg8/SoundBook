@@ -38,7 +38,7 @@
                 <div class="box-comment">
                     @foreach($users as $u)
                         @if($publi->user_id == $u->id)
-                            <img class="img-circle img-sm" src="{{$u->image}}" alt="User Image">
+                            <img class="img-circle img-sm" src="{{url($u->image)}}" alt="User Image">
                         
                             <div class="comment-text">
                                 <span class="username">{{$u->nick}}
@@ -120,7 +120,7 @@
             <form action="{{action('PublicationController@create')}}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" name="group" value="{{ $group->id }}"></input>
-                <img class="img-responsive img-circle img-sm" src="{{Auth::user()->image}}" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="{{url(Auth::user()->image)}}" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                     <!-- <input type="text" id="titulo" name="titulo" class="form-control input-sm" placeholder="Presiona enter para comentar"> -->
