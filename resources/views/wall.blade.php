@@ -17,7 +17,7 @@
                         @else
                             <span class="description"><a href="visit/{{$users[$i]->id}}">{{$users[$i]->name}}</a></span>
                         @endif
-                        <span class="username">{{$song->title}}</span>
+                        <span class="username"><a href="/song/{{$song->id}}">{{$song->title}}</a></span>
                     </div>
                     
                 </div>
@@ -28,12 +28,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label>Título: {{$song->title}} </label><br/>
-                        <label>Artista: {{$song->artist}} </label><br/>
+                        <label>Título: </label><text> {{$song->title}}</text><br/>
+                        <label>Artista: </label><text> {{$song->artist}} </text><br/>
                         <label>Género: </label>
                         @foreach($types as $t)
                             @if($t->id == $song->type_id)
-                                <label>{{$t->type}} </label><br/>
+                                <text> {{$t->type}} </text><br/>
                             @endif
                         @endforeach
                     </div>
