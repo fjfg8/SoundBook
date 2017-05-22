@@ -15,8 +15,9 @@ public function show($id){
         $group = Group::findorFail($id);
         $type = Type::where('id','=',$group->type_id)->first();
         $members = $group->users()->count();
-        $publication = $group->publications()->paginate(3);
-        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members, 'publications'=>$publication));
+        $publication = $group->publications()->orderby('created_at','desc')->paginate(3);
+        $users = User::all();
+        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members, 'publications'=>$publication, 'users'=>$users));
     }
 
 
