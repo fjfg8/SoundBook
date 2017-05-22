@@ -72,6 +72,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/subscribe','GroupsController@subscribe');
     Route::delete('/cancelSubscribe','GroupsController@CancelSubscribe');
     Route::delete('/deletegroup','GroupsController@deleteGroup');
+    //Publicaciones grupos
+    Route::delete('/groups/','PublicationController@delete');
+    Route::put('/groups/', 'PublicationController@edit');
+    Route::post('/groups/', 'PublicationController@create');
 
     
     Route::get('/home', 'HomeController@index');

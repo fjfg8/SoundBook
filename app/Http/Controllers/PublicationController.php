@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Publication;
 use App\Group;
+use App\User;
 
 class PublicationController extends Controller
 {
@@ -17,15 +18,36 @@ class PublicationController extends Controller
         ]);
 
         $group = Group::find($request->group);
-        //$user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
         $p = new Publication();
         $p->title = $request->titulo;
-        $p->publication = $request->publicacion;
+        $p->description = $request->publicacion;
         $p->group()->associate($group);
-        //$p->song()->associate($song);
+        $p->user()->associate($user);
 
         $p->save();
 
         return redirect()->action('GroupsController@show',$request->group);
+    }
+
+    public function edit(Request $request){
+        $this->validate($request,[
+            'titulo'=>'required',
+            'publicacion'=>'required',
+        ]);
+
+        $p = Publication::find($request->publication_id);
+        $p->title = $request->titulo;
+        $p->description = $request->publicacion;
+        $p->save();
+
+        return redirect()->action('GroupsController@show',$request->group);
+    }
+
+    public function delete(Request $request){
+        $publication = Publication::find($request->publication_id);
+        $publication->delete();
+
+        return redirect()->back();
     }
 }
