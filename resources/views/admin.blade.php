@@ -182,7 +182,33 @@
                                                                 <h4 class="modal-title">¿Estás seguro de convertir en admin a {{$user->name}}?</h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>No podrás deshacer la acción</p>
+                                                                <p></p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-outline">Si</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @else
+                                            <a class="btn btn-default btn-danger" data-toggle="modal" data-target="#remove_admin{{$user->id}}"style="color:#ffffff">Quitar admin</a>
+                                            <div class="modal modal-warning fade" id="remove_admin{{$user->id}}">
+                                                <form method="POST" action="{{action('UsersController@removeAdmin')}}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                                    <input type="hidden" name="_method" value="PUT"></input>
+                                                    <input type="hidden" name="id" value="{{$user->id}}">
+                                                    <div class="modal-dialog" align="center">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                                <h4 class="modal-title">¿Estás seguro de quitar los permisos de admin a {{$user->name}}?</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p></p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>

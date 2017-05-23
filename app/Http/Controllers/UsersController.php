@@ -123,6 +123,14 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+    public function removeAdmin(Request $request){
+        $user = User::findOrFail($request->id);
+        $user->isAdmin = false;
+        $user->save();
+
+        return redirect()->back();
+    }
+
     public function delete(Request $request){
         $s = User::find($request->user);
         $s->delete();
