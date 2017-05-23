@@ -119,11 +119,17 @@ class HomeController extends Controller
     }
 
     public function showFollowers(){
-        $ids = DB::table('user_user')->where('user_id2','=',Auth::user()->id)->get();
+        $ids = DB::table('user_user')->where('user_id2',2)->get();
         $users = array();
-        foreach($ids as $id){
-            $aux = User::find($id);
-            $users = $users->merge($aux);
+        if(sizeof($ids)<2){
+            $users[0]=User::find($ids);
+        }else{
+            
+            for($i=0;$i<sizeof($ids);$i++){
+                $aux = User::find($ids[$i]->user_id1);
+                //$users = $users->merge($aux);
+                $users[$i]=$aux;
+            }
         }
         return view('followers',array('users'=>$users));
     }
