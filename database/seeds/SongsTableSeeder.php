@@ -81,7 +81,65 @@ class SongsTableSeeder extends Seeder
             'created_at'=>'2017-02-02'
         ]);
 
+         DB::table('songs')->insert([
+            
+            'title' => 'Play Hard',
+            'artist' => 'David Guetta',
+            'album' => 'Play Hard',
+            'url' => "https://www.youtube.com/embed/5dbEhBKGOtY",
+            'date' => '2013-06-23',
+            'user_id' => 4,
+            'type_id' => 1,
+            'created_at'=>'2017-05-23'
+        ]);
 
+         DB::table('songs')->insert([
+            
+            'title' => 'Cool',
+            'artist' => 'Alesso',
+            'album' => 'Cool',
+            'url' => "https://www.youtube.com/embed/-aWtrEFfS4E",
+            'date' => '2017-07-05',
+            'user_id' => 2,
+            'type_id' => 1,
+            'created_at'=>'2017-05-23'
+        ]);
+
+        DB::table('songs')->insert([
+            
+            'title' => 'Highway to Hell',
+            'artist' => 'AC/DC',
+            'album' => 'Back in Black',
+            'url' => "https://www.youtube.com/embed/l482T0yNkeo",
+            'date' => '2017-07-05',
+            'user_id' => 3,
+            'type_id' => 7,
+            'created_at'=>'2017-05-23'
+        ]);
+
+        DB::table('songs')->insert([
+            
+            'title' => 'Te entiendo',
+            'artist' => 'Pignoise',
+            'album' => 'Anunciado en TV',
+            'url' => "https://www.youtube.com/embed/Ui6uoWoUfac",
+            'date' => '2017-07-05',
+            'user_id' => 6,
+            'type_id' => 8,
+            'created_at'=>'2017-05-23'
+        ]);
+
+        DB::table('songs')->insert([
+            
+            'title' => 'Sigo Extrañándote',
+            'artist' => 'J Balvin',
+            'album' => 'Energia',
+            'url' => "https://www.youtube.com/embed/nZ0zbsZOdwg",
+            'date' => '2017-02-12',
+            'user_id' => 6,
+            'type_id' => 2,
+            'created_at'=>'2017-05-23'
+        ]);
 
         /*for($i=0;$i<=25;$i++){
            DB::table('songs')->insert([
