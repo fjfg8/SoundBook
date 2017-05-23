@@ -20,6 +20,7 @@
                             <th style="text-align:center;"><i class="fa fa-envelope" aria-hidden="true"></i> Email</th>
                             <th style="text-align:center;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</th>
                             <th style="text-align:center;"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</th>
+                            <th style="text-align:center;"><i class="fa fa-cogs" aria-hidden="true"></i> Convertir en admin</th>
                         </tr>
                         @forelse($users as $user)
                             <tr>
@@ -28,7 +29,7 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
            
-                                <td><a class="btn btn-default btn-warning" data-toggle="modal" data-target="#edit_user{{$user->id}}">Editar</a></td>
+                                <td><a class="btn btn-default btn-warning" data-toggle="modal" data-target="#edit_user{{$user->id}}"style="color:#ffffff">Editar</a></td>
   
                                 <div class="modal modal-default fade" id="edit_user{{$user->id}}">
                                     <form method="POST" action="{{action('UsersController@edit')}}">
@@ -138,7 +139,7 @@
 
                                 @if (!(Auth::user()->id == $user->id))
                                     <td> 
-                                        <a class="btn btn-default btn-danger" data-toggle="modal" data-target="#delete_user{{$user->id}}">Eliminar</a>
+                                        <a class="btn btn-default btn-danger" data-toggle="modal" data-target="#delete_user{{$user->id}}"style="color:#ffffff">Eliminar</a>
                                         <div class="modal modal-danger fade" id="delete_user{{$user->id}}">
                                             <form method="POST" action="{{action('UsersController@delete')}}" id="usuario">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -150,7 +151,7 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
-                                                            <h4 class="modal-title">¿Estás seguro de borrar a cancion {{$user->name}}?</h4>
+                                                            <h4 class="modal-title">¿Estás seguro de borrar a {{$user->name}}?</h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             <p>No podrás deshacer la acción</p>
@@ -163,6 +164,35 @@
                                                 </div>
                                             </form>
                                         </div>
+                                    </td>
+                                    <td> 
+                                        @if(!$user->isAdmin)
+                                            <a class="btn btn-default btn-info" data-toggle="modal" data-target="#make_admin{{$user->id}}"style="color:#ffffff">Hacer admin</a>
+                                            <div class="modal modal-info fade" id="make_admin{{$user->id}}">
+                                                <form method="POST" action="{{action('UsersController@makeAdmin')}}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                                    <input type="hidden" name="_method" value="PUT"></input>
+                                                    <input type="hidden" name="id" value="{{$user->id}}">
+                                                    <div class="modal-dialog" align="center">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                                <h4 class="modal-title">¿Estás seguro de convertir en admin a {{$user->name}}?</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>No podrás deshacer la acción</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-outline">Si</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @endif
                                     </td>
                                 @else
                                     <td></td>

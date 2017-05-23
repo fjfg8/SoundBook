@@ -112,8 +112,7 @@ class HomeController extends Controller
     }
 
     public function showFollow(){
-        $user = User::find(Auth::user()->id);
-        $users = $user->users()->paginate(4);
+        $users = Auth::user()->users();
         
         return view('following',array('users'=>$users));
     }
