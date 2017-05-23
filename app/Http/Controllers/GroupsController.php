@@ -50,26 +50,47 @@ public function showAll() {
 
 public function create(Request $request) {
 
-        $this->validate($request,[
-            'name'=>'required',
-            'musicStyle'=>'required',
-            'description'=>'required',
-        ]);
+    $this->validate($request,[
+        'name'=>'required',
+        'musicStyle'=>'required',
+        'description'=>'required',
+    ]);
 
-        $group = new Group();
-        $group->name = $request->name;
-        $type = Type::where('type','=',$request->musicStyle)->first();
-        $group->type()->associate($type);
-        $user = User::find(Auth::user()->id);
-        $group->user_admin()->associate($user);
-        $group->description = $request->description;
-        $group->save();
-        $group->users()->attach($user->id);
+    $group = new Group();
+    $group->name = $request->name;
+    $type = Type::where('type','=',$request->musicStyle)->first();
+    $group->type()->associate($type);
+    $user = User::find(Auth::user()->id);
+    $group->user_admin()->associate($user);
+    $group->description = $request->description;
+    $group->save();
+    $group->users()->attach($user->id);
 
-        //$group->save();
+    //$group->save();
 
-        return redirect()->action('GroupsController@showlista');
-    }
+    return redirect()->action('GroupsController@showlista');
+}
+
+public function edit(Request $request){
+        $group = Group::findOrFail($request->id);
+
+        if($request->has('name')){
+            $group->name = $request->name;
+        }
+
+        if($request->has('musicStyle')){
+            $group->type_id = $request->musicStyle;            
+        }
+
+        if($request->has('description')){
+            $group->description = $request->description;
+        }
+
+        $group->save();      
+        
+        return redirect()->back();
+}
+
 
 public function subscribe(Request $request) {
 

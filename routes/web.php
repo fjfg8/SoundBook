@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/createGroup','GroupsController@create');
     Route::get('/members/{id}','GroupsController@members');
     Route::put('/subscribe','GroupsController@subscribe');
+    Route::put('/edit','GroupsController@edit');
     Route::delete('/cancelSubscribe','GroupsController@CancelSubscribe');
     Route::delete('/deletegroup','GroupsController@deleteGroup');
     //Publicaciones grupos
