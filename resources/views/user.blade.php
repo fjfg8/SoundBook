@@ -44,13 +44,13 @@
                     <div class="col-md-4 border-right">
                         <div class="description-block">
                             <h5 class="description-header">{{$followers}}</h5>
-                            <span class="description-text"><a href="/home/follow">Seguidores</a></span>
+                            <span class="description-text">Seguidores</span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="description-block">
                             <h5 class="description-header">{{$follow}}</h5>
-                            <span class="description-text"><a href="/home/follow">Siguiendo</a></span>
+                            <span class="description-text">Siguiendo</span>
                         </div>
                     </div>
                 </div>

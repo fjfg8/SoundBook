@@ -8,7 +8,7 @@
     <div class="col-md-8">
         <div class="box box-primary">
             <div class="box-header with-border" align="center">
-                <h2 class="box-title with-border">Listado de usuarios que te siguen</h2>
+                <h2 class="box-title with-border">Listado de usuarios que sigues</h2>
             </div>
             <div class="box-body">
                 @forelse($users as $user)
@@ -40,7 +40,7 @@
                     </div>
                 @empty
                     <div class="alert alert-info">
-                        <strong>No te sigue ningun usuario</strong>
+                        <strong>No sigues a ningun usuario</strong>
                     </div>
                 @endforelse 
             </div>

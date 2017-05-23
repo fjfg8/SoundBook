@@ -75,7 +75,7 @@ public function subscribe(Request $request) {
         $user = User::find(Auth::user()->id);
         $user->groups()->attach($request->group);
 
-        return redirect()->action('GroupsController@showAll');
+        return redirect()->back();
     }
 
 public function cancelSubscribe(Request $request){
@@ -86,7 +86,7 @@ public function cancelSubscribe(Request $request){
 
         $result->delete();
 
-        return redirect()->action('GroupsController@showlista');
+        return redirect()->back();
     }
 
 public function members($id) {

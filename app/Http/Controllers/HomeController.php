@@ -115,7 +115,7 @@ class HomeController extends Controller
         $user = User::find(Auth::user()->id);
         $users = $user->users()->paginate(4);
         
-        return view('followers',array('users'=>$users));
+        return view('following',array('users'=>$users));
     }
 
     public function showFollowers(){

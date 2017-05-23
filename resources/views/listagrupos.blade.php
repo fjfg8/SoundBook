@@ -2,52 +2,75 @@
 
 @section('content')
 
-<div class="box box-primary">
-    <div class="box-header with-border" align="center">
-        <a href="/allGroups" class="btn btn-primary pull-right" style="margin:20px">Ver todos</a>
-        <h3><strong>Mis Grupos</strong></h3>
+<div class="row">
+    <div class="col-md-2">
     </div>
-    <div class="box-body">
-         @forelse($lista as $list)
-            <div class="box-header with-border" >
-                <h3 class="box-title with-border"><strong>{{$list->name}}</strong></h3>
-                <a href="/groups/{{$list->id}}" class="btn btn-primary pull-right" style="margin:10px">Acceder</a>               
-                <div class="box-body" align="left">
-                    @foreach($types as $t)
-                        @if($list->type_id == $t->id)
-                            <label>{{$t->type}}</label></br>
+    <div class="col-md-8">
+    <div class="box box-primary">
+        <div class="box-header with-border" align="center">
+            <a href="/allGroups" class="btn btn-primary pull-right" style="margin:20px">Ver todos</a>
+            <h3><strong>Mis Grupos</strong></h3>
+        </div>
+        <div class="box-body">
+            @forelse($lista as $group)
+                <div class="box box-primary" >
+                    <div class="box-header with-border" style="background: #f4fcff;">
+                        <div class="user-block pull-left">
+                            <img class="img-circle" src="http://icon-icons.com/icons2/67/PNG/512/group_users_13234.png" alt="Group Image">
+                            <span class="username" color="blue"><a href="/groups/{{$group->id}}">{{$group->name}}</a></span>
+                        </div>
+                    
+                        @if(Auth::user()->isAdmin && Auth::user()->id != $group->user_admin_id)
+                            <form method="POST" action="{{action('GroupsController@deleteGroup')}}">
+                                <input type="hidden" name="_method" value="DELETE"></input>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                <input type="hidden" name="group" value="{{ $group->id }}"></input>
+                                <button class="btn btn-danger pull-right" type="submit">Borrar Grupo</button>
+                            </form>
+                            <span class="pull-right">&nbsp;</span>
                         @endif
-                    @endforeach
-                     
-                    
-                    @if($list->user_admin_id == $user->id)
-                    <form method="POST" action="{{action('GroupsController@deleteGroup')}}">
-                            <input type="hidden" name="_method" value="DELETE"></input>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                            <input type="hidden" name="group" value="{{ $list->id }}"></input>
-                            <button class="btn btn-danger pull-right" type="submit">Borrar Grupo</button>
-                    </form>
-                    @else
-                    <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
-                            <input type="hidden" name="_method" value="DELETE"></input>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                            <input type="hidden" name="group" value="{{ $list->id }}"></input>
-                            <button class="btn btn-primary pull-right" type="submit">Cancelar Subscripción</button>
-                    </form>
-                    @endif
-                    
-                </div> 
-                        
-            </div>
+                        @if(Auth::user()->id == $group->user_admin_id)
+                            <form method="POST" action="{{action('GroupsController@deleteGroup')}}">
+                                <input type="hidden" name="_method" value="DELETE"></input>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                <input type="hidden" name="group" value="{{ $group->id }}"></input>
+                                <button class="btn btn-danger pull-right" type="submit">Borrar Grupo</button>
+                            </form>
+                        @else
+                            <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
+                                <input type="hidden" name="_method" value="DELETE"></input>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                                <input type="hidden" name="group" value="{{ $group->id }}"></input>
+                                <button class="btn btn-warning pull-right" type="submit">Cancelar Suscripción</button>
+                            </form>
+                        @endif
+                    </div>
 
-            @empty
-            <div class="alert alert-info">
-                <strong>No estas subscrito a ningun grupo</strong>
+                    <div class="box-body" style="background: #f4fcff;">
+                        @foreach($types as $t)
+                            @if($group->type_id == $t->id)
+                                <label>Género: </label>
+                                <text>{{$t->type}}</text></br>
+                            @endif
+                        @endforeach
+                        </br>
+                        </br>
+                        <text>{{$group->description}}</text>
+                    </div>
+                    <div class="box-footer" style="background: #f4fcff;">
+                        <a href="/groups/{{$group->id}}" class="btn btn-primary pull-right" style="padding: 5px;">Ver más</a>
+                    </div>
+                </div>
+
+                @empty
+                <div class="alert alert-info">
+                    <strong>No estas suscrito a ningun grupo</strong>
+                </div>
+            @endforelse
+            <div class="box-footer with-border" align="center">
+                {{ $lista->links() }}
+                <a class="btn btn-success btn-lg pull-right" data-toggle="modal" data-target="#create_group" style="margin:10px">Crear Grupo</a>
             </div>
-        @endforelse
-        <div class="box-footer with-border" align="center">
-            {{ $lista->links() }}
-            <a class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#create_group" style="margin:10px">Crear Grupo</a>
         </div>
     </div>
 </div>
@@ -55,7 +78,6 @@
 <div class="modal modal-default fade" id="create_group">
     <form method="POST" action="{{action('GroupsController@create')}}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-        <input type="hidden" name="user" value="{{$user->id}}"></input>
         <input type="hidden" name="_method" value="PUT"></input>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -67,7 +89,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label>Nombre</label></br>
                                 <div class="input-group">
@@ -104,7 +128,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Subir</button>
+                    <button type="submit" class="btn btn-success">Crear</button>
                 </div>
             </div>
         </div>
