@@ -47,6 +47,41 @@ class SongsTableSeeder extends Seeder
             'type_id' => 11,
             'created_at'=>'2017-02-02'
         ]);
+        DB::table('songs')->insert([
+            
+            'title' => '100 Frases',
+            'artist' => 'Sharif',
+            'album' => 'Sobre los margenes',
+            'url' => "https://www.youtube.com/embed/5vtf8k3Ibgo",
+            'date' => '2014-03-06',
+            'user_id' => 3,
+            'type_id' => 3,
+            'created_at'=>'2017-03-02'
+        ]);
+        DB::table('songs')->insert([
+            
+            'title' => 'Copacabana',
+            'artist' => 'Izal',
+            'album' => 'Copacabana',
+            'url' => "https://www.youtube.com/embed/eFN5TSKCuCs",
+            'date' => '2015-03-13',
+            'user_id' => 5,
+            'type_id' => 12,
+            'created_at'=>'2017-04-02'
+        ]);
+        DB::table('songs')->insert([
+            
+            'title' => 'Triste cancion de amor',
+            'artist' => 'Sharif',
+            'album' => 'Sobre los margenes',
+            'url' => "https://www.youtube.com/embed/ZQW_xbekOJc",
+            'date' => '2013-03-23',
+            'user_id' => 5,
+            'type_id' => 3,
+            'created_at'=>'2017-02-02'
+        ]);
+
+
 
         /*for($i=0;$i<=25;$i++){
            DB::table('songs')->insert([

@@ -78,6 +78,85 @@ class UsersTableSeeder extends Seeder
             'preferences' => 'HipHop',
             'image' => 'img/larry.png'
         ]);
+
+        DB::table('users')->insert([
+            
+            'name' => 'Alex',
+            'email' => 'alex@ejemplo.com',
+            'nick' => 'alex',
+            'password' => bcrypt('alex'),
+            'isAdmin' => false,
+            'gender' => 'Hombre',
+            'status' => 'Comprometido/a',
+            'preferences' => 'Pop',
+            'image' => 'img/alex.png'
+        ]);
+
+        DB::table('users')->insert([
+            
+            'name' => 'Angel',
+            'email' => 'angel@ejemplo.com',
+            'nick' => 'angel',
+            'password' => bcrypt('angel'),
+            'isAdmin' => false,
+            'gender' => 'Hombre',
+            'status' => 'Soltero/a',
+            'preferences' => 'Salsa',
+            'image' => 'img/angel.png'
+        ]);
+
+        DB::table('users')->insert([
+            
+            'name' => 'Carlos',
+            'email' => 'carlos@ejemplo.com',
+            'nick' => 'carlos',
+            'password' => bcrypt('carlos'),
+            'isAdmin' => false,
+            'gender' => 'Hombre',
+            'status' => 'Soltero/a',
+            'preferences' => 'Copla',
+            'image' => 'img/carlos.png'
+        ]);
+
+        DB::table('users')->insert([
+            
+            'name' => 'Paloma',
+            'email' => 'paloma@ejemplo.com',
+            'nick' => 'paloma',
+            'password' => bcrypt('paloma'),
+            'isAdmin' => false,
+            'gender' => 'Mujer',
+            'status' => 'Casado/a',
+            'preferences' => 'Reggaeton',
+            'image' => 'img/paloma.png'
+        ]);
+
+        DB::table('users')->insert([
+            
+            'name' => 'Natalia',
+            'email' => 'natalia@ejemplo.com',
+            'nick' => 'natalia',
+            'password' => bcrypt('natalia'),
+            'isAdmin' => false,
+            'gender' => 'Mujer',
+            'status' => 'Soltero/a',
+            'preferences' => 'Pop',
+            'image' => 'img/natalia.png'
+        ]);
+
+        DB::table('users')->insert([
+            
+            'name' => 'Arancha',
+            'email' => 'arancha@ejemplo.com',
+            'nick' => 'arancha',
+            'password' => bcrypt('arancha'),
+            'isAdmin' => false,
+            'gender' => 'Mujer',
+            'status' => 'Soltero/a',
+            'preferences' => 'Latino',
+            'image' => 'img/arancha.png'
+        ]);
+
     
 
     }
