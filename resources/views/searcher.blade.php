@@ -78,7 +78,7 @@
                                     @else
                                         <span class="description"><a href="visit/{{$users[$i]->id}}">{{$users[$i]->name}}</a></span>
                                     @endif
-                                    <span class="username">{{$busqueda[$i]->title}}</span>
+                                    <span class="username"><a href="/song/{{$busqueda[$i]->id}}">{{$busqueda[$i]->title}}</span>
                                 </div>
                             </div>
                             <div class="box-body" style="background: #f4fcff;">
