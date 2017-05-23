@@ -115,6 +115,14 @@ class UsersController extends Controller
         return view('admin',array('users' => $users,'generos'=>$generos,'estados'=>$estados));
     }
 
+    public function makeAdmin(Request $request){
+        $user = User::findOrFail($request->id);
+        $user->isAdmin = true;
+        $user->save();
+
+        return redirect()->back();
+    }
+
     public function delete(Request $request){
         $s = User::find($request->user);
         $s->delete();

@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::group(['middleware' => 'admin'], function() {
     Route::get('/admin','UsersController@admin');
+    Route::put('/makeAdmin','UsersController@makeAdmin');
     Route::delete('/deleteUser','UsersController@delete');
 });
 
