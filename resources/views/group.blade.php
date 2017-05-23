@@ -4,7 +4,39 @@
 
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
-        <a href="/listagrupos" class="btn btn-primary pull-right" style="margin:20px">Mis Grupos</a>
+        @if(Auth::user()->isAdmin && Auth::user()->id != $group->user_admin_id)
+            <form method="POST" action="{{action('GroupsController@deleteGroup')}}">
+                <input type="hidden" name="_method" value="DELETE"></input>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                <input type="hidden" name="group" value="{{ $group->id }}"></input>
+                <button class="btn btn-danger pull-right" type="submit">Borrar Grupo</button>
+            </form>
+            <span class="pull-right">&nbsp;</span>
+        @endif
+        @if($groups->find($group->id))
+            @if(Auth::user()->id == $group->user_admin_id)
+                <form method="POST" action="{{action('GroupsController@deleteGroup')}}">
+                    <input type="hidden" name="_method" value="DELETE"></input>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                    <input type="hidden" name="group" value="{{ $group->id }}"></input>
+                    <button class="btn btn-danger pull-right" type="submit">Borrar Grupo</button>
+                </form>
+            @else
+                <form method="POST" action="{{action('GroupsController@CancelSubscribe')}}">
+                    <input type="hidden" name="_method" value="DELETE"></input>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                    <input type="hidden" name="group" value="{{ $group->id }}"></input>
+                    <button class="btn btn-warning pull-right" type="submit">Cancelar Suscripción</button>
+                </form>
+            @endif
+        @else
+            <form method="POST" action="{{action('GroupsController@subscribe')}}">
+                <input type="hidden" name="_method" value="PUT"></input>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                <input type="hidden" name="group" value="{{ $group->id }}"></input>
+                <button class="btn btn-success pull-right" type="submit">Suscribirse</button>
+            </form>
+        @endif
         <h3><strong>{{$group->name}}</strong></h3>
     </div>
     <div class="box-body">
@@ -20,18 +52,21 @@
                 <span class="description-text">{{$type->type}}</span>
             </div>
         </div>
-        <div class="col-md-4 border-right">
+        <div class="col-md-4">
             <div class="description-block">
-                <h5 class="description-header"></h5>{{$members}}</br>
-                <span class="description-text"><a href="/members/{{$group->id}}">Miembros</a></span>
+                <span class="description-text"><a href="/members/{{$group->id}}">Miembros</a></span></br></br>
+                <h5 class="description-header">{{$members}}</h5>
             </div>
         </div>
+    </div>
+    <div class="box-footer">
+        <a href="/listagrupos" class="btn btn-primary pull-right" style="margin:20px">Mis Grupos</a>
     </div>
 </div>
 
 <div class="box box-primary">
     <div class="box-header with-border" align="center">
-        <h6 class="box-title with-border"><strong>PUBLICACIONES</strong></h6>
+        <h6 class="box-title with-border"><strong>Publicaciones</strong></h6>
     </div>
     <div class="box-footer box-comments">
             @forelse($publications as $publi)

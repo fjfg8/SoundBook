@@ -74,7 +74,7 @@
                                 <li class="user-body">
                                     <div class="row">
                                         <div class="col-xs-4 text-center border-right" style="color: #FFFFFF;">
-                                            <a href="/home">Canciones</a>
+                                            <a href="/listagrupos">Grupos</a>
                                         </div>
                                         <div class="col-xs-4 text-center border-right">
                                             <a href="/home/followers">Seguidores</a>

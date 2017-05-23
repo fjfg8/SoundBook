@@ -47,7 +47,7 @@
                     <div class="col-md-4 border-right">
                         <div class="description-block">
                             <h5 class="description-header">{{$followers}}</h5>
-                            <span class="description-text"><a href="/home/follow">Seguidores</a></span>
+                            <span class="description-text"><a href="/home/followers">Seguidores</a></span>
                         </div>
                     </div>
                     <div class="col-md-4">

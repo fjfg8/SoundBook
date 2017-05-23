@@ -17,7 +17,8 @@ public function show($id){
         $members = $group->users()->count();
         $publication = $group->publications()->orderby('created_at','desc')->paginate(3);
         $users = User::all();
-        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members, 'publications'=>$publication, 'users'=>$users));
+        $groups = Auth::user()->groups()->get();
+        return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members, 'publications'=>$publication, 'users'=>$users, 'groups'=>$groups));
     }
 
 
@@ -94,7 +95,7 @@ public function members($id) {
         $group = Group::findorFail($id);
         $users = $group->users()->paginate(3);
 
-        return view('members', array('users'=>$users));
+        return view('members', array('users'=>$users, 'group'=>$group));
     }
 
 public function deleteGroup(Request $request){
