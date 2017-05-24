@@ -14,4 +14,8 @@ class Type extends Model
     public function groups(){
         return $this->hasMany('App\Group');
     }
+
+    public static function getTypes(){
+        return Type::all();
+    }
 }

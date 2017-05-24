@@ -12,23 +12,20 @@ use App\Type;
 class WallController extends Controller
 {
     public function show(){
-        $result = $this->publicaciones();
+        $result = User::publicaciones();
         $users = array();
         $likes = array();
         $liked = array();
-        $types = Type::all();
-        
-       /* for($i=0;$i<sizeof($result);$i++){
-            $users[$i] = User::find($result[$i]->user_id);
-        }*/
+        $types = Type::getTypes();
+       
         $i=0;
         foreach($result as $r){
-            $users[$i] = User::find($r->user_id);
-            $likes[$i] = $r->users_likes()->count();
+            $users[$i] = User::search($r->user_id);
+            $likes[$i] = Song::getLikes($r);
 
             //proceso para controlar si ya le hemos dado like a la cancion
             $aux = false;
-            if($r->users_likes()->where('user_id','=',Auth::user()->id)->count() == 1){
+            if(Song::userLike($r) == 1){
                 $aux = true;
             }
             $liked[$i] = $aux;
@@ -39,21 +36,6 @@ class WallController extends Controller
         
 
         return view('wall',array('songs' => $result,'users'=>$users,'i'=>0, 'types'=>$types, 'likes'=>$likes, 'liked'=>$liked));
-    }
-
-    public function publicaciones(){
-        $user = User::find(Auth::user()->id);
-
-        $others = $user->users; 
-        $songs = $user->songs;
-        
-        foreach($others as $o){
-            $aux = $o->songs;
-            $songs = $songs->merge($aux);
-        }
-        $aux2 = $songs->sortByDesc('created_at');
-
-        return $aux2;
     }
 
 }

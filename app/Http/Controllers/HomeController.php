@@ -27,9 +27,8 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $id = Auth::user()->id;
-        $user = User::find($id);
-        $types = Type::all();
+        $user = Auth::user();
+        $types = Type::getTypes();
 
         $generos = [
             "Mujer" => "Mujer",
@@ -57,34 +56,23 @@ class HomeController extends Controller
         if(session()->has("filtro")){
             $filtro = session()->get('filtro'); 
         }
-
-        $songs = Song::select('*')->where('user_id','=',$id)->orderby('date','asc')->paginate(4);
-
-        if($filtro == "Titulo")
-            $songs = Song::select('*')->where('user_id','=',$id)->orderby('title','asc')->paginate(4);
-            
-
-        if($filtro == "Artista")
-            $songs = Song::select('*')->where('user_id','=',$id)->orderby('artist','asc')->paginate(4);
-            
         session()->put([
             'filtro'=> $filtro,
         ]);
 
-        $follow = $this->follow(Auth::user()->id);
-        $followers = $this->followers(Auth::user()->id);
-        
-        return view('home',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers, 
+        return view('home',array('user' => $user,
+        'songs'=>Song::search($user->id,$filtro),
+        'follow'=>User::follow($user->id),'followers'=>User::followers($user->id), 
             'types'=>$types, 'generos'=>$generos, 'filters'=>$filters, 'estados'=>$estados));
     }
 
     public function visitProfile($id){
         if(Auth::user()->id != $id){
-            $user = User::find($id);
-            $songs = $user->songs()->paginate(4);
-            $follow = $this->follow($user->id);
-            $followers = $this->followers($user->id);
-            $bool = $this->followProfile($user->id);
+            $user = User::search($id);
+            $songs = User::getSongs($user);
+            $follow = User::follow($user->id);
+            $followers = User::followers($user->id);
+            $bool = User::followProfile($user->id);
 
             return view('user',array('user' => $user,'songs'=>$songs,'follow'=>$follow,'followers'=>$followers,'bool'=>$bool));
         }
@@ -93,39 +81,20 @@ class HomeController extends Controller
         }
     }
 
-    public function followProfile($id){
-        $res = DB::table('user_user')->where('user_id1','=',Auth::user()->id)->where('user_id2','=',$id)->count(); 
-        if($res==1){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public function follow($id){
-        $res = DB::table('user_user')->where('user_id1','=',$id)->count();
-        return $res;
-    }
-    public function followers($id){
-        $res = DB::table('user_user')->where('user_id2','=',$id)->count();
-        return $res;
-    }
-
     public function showFollow(){
-        $users = Auth::user()->users;
+        $users = User::getFollow(Auth::user());
         
         return view('following',array('users'=>$users));
     }
 
     public function showFollowers(){
-        $ids = DB::table('user_user')->where('user_id2',Auth::user()->id)->get();
+        $ids = User::getFollowers(Auth::user());
         $users = array();
         if(sizeof($ids)==0){
             return view('followers',array('users'=>$users));
         }else{
             for($i=0;$i<sizeof($ids);$i++){
-                $aux = User::find($ids[$i]->user_id1);
-                //$users = $users->merge($aux);
+                $aux = User::search($ids[$i]->user_id1);
                 $users[$i]=$aux;
             }
         }
