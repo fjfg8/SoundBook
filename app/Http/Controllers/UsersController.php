@@ -23,7 +23,7 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request){
-        $user = User::findOrFail($request->id);
+        
 
         $this->validate($request,[
             'nick'=>'unique:users|max:20',
@@ -32,31 +32,7 @@ class UsersController extends Controller
             'preferences' => 'max:100',
         ]);
 
-        if($request->has('nick')){
-            $user->nick = $request->nick;
-        }
-
-        if($request->has('name')){
-            $user->name = $request->name;            
-        }
-
-        if($request->has('email')){
-            $user->email = $request->email;
-        }
-
-        if($request->has('gender')){
-            $user->gender = $request->gender;
-        }
-
-        if($request->has('status')){
-            $user->status = $request->status;
-        }
-
-        if($request->has('preferences')){
-            $user->preferences = $request->preferences;
-        }
-
-        $user->save();
+        User::edit($request);
         $request->session()->put([
             'filtro'=>"Fecha"
         ]);        
@@ -70,8 +46,8 @@ class UsersController extends Controller
             'new'=>'required|min:6',
             'copy'=>'required|min:6'
         ]);
-        $id = Auth::user()->id;
-        $user = User::find($id);
+        $user = User::search(Auth::user()->id);
+        
 
         if(!Hash::check($request->old, $user->password)){
             return redirect()->back()->with('msg', 'La contraseña guardada no coincide con la introducida');
@@ -81,8 +57,7 @@ class UsersController extends Controller
             return redirect()->back()->with('mess', 'La nueva contraseña no coincide con la confirmación');
         }
 
-        $user->password = bcrypt($request->new);
-        $user->save();
+        User::changePass($user,$request->new);
 
         $request->session()->put([
             'filtro'=>"Fecha"
@@ -91,13 +66,8 @@ class UsersController extends Controller
         return redirect()->action('HomeController@index');
     }
 
-   /* public function logout(){
-        session()->flush();
-        return redirect()->action('UsersController@start');
-    }*/
-
     public function admin(){
-        $users = User::select('*')->paginate(4);
+        $users = User::getAll();
         $generos = [
             "Mujer" => "Mujer",
             "Hombre" => "Hombre",
@@ -116,59 +86,42 @@ class UsersController extends Controller
     }
 
     public function makeAdmin(Request $request){
-        $user = User::findOrFail($request->id);
-        $user->isAdmin = true;
-        $user->save();
-
+        
+        User::makeAdmin($request->id);
         return redirect()->back();
     }
 
     public function removeAdmin(Request $request){
-        $user = User::findOrFail($request->id);
-        $user->isAdmin = false;
-        $user->save();
-
+        User::removeAdmin($request->id);
         return redirect()->back();
     }
 
     public function delete(Request $request){
-        $s = User::find($request->user);
-        $s->delete();
-
+        User::borrar($request->user);
         return redirect()->back();
     }
 
     public function follow(Request $request){
-        $user1 = Auth::user();
-        $user2 = User::find($request->user);
-
-        $user1->users()->attach($user2->id);
-
-        //return redirect()->action('HomeController@index');
+        
+        User::makeFollow($request->user);
         return redirect()->back();
     }
 
     public function unfollow(Request $request){
-        $user1 = Auth::user();
-        $user2 = User::find($request->user);
-
-        $result = DB::table('user_user')->where('user_id1','=',$user1->id)->where('user_id2','=',$user2->id);
-
-        $result->delete();
-
+        
+        User::makeUnfollow($request->user);
         //return redirect()->action('HomeController@index');
         return redirect()->back();
     }
 
     public function changeImage(Request $request){
-        $user = User::find(Auth::user()->id);
+        $user = User::search(Auth::user()->id);
 
         $this->validate($request,[
             'Imagen' => 'required'
         ]);
 
-        $user->image = $request->Imagen;
-        $user->save();
+        User::changeImage($request->Imagen);
 
         return redirect()->action('HomeController@index');
     }
