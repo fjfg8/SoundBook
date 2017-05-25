@@ -48,5 +48,59 @@ class Song extends Model
         return $song->users_likes()->where('user_id','=',Auth::user()->id)->count();
     }
 
+    public function create($request, $user) {
+                
+        $this->title = $request->title;
+        $this->artist = $request->artist;
+        $this->album = $request->album;
+        $this->date = $request->date;
+        $this->url = $request->url;
+        $this->user()->associate($user);
+        $type = Type::getTypeStyle($request->gender)->first();
+        $this->type()->associate($type);
+
+        $this->save();
+
+    }
+
+    public static function buscar($id) {
+        return Song::find($id);
+    }
+
+    public function edit($request) {
+        if($request->has('title')){
+            $this->title = $request->title;
+           
+        }
+        if($request->has('artist')){
+            $this->artist = $request->artist;
+        }
+        if($request->has('type_id')){
+            $this->type_id = $request->type_id;
+        }
+        if($request->has('date')){
+            $this->date = $request->date;
+        }
+        if($request->has('album')){
+            $this->album = $request->album;
+        }
+        if($request->has('url')){
+            $this->url = $request->url;
+        }
+        if($request->has('date')){
+            $this->date = $request->date;
+        }
+
+
+         $this->save();
+
+        $request->session()->put([
+            'filtro'=>"Fecha"
+        ]);
+    }
+
+    public function getComments() {
+        return $this->comments()->orderby('created_at','desc')->paginate(5);
+    }
     
 }
