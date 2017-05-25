@@ -13,17 +13,17 @@ class SongsController extends Controller
 {
     public function show($id){
     
-        $song = Song::findOrFail($id);
+        $song = Song::buscar($id);
         $user_id = $song->user_id;
-        $user = User::find($user_id);
-        $types = Type::all();
-        $comments = $song->comments()->orderby('created_at','desc')->paginate(5);
+        $user = User::search($user_id);
+        $types = Type::getTypes();
+        $comments = $song->getComments();
         $count = $song->comments()->count();
-        $users = User::all();
+        $users = User::getAll();
         //proceso para controlar los likes y si ya le hemos dado like a la cancion
-        $likesSong = $song->users_likes()->count();
+        $likesSong = Song::getLikes($song);
         $likedSong = false;
-        if($song->users_likes()->where('user_id','=',Auth::user()->id)->count() == 1){
+        if(Song::userLike($song) == 1){
             $likedSong = true;
         }
         ////////
@@ -33,9 +33,9 @@ class SongsController extends Controller
         $likedComm = array();
         $i=0;
         foreach($comments as $c){
-            $likesComm[$i] = $c->users_likes()->count();
+            $likesComm[$i] = Comment::getLikes($c);
             $aux = false;
-            if($c->users_likes()->where('user_id','=',Auth::user()->id)->count() == 1){
+            if(Comment::userLike($c) == 1){
                 $aux = true;
             }
             $likedComm[$i] = $aux;
@@ -58,23 +58,14 @@ class SongsController extends Controller
         ]);
 
         $s = new Song();
-        $s->title = $request->title;
-        $s->artist = $request->artist;
-        $s->album = $request->album;
-        $s->date = $request->date;
-        $s->url = $request->url;
         $user = User::find(Auth::user()->id);
-        $s->user()->associate($user);
-        $type = Type::where('type','=',$request->gender)->first();
-        $s->type()->associate($type);
-
-        $s->save();
+        $s->create($request, $user);
 
         return redirect()->action('HomeController@index');
     }
 
     public function delete(Request $request){
-        $s = Song::find($request->song);
+        $s = Song::buscar($request->song);
         $s->delete();
 
         return redirect()->action('HomeController@index');
@@ -82,44 +73,16 @@ class SongsController extends Controller
 
     public function edit(Request $request){
 
-        $s = Song::findOrFail($request->id);
+        $s = Song::buscar($request->id);
 
-        if($request->has('title')){
-            $s->title = $request->title;
-           
-        }
-        if($request->has('artist')){
-            $s->artist = $request->artist;
-        }
-        if($request->has('type_id')){
-            $s->type_id = $request->type_id;
-        }
-        if($request->has('date')){
-            $s->date = $request->date;
-        }
-        if($request->has('album')){
-            $s->album = $request->album;
-        }
-        if($request->has('url')){
-            $s->url = $request->url;
-        }
-        if($request->has('date')){
-            $s->date = $request->date;
-        }
-
-
-         $s->save();
-
-        $request->session()->put([
-            'filtro'=>"fecha"
-        ]);
+        $s->edit($request);
 
         return redirect()->back();
     }
 
     public function like(Request $request){
-        $song = Song::find($request->id);
-        $user = User::find(Auth::user()->id);
+        $song = Song::buscar($request->id);
+        $user = User::search(Auth::user()->id);
         //$song->likes = $song->likes + 1;
         $song->users_likes()->attach($user->id);
         //$song->save();

@@ -152,7 +152,7 @@ class User extends Authenticatable
         $user->save();
     }
     public static function borrar($id){
-        $s = User::searchs($id);
+        $s = User::search($id);
         $s->delete();
 
     }
@@ -193,5 +193,9 @@ class User extends Authenticatable
         $aux2 = $songs->sortByDesc('created_at');
 
         return $aux2;
+    }
+
+    public static function getGroups($user) {
+        return $user->groups()->paginate(3);
     }
 }

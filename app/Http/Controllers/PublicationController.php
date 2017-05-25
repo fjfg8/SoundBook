@@ -17,8 +17,8 @@ class PublicationController extends Controller
             'publicacion'=>'required',
         ]);
 
-        $group = Group::find($request->group);
-        $user = User::find(Auth::user()->id);
+        $group = Group::search($request->group);
+        $user = User::search(Auth::user()->id);
         $p = new Publication();
         $p->title = $request->titulo;
         $p->description = $request->publicacion;

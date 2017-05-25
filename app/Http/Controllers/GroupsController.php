@@ -12,38 +12,38 @@ use App\Publication;
 class GroupsController extends Controller {
 
 public function show($id){
-        $group = Group::findorFail($id);
-        $type = Type::where('id','=',$group->type_id)->first();
-        $members = $group->users()->count();
-        $publication = $group->publications()->orderby('created_at','desc')->paginate(3);
-        $users = User::all();
-        $groups = Auth::user()->groups()->get();
+        $group = Group::search($id);
+        $type = Type::getType($group->type_id);
+        $members = $group->getMembers();
+        $publication = $group->getPublications();
+        $users = User::getAll();
+        $groups = User::getGroups(Auth::user());
         return view('group', array('group'=>$group, 'type'=>$type, 'members'=>$members, 'publications'=>$publication, 'users'=>$users, 'groups'=>$groups));
     }
 
 
 public function showlista() {
 
-        $user = User::find(Auth::user()->id);
-        $groups = $user->groups()->paginate(3);
-        $type = Type::all();
+        $user = User::search(Auth::user()->id);
+        $groups = User::getGroups($user);
+        $type = Type::getTypes();
         return view('listagrupos',array('lista'=>$groups, 'types'=>$type, 'user'=>$user));
     }
 
 public function showAll() {
 
-        $user = User::find(Auth::user()->id);
+        $user = User::search(Auth::user()->id);
         if(session()->has('filtroGrupos')){
             if(session()->get('filtroGrupos') == "-1"){
-                $all = Group::orderby('name')->paginate(3);
+                $all = Group::getOrdenados();
             }else{
-                $all = Group::where('type_id','=',session()->get('filtroGrupos'))->orderby('name')->paginate(3);
+                $all = Group::getFiltrados();
             }
         }else{
-            $all = Group::orderby('name')->paginate(3);
+            $all = Group::getOrdenados();
         }
-        $groups = $user->groups()->get();
-        $type = Type::all();
+        $groups = User::getGroups($user);
+        $type = Type::getTypes();
         return view('allGroups', array('all'=>$all, 'types'=>$type, 'groups'=>$groups, 'user'=>$user));
 }
 
@@ -57,14 +57,8 @@ public function create(Request $request) {
     ]);
 
     $group = new Group();
-    $group->name = $request->name;
-    $type = Type::where('type','=',$request->musicStyle)->first();
-    $group->type()->associate($type);
-    $user = User::find(Auth::user()->id);
-    $group->user_admin()->associate($user);
-    $group->description = $request->description;
-    $group->save();
-    $group->users()->attach($user->id);
+    $user = User::search(Auth::user()->id);
+    $group->create($request, $user);
 
     //$group->save();
 
@@ -72,21 +66,9 @@ public function create(Request $request) {
 }
 
 public function edit(Request $request){
-        $group = Group::findOrFail($request->id);
+        $group = Group::search($request->id);
 
-        if($request->has('name')){
-            $group->name = $request->name;
-        }
-
-        if($request->has('musicStyle')){
-            $group->type_id = $request->musicStyle;            
-        }
-
-        if($request->has('description')){
-            $group->description = $request->description;
-        }
-
-        $group->save();      
+        $group->edit($request);     
         
         return redirect()->back();
 }
@@ -94,7 +76,7 @@ public function edit(Request $request){
 
 public function subscribe(Request $request) {
 
-        $user = User::find(Auth::user()->id);
+        $user = User::search(Auth::user()->id);
         $user->groups()->attach($request->group);
 
         return redirect()->back();
@@ -104,7 +86,7 @@ public function cancelSubscribe(Request $request){
         $user = Auth::user();
         $group = $request->group;
 
-        $result = DB::table('group_user')->where('user_id','=',$user->id)->where('group_id','=',$group);
+        $result = Group::getSuscription($user, $group);
 
         $result->delete();
 
@@ -113,7 +95,7 @@ public function cancelSubscribe(Request $request){
 
 public function members($id) {
 
-        $group = Group::findorFail($id);
+        $group = Group::search($id);
         $users = $group->users()->paginate(3);
 
         return view('members', array('users'=>$users, 'group'=>$group));
@@ -121,7 +103,7 @@ public function members($id) {
 
 public function deleteGroup(Request $request){
 
-        $group = Group::find($request->group);
+        $group = Group::search($request->group);
         $group->delete();
 
         return redirect()->back();
