@@ -102,5 +102,9 @@ class Song extends Model
     public function getComments() {
         return $this->comments()->orderby('created_at','desc')->paginate(5);
     }
+
+    public static function getUser($user) {
+        
+    }
     
 }

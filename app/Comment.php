@@ -28,4 +28,24 @@ class Comment extends Model
     public static function userLike($comm){
         return $comm->users_likes()->where('user_id','=',Auth::user()->id)->count();
     }
+
+    public function create($request, $user, $song) {
+        $this->comment = $request->comentario;
+        $this->user()->associate($user);
+        $this->song()->associate($song);
+
+        $this->save();
+    }
+
+    public static function edit($request) {
+        $c = Comment::find($request->comment_id);
+        $c->comment = $request->comentario;
+        $c->save();
+    }
+
+    public static function borrar($request) {
+        $comment = Comment::find($request->comment);
+        $comment->delete();
+    }
+
 }
