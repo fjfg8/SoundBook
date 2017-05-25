@@ -20,12 +20,7 @@ class PublicationController extends Controller
         $group = Group::search($request->group);
         $user = User::search(Auth::user()->id);
         $p = new Publication();
-        $p->title = $request->titulo;
-        $p->description = $request->publicacion;
-        $p->group()->associate($group);
-        $p->user()->associate($user);
-
-        $p->save();
+        $p->create($request, $group, $user);
 
         return redirect()->action('GroupsController@show',$request->group);
     }
@@ -36,18 +31,14 @@ class PublicationController extends Controller
             'publicacion'=>'required',
         ]);
 
-        $p = Publication::find($request->publication_id);
-        $p->title = $request->titulo;
-        $p->description = $request->publicacion;
-        $p->save();
+        Publication::edit($request);
 
         return redirect()->action('GroupsController@show',$request->group);
     }
 
     public function delete(Request $request){
-        $publication = Publication::find($request->publication_id);
-        $publication->delete();
-
+        Publication::borrar($request);
+        
         return redirect()->back();
     }
 }

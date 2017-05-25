@@ -16,14 +16,10 @@ class CommentController extends Controller
             'comentario'=>'required',
         ]);
 
-        $song = Song::find($request->song);
-        $user = User::find(Auth::user()->id);
+        $song = Song::buscar($request->song);
+        $user = User::search(Auth::user()->id);
         $c = new Comment();
-        $c->comment = $request->comentario;
-        $c->user()->associate($user);
-        $c->song()->associate($song);
-
-        $c->save();
+        $c->create($request, $user, $song);
 
         return redirect()->action('SongsController@show',$request->song);
     }
@@ -33,9 +29,7 @@ class CommentController extends Controller
             'comentario'=>'required',
         ]);
 
-        $c = Comment::find($request->comment_id);
-        $c->comment = $request->comentario;
-        $c->save();
+        Comment::edit($request);
 
         return redirect()->action('SongsController@show',$request->song);
     }
@@ -60,8 +54,7 @@ class CommentController extends Controller
     }
 
     public function delete(Request $request){
-        $comment = Comment::find($request->comment);
-        $comment->delete();
+        Comment::borrar($request);
 
         return redirect()->back();
     }
