@@ -31,7 +31,7 @@ class SongsTableSeeder extends Seeder
             'album' => 'Grandes exitos',
             'url' => "https://www.youtube.com/embed/477d0T1YuKE",
             'date' => '1978-02-17',
-            'user_id' => 1,
+            'user_id' => 4,
             'type_id' => 5,
             'created_at'=>'2017-02-01'
             
