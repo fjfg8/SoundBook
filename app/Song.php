@@ -107,5 +107,13 @@ class Song extends Model
         $s = Song::buscar($request->song);
         $s->delete();
     }
+
+    public static function searcher($request) {
+        return DB::table('songs')->where('title','like','%'.$request->busqueda.'%')->paginate(3);
+    }
+
+    public static function searcherAlbum($request) {
+        return DB::table('songs')->where('album','like','%'.$request->busqueda.'%')->paginate(3);
+    }
     
 }

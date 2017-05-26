@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Song;
 use App\User;
 use App\Type;
+use App\Group;
 
 class SearchController extends Controller{
 
@@ -38,33 +39,33 @@ class SearchController extends Controller{
 
         if($request->busqueda != ""){
             if($request->filtro=="Grupo"){
-                $result = DB::table('groups')->where('name','like','%'.$request->busqueda.'%')->paginate(3);
+                $result = Group::searcher($request);
                 $i=0;
                 foreach($result as $r){
-                    $type[$i] = Type::find($r->type_id);
+                    $type[$i] = Type::getType($r->type_id);
                     $i++;
                 }
             }
             if($request->filtro == "Cancion"){
-                $result = DB::table('songs')->where('title','like','%'.$request->busqueda.'%')->paginate(3);
+                $result = Song::searcher($request);
                 $i=0;
                 foreach($result as $r){
-                    $users[$i] = User::find($r->user_id);
-                    $type[$i] = Type::find($r->type_id);
+                    $users[$i] = User::search($r->user_id);
+                    $type[$i] = Type::getType($r->type_id);
                     $i++;
                 }
             }
             if($request->filtro == "Album"){
-                $result = DB::table('songs')->where('album','like','%'.$request->busqueda.'%')->paginate(3);
+                $result = Song::searcherAlbum($request);
                 $i=0;
                 foreach($result as $r){
-                    $users[$i] = User::find($r->user_id);
-                    $type[$i] = Type::find($r->type_id);
+                    $users[$i] = User::search($r->user_id);
+                    $type[$i] = Type::getType($r->type_id);
                     $i++;
                 }
             }
             if($request->filtro == "Usuario"){
-                $result = DB::table('users')->where('nick','like','%'.$request->busqueda.'%')->paginate(3);
+                $result = User::searcher($request);
                 for($i=0;$i<sizeof($result);$i++){
                     $bool = $this->followers($result[$i]->id);
                     if($bool==true){
@@ -84,11 +85,6 @@ class SearchController extends Controller{
     }
 
     public function followers($user){
-        $res = DB::table('user_user')->where('user_id1','=',Auth::user()->id)->where('user_id2','=',$user)->count();
-        if($res!=0){
-            return true;
-        }else{
-            return false;
-        }
+        return User::searchFollowers($user);
     }
 }

@@ -79,5 +79,9 @@ class Group extends Model
         $group = Group::search($request->group);
         $group->delete();
     }
+
+    public static function searcher($request) {
+        return DB::table('groups')->where('name','like','%'.$request->busqueda.'%')->paginate(3);
+    }
     
 }
