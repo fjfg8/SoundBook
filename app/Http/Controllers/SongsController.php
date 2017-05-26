@@ -65,8 +65,7 @@ class SongsController extends Controller
     }
 
     public function delete(Request $request){
-        $s = Song::buscar($request->song);
-        $s->delete();
+        Song::borrar($request);
 
         return redirect()->action('HomeController@index');
     }

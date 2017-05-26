@@ -74,5 +74,10 @@ class Group extends Model
     public static function getSuscription($user, $group) {
         return DB::table('group_user')->where('user_id','=',$user->id)->where('group_id','=',$group);
     }
+
+    public static function borrar($request) {
+        $group = Group::search($request->group);
+        $group->delete();
+    }
     
 }
