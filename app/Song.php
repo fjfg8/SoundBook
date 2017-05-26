@@ -103,8 +103,9 @@ class Song extends Model
         return $this->comments()->orderby('created_at','desc')->paginate(5);
     }
 
-    public static function getUser($user) {
-        
+    public static function borrar($request) {
+        $s = Song::buscar($request->song);
+        $s->delete();
     }
     
 }

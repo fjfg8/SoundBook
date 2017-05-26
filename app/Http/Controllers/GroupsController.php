@@ -103,8 +103,7 @@ public function members($id) {
 
 public function deleteGroup(Request $request){
 
-        $group = Group::search($request->group);
-        $group->delete();
+        Group::borrar($request);
 
         return redirect()->back();
     }
