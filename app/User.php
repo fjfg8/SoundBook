@@ -198,4 +198,17 @@ class User extends Authenticatable
     public static function getGroups($user) {
         return $user->groups()->paginate(3);
     }
+
+    public static function searchFollowers($user){
+        $res = DB::table('user_user')->where('user_id1','=',Auth::user()->id)->where('user_id2','=',$user)->count();
+        if($res!=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function searcher($request) {
+        return DB::table('users')->where('nick','like','%'.$request->busqueda.'%')->paginate(3);
+    }
 }
